@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".ProfilePage"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btn_backprofile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserratbold"
+            android:text="Profile"
+            android:textColor="@color/yellow"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserratbold"
+        android:text="Full Name"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        />
+
+    <EditText
+        android:id="@+id/et_fullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Sendo Tjiamis"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:background="@drawable/edittext_custom"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserratbold"
+        android:text="Gender"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        />
+
+    <EditText
+        android:id="@+id/et_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Male"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:background="@drawable/edittext_custom"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserratbold"
+        android:text="Phone Number"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        />
+
+    <EditText
+        android:id="@+id/et_phonenumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserratlight"
+        android:hint="081244566567"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:background="@drawable/edittext_custom"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserratbold"
+        android:text="Date of Birth"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        />
+
+    <EditText
+        android:id="@+id/et_dob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserratlight"
+        android:hint="5/7/2001"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:background="@drawable/edittext_custom"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserratbold"
+        android:text="Olshop Cash"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        />
+
+    <EditText
+        android:id="@+id/et_cash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Rp200.000,00"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:background="@drawable/edittext_custom"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserratbold"
+        android:text="Top Up Olshop Cash"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserratbold"
+        android:text="Fill Top Up Nominal:"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        />
+
+    <EditText
+        android:id="@+id/et_topupnominal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Rp1.000.000,00"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:background="@drawable/edittext_custom"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserratbold"
+        android:text="Confirm Password"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        />
+
+    <EditText
+        android:id="@+id/et_confirmpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserratlight"
+        android:hint="........"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:background="@drawable/edittext_custom"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/btn_topup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Top Up"
+        android:fontFamily="@font/montserratbold"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:background="@drawable/btn_custom"
+        />
+
+</LinearLayout>

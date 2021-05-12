@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:id="@+id/fnb_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratlight"
+            android:text="Ayam Goreng 50 pcs"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/fnb_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/montserratlight"
+            android:text="Rp500.000,00"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
