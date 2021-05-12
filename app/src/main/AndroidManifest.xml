@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineCatering">
+        <activity android:name=".CheckOutPage"></activity>
+        <activity android:name=".InvoicePage" />
+        <activity android:name=".ProfilePage" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
