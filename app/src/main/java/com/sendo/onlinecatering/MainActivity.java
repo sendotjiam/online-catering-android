@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pindah(View view) {
-        Intent intent = new Intent(this, InvoicePage.class);
+        Intent intent = new Intent(this, CustomerOrder.class);
         startActivity(intent);
     }
 }
