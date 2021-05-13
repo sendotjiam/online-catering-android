@@ -18,7 +18,7 @@
         <activity android:name=".ProfilePage" />
         <activity android:name=".AllMenuPage" />
         <activity android:name=".AddMenuPage" />
-        <activity android:name=".EditMenuPage" />
+        <activity android:name=".EditMenuPage"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
