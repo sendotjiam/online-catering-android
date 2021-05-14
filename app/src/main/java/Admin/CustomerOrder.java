@@ -11,6 +11,7 @@ import android.os.storage.StorageManager;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sendo.onlinecatering.AllMenuPage;
 import com.sendo.onlinecatering.R;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class CustomerOrder extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull @org.jetbrains.annotations.NotNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_menus) {
-                    Intent intent = new Intent(CustomerOrder.this, ChatAdmin.class);
+                    Intent intent = new Intent(CustomerOrder.this, AllMenuPage.class);
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.menu_chat) {

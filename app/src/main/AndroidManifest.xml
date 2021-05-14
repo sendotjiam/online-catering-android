@@ -10,14 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineCatering">
         <activity android:name=".MenuDetailsPage"></activity>
-        <activity android:name=".EditMenuPage" />
-        <activity android:name=".AddMenuPage" />
-        <activity android:name=".AllMenuPage" />
-        <activity android:name=".ChatwithCustomer" />
-        <activity android:name=".OrderDetail" />
-        <activity android:name=".ChatAdmin" />
-        <activity android:name=".CustomerOrder" />
-        <activity android:name="Admin.ChatwithCustomer"></activity>
+        <activity android:name="Admin.ChatwithCustomer"/>
         <activity android:name="Admin.OrderDetail" />
         <activity android:name="Admin.ChatAdmin" />
         <activity android:name="Admin.CustomerOrder" />

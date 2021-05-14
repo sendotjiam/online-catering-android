@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import Admin.ChatAdmin;
 import Admin.CustomerOrder;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pindah(View view) {
-        Intent intent = new Intent(this, AllMenuPage.class);
+        Intent intent = new Intent(this, ChatAdmin.class);
         startActivity(intent);
     }
 }
