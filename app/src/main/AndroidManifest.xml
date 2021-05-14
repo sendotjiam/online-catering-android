@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineCatering">
+<<<<<<< HEAD
         <activity android:name=".MenuDetailsPage"></activity>
         <activity android:name=".EditMenuPage" />
         <activity android:name=".AddMenuPage" />
@@ -17,9 +18,18 @@
         <activity android:name=".OrderDetail" />
         <activity android:name=".ChatAdmin" />
         <activity android:name=".CustomerOrder" />
+=======
+        <activity android:name="Admin.ChatwithCustomer"></activity>
+        <activity android:name="Admin.OrderDetail" />
+        <activity android:name="Admin.ChatAdmin" />
+        <activity android:name="Admin.CustomerOrder" />
+>>>>>>> feca8da1854b634450110a28b584901d00d7195c
         <activity android:name=".CheckOutPage" />
         <activity android:name=".InvoicePage" />
         <activity android:name=".ProfilePage" />
+        <activity android:name=".AllMenuPage" />
+        <activity android:name=".AddMenuPage" />
+        <activity android:name=".EditMenuPage"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
