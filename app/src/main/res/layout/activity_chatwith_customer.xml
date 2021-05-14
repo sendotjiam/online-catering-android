@@ -60,7 +60,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <RelativeLayout
-                android:layout_width="330dp"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content">
 
                 <Button
@@ -74,7 +74,7 @@
 
                 <EditText
                     android:id="@+id/typemessage"
-                    android:layout_width="320dp"
+                    android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
@@ -94,7 +94,7 @@
 
             <ImageButton
                 android:id="@+id/btn_send"
-                android:layout_width="match_parent"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
