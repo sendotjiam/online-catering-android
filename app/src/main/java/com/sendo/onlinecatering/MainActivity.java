@@ -6,22 +6,51 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import Admin.ChatAdmin;
 import Admin.CustomerOrder;
 
 public class MainActivity extends AppCompatActivity {
-    Button sementara;
+    TextView ETUsername, ETPassword,TVError;
+    Button BTNLogin, BTNRegister;
+    UsersDB usersDB;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ETUsername =findViewById(R.id.edittextusernamelogin);
+        ETPassword = findViewById(R.id.edittextpasswordlogin);
+        BTNLogin = findViewById(R.id.btnlogin);
+        BTNRegister = findViewById(R.id.btnregister);
+        TVError = findViewById(R.id.txterrormessage);
+        usersDB = new UsersDB(this);
 
-        getSupportActionBar().hide();
+        BTNRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenRegisterActivity();
+            }
+        });
 
-        sementara = findViewById(R.id.btn_sementara);
+        BTNLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkusername() && checkpassword()){
+                    String username = ETUsername.getText().toString();
+                    String password = ETPassword.getText().toString();
+                    if(usersDB.checkUsers(username, password)){
+                        pindah(view);
+                    }
+                    else{
+                        TVError.setText("Username or Password are wrong");
+                    }
+
+                }
+            }
+        });
 
 
     }
@@ -29,5 +58,30 @@ public class MainActivity extends AppCompatActivity {
     public void pindah(View view) {
         Intent intent = new Intent(this, ChatAdmin.class);
         startActivity(intent);
+    }
+
+    private void OpenRegisterActivity() {
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    private Boolean checkusername(){
+        if(ETUsername.getText().toString().isEmpty()){
+            TVError.setText("Username cannot be empty");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    private Boolean checkpassword(){
+        if(ETPassword.getText().toString().isEmpty()){
+            TVError.setText("Password cannot be empty");
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }
