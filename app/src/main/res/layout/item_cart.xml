@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/menu_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/fnbimage"
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ayamgoreng" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:background="@drawable/custom_checkout"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textAlignment="center"
+                android:text="Ayam Goreng Lengkuas"
+                android:fontFamily="@font/montaga_regular" />
+
+            <TextView
+                android:id="@+id/detail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:textAlignment="center"
+                android:text="Ayam goreng dengan menggunakan bumbu lengkuas gurih dan sehat"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="10sp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/menu_card"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notes"
+            style="@style/TextTitle"
+            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ayam Goreng Lengkuas 50pcs untuk nikahan anak."
+            style="@style/TextRegular"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp"
+            />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tanggal 13 Mei 2021"
+            style="@style/TextRegular"
+            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"/>
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            >
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_delete"
+                android:layout_marginEnd="64dp"
+                />
+            <ImageButton
+                android:id="@+id/btn_next"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_next"
+                android:layout_toEndOf="@id/btn_delete"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

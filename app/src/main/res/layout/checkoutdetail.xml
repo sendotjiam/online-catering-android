@@ -18,7 +18,7 @@
             android:layout_width="180dp"
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/ayamgoreng" />
+            android:src="@drawable/ayamgoreng" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_marginTop="5dp"
             android:textAlignment="center"
             android:text="Ayam Goreng Lengkuas"
-            android:fontFamily="@font/montagaregular" />
+            android:fontFamily="@font/montaga_regular" />
 
         <TextView
             android:id="@+id/detail"
@@ -45,7 +45,7 @@
             android:layout_marginTop="3dp"
             android:textAlignment="center"
             android:text="Ayam goreng dengan menggunakan bumbu lengkuas gurih dan sehat"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:textSize="11sp"/>
         </LinearLayout>
     </LinearLayout>
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:paddingLeft="17dp"
             android:text="Notes"
             android:textColor="@color/black"
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:fontFamily="@font/montserratlight"
+            android:fontFamily="@font/montserrat_light"
             android:paddingLeft="17dp"
             android:text="Ayam Goreng Lengkuas 50 pcs untuk nikahan anak"
             android:textColor="@color/black"
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserratlight"
+            android:fontFamily="@font/montserrat_light"
             android:paddingLeft="17dp"
             android:text="13 Mei 2021"
             android:textColor="@color/black"
@@ -90,7 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:paddingLeft="17dp"
             android:text="Price"
             android:textColor="@color/black"
@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserratlight"
+            android:fontFamily="@font/montserrat_light"
             android:paddingLeft="17dp"
             android:text="Rp500.000,00"
             android:textColor="@color/black"

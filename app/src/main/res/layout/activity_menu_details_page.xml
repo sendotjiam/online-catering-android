@@ -18,7 +18,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:layout_centerHorizontal="true"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Menu name"
             android:textSize="14sp" />
 
@@ -106,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Menu price"
             android:textColor="@color/black"
             android:textSize="17sp" />

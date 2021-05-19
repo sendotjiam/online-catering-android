@@ -29,7 +29,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserratsemibold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Order Code : "
                     android:textColor="@color/white"
                     android:textSize="22sp" />
@@ -38,7 +38,7 @@
                     android:id="@+id/ordercode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserratsemibold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="C2G3A"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
@@ -52,7 +52,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserratsemibold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Delivery Date : "
                     android:textColor="@color/white"
                     android:textSize="22sp" />
@@ -61,7 +61,7 @@
                     android:id="@+id/deliverydate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserratsemibold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="3/25/2021"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
@@ -75,7 +75,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserratsemibold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Status : "
                     android:textColor="@color/white"
                     android:textSize="22sp" />
@@ -84,7 +84,7 @@
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserratsemibold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="paid"
                     android:textColor="@color/white"
                     android:textSize="22sp" />

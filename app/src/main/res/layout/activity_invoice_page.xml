@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/montserratbold"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="Invoice"
                 android:textColor="@color/yellow"
                 android:textSize="30sp" />
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Payment Successfull"
             android:textColor="@color/black"
             android:textSize="30sp" />
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Detail"
             android:textColor="@color/black"
             android:textSize="35sp" />
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Food and Beverages"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Transaction Date"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserratlight"
+            android:fontFamily="@font/montserrat_light"
             android:text="3/25/2001"
             android:textColor="@color/black"
             android:textSize="15sp" />
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:fontFamily="@font/montserratbold"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Order Code"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserratlight"
+            android:fontFamily="@font/montserrat_light"
             android:text="C2G3A"
             android:textColor="@color/black"
             android:textSize="15sp" />
@@ -131,7 +131,7 @@
         android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"
         android:text="BACK"
-        android:fontFamily="@font/montserratbold"
+        android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:background="@drawable/btn_custom"

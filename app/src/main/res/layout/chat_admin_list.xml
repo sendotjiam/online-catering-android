@@ -30,7 +30,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratsemibold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:paddingBottom="10dp"
                 android:text="Andy"
                 android:textColor="@color/black"
@@ -45,14 +45,14 @@
                 android:paddingRight="2dp"
                 android:paddingTop="15dp"
                 android:textSize="14sp"
-                android:fontFamily="@font/montserratlight"/>
+                android:fontFamily="@font/montserrat_light"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/message_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratlight"
+            android:fontFamily="@font/montserrat_light"
             android:text="selamat siang !"
             android:textColor="@color/black"
             android:textSize="18dp" />
