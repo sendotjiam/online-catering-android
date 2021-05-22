@@ -20,6 +20,7 @@ public class UsersDB {
         cv.put(UserDBHelper.FIELD_USER_PHONE, users.phone);
         cv.put(UserDBHelper.FIELD_USER_WALLET, users.wallet);
         cv.put(UserDBHelper.FIELD_USER_GENDER, users.gender);
+        cv.put(UserDBHelper.FIELD_USER_DATEBIRTH, users.dateOfBirth);
 
         db.insert(UserDBHelper.TABLE_USERS, null, cv );
 

@@ -6,5 +6,6 @@ public class Users {
     String password;
     String phone;
     String gender;
+    String dateOfBirth;
     long wallet;
 }

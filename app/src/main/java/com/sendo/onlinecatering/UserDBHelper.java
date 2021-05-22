@@ -17,6 +17,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
     public static final String FIELD_USER_PHONE = "phone";
     public static final String FIELD_USER_GENDER = "gender";
     public static final String FIELD_USER_WALLET = "wallet";
+    public static final String FIELD_USER_DATEBIRTH = "DOB";
 
     private static final String CREATE_USERS = "CREATE TABLE IF NOT EXISTS " + TABLE_USERS +" (" +
             FIELD_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -24,7 +25,8 @@ public class UserDBHelper extends SQLiteOpenHelper {
             FIELD_USER_PASSWORD + " TEXT," +
             FIELD_USER_PHONE + " INTEGER," +
             FIELD_USER_GENDER + " TEXT," +
-            FIELD_USER_WALLET + " FLOAT)";
+            FIELD_USER_WALLET + " FLOAT,"+
+            FIELD_USER_DATEBIRTH + " DATE)";
 
     private static final String DROP_PRODUCTS = "DROP TABLE IF EXISTS " + TABLE_USERS;
 

@@ -21,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     RadioButton radioButtongender;
     CheckBox checkagreement;
     UsersDB usersDB;
+    DatePicker datebirth;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         BTNRegister = findViewById(R.id.regbtnreg);
         radiogroupgender = findViewById(R.id.radiogroup);
         checkagreement = findViewById(R.id.checkboxagreement);
+        datebirth = findViewById(R.id.datebirth);
         TVerror = findViewById(R.id.texterrors);
         usersDB = new UsersDB(this);
 
@@ -45,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
                     user.password = ETPassword.getText().toString();
                     user.phone = ETPhone.getText().toString();
                     user.gender = radioButtongender.getText().toString();
-                    TVerror.setText("Register Succeed");
+                    user.dateOfBirth = datebirth.getDayOfMonth() + "-" + (datebirth.getMonth() + 1) + "-" + datebirth.getYear();
                     usersDB.insertUsers(user);
                     OpenRegisterActivity();
                 }
@@ -141,6 +143,18 @@ public class RegisterActivity extends AppCompatActivity {
         else {
             TVerror.setText("Confirmation Password must be the same with Password");
             return false;
+        }
+    }
+
+    private boolean checkDateOfBirth()
+    {
+        if (!datebirth.isEnabled())
+        {
+            TVerror.setText("DOB cannot be blank");
+            return false;
+        }
+        else{
+            return true;
         }
     }
 
