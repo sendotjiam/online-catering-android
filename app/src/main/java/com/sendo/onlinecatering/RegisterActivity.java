@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkusername() && checkpassword() && checkPhone() && checkconfirmationpass() && checkGender() && checkTerms() ){
+                if(checkusername() && checkpassword() && checkPhone() && checkconfirmationpass() && checkGender() && checkDateOfBirth() && checkTerms() ){
                     Users user = new Users();
                     user.username = ETUsername.getText().toString();
                     user.password = ETPassword.getText().toString();
@@ -148,6 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean checkDateOfBirth()
     {
+        Date dateOfBirth = new Date(datebirth.getYear(), datebirth.getMonth(), datebirth.getDayOfMonth());
         if (!datebirth.isEnabled())
         {
             TVerror.setText("DOB cannot be blank");
