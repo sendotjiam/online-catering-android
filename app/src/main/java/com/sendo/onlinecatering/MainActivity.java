@@ -15,7 +15,13 @@ public class MainActivity extends AppCompatActivity {
     TextView ETUsername, ETPassword,TVError;
     Button BTNLogin, BTNRegister;
     UsersDB usersDB;
+    int check_admin = 0;
 
+    public static final String ADMIN_USERNAME = "admin";
+    public static final String ADMIN_PASSWORD = "admin1234";
+    public static final String ADMIN_PHONE = "01234567890";
+    public static final String ADMIN_GENDER = "Male";
+    public static final String ADMIN_DOB = "01-01-2001";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         BTNRegister = findViewById(R.id.btnregister);
         TVError = findViewById(R.id.txterrormessage);
         usersDB = new UsersDB(this);
+        Users user = new Users();
+
 
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,11 +46,27 @@ public class MainActivity extends AppCompatActivity {
         BTNLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                user.username = ADMIN_USERNAME;
+                user.password = ADMIN_PASSWORD;
+                user.phone = ADMIN_PHONE;
+                user.gender = ADMIN_GENDER;
+                user.dateOfBirth =  ADMIN_DOB;
+
+                if(check_admin == 0){
+                    usersDB.insertUsers(user);
+                    check_admin++;
+                }
+
                 if(checkusername() && checkpassword()){
                     String username = ETUsername.getText().toString();
                     String password = ETPassword.getText().toString();
-                    if(usersDB.checkUsers(username, password)){
-                        pindah(view);
+                    if(username.contentEquals("admin")  && password.contentEquals("admin1234") ){
+
+                        openadminactivity(view);
+                    }
+                    else if(usersDB.checkUsers(username, password)){
+                        openhomeactivity(view);
                     }
                     else{
                         TVError.setText("Username or Password are wrong");
@@ -55,7 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void pindah(View view) {
+    public void openhomeactivity(View view) {
+        Intent intent = new Intent(this, ChatAdmin.class);
+        startActivity(intent);
+    }
+
+    public void openadminactivity(View view) {
         Intent intent = new Intent(this, ChatAdmin.class);
         startActivity(intent);
     }
