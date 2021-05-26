@@ -54,8 +54,7 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
         holder.fnbimage.setImageResource(checkOutDetails.get(position).getImage_src());
         holder.fnbname.setText(checkOutDetails.get(position).getFnbname());
         holder.fnbdetail.setText(checkOutDetails.get(position).getFnbdetail());
-        holder.note.setText(checkOutDetails.get(position).getNotes());
-        holder.date.setText(checkOutDetails.get(position).getDate());
+        holder.fnbname2.setText(checkOutDetails.get(position).getFnbname2());
         holder.price.setText(checkOutDetails.get(position).getFnbprice());
     }
 
@@ -68,7 +67,7 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
         ImageView fnbimage;
         TextView fnbname;
         TextView fnbdetail;
-        TextView note;
+        TextView fnbname2;
         TextView date;
         TextView price;
         public ViewHolder(View itemView) {
@@ -76,8 +75,7 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
             fnbimage = itemView.findViewById(R.id.fnbimage);
             fnbname = itemView.findViewById(R.id.name);
             fnbdetail = itemView.findViewById(R.id.detail);
-            note = itemView.findViewById(R.id.notesdetail);
-            date = itemView.findViewById(R.id.date);
+            fnbname2 = itemView.findViewById(R.id.name2);
             price = itemView.findViewById(R.id.price);
         }
     }

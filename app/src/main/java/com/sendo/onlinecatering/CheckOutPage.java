@@ -24,29 +24,25 @@ public class CheckOutPage extends AppCompatActivity {
         checkOutDetails.add(new CheckOutDetail(R.drawable.ayamgoreng,
                 "Ayam Goreng Lengkuas",
                 "Ayam goreng dengan menggunakan bumbu lengkuas gurih dan sehat",
-                "Ayam Goreng Lengkuas 50 pcs untuk nikahan anak",
-                "13 Mei 2021",
+                "Ayam Goreng Lengkuas",
                 "Rp500.000,00"));
 
         checkOutDetails.add(new CheckOutDetail(R.drawable.ikangoreng,
                 "Ikan Goreng Lengkuas",
                 "Ikan goreng dengan menggunakan bumbu lengkuas gurih dan sehat",
-                "Ikan Goreng Lengkuas 50 pcs untuk nikahan anak",
-                "13 Mei 2021",
+                "Ikan Goreng Lengkuas",
                 "Rp600.000,00"));
 
         checkOutDetails.add(new CheckOutDetail(R.drawable.ayamgoreng,
                 "Ayam Goreng Lengkuas",
                 "Ayam goreng dengan menggunakan bumbu lengkuas gurih dan sehat",
-                "Ayam Goreng Lengkuas 50 pcs untuk nikahan anak",
-                "13 Mei 2021",
+                "Ayam Goreng Lengkuas",
                 "Rp500.000,00"));
 
         checkOutDetails.add(new CheckOutDetail(R.drawable.ikangoreng,
                 "Ikan Goreng Lengkuas",
                 "Ikan goreng dengan menggunakan bumbu lengkuas gurih dan sehat",
-                "Ikan Goreng Lengkuas 50 pcs untuk nikahan anak",
-                "13 Mei 2021",
+                "Ikan Goreng Lengkuas",
                 "Rp600.000,00"));
 
         CheckOutDetailAdapter checkOutDetailAdapter = new CheckOutDetailAdapter(this);

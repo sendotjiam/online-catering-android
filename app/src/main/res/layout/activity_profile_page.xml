@@ -17,12 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/btn_backprofile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/ic_back" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,7 +38,7 @@
             android:textColor="@color/black"
             android:textSize="17sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_fullname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +61,7 @@
             android:textColor="@color/black"
             android:textSize="17sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,7 +84,7 @@
             android:textColor="@color/black"
             android:textSize="17sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_phonenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -113,7 +107,7 @@
             android:textColor="@color/black"
             android:textSize="17sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -136,7 +130,7 @@
             android:textColor="@color/black"
             android:textSize="17sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_cash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -179,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
-                android:onClick="topup"
+                android:onClick="topupgroup"
                 android:text="Rp.1.000.000,00"
                 android:textSize="18sp" />
 
@@ -188,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
-                android:onClick="topup"
+                android:onClick="topupgroup"
                 android:text="Rp.1.500.000,00"
                 android:textSize="18sp" />
 
@@ -197,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
-                android:onClick="topup"
+                android:onClick="topupgroup"
                 android:text="Rp.2.000.000,00"
                 android:textSize="18sp" />
 
@@ -237,7 +231,8 @@
             android:fontFamily="@font/montserrat_bold"
             android:text="Top Up"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:onClick="topup"/>
     </LinearLayout>
 
     <LinearLayout
