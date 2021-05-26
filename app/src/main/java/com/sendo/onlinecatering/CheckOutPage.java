@@ -17,8 +17,6 @@ public class CheckOutPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out_page);
 
-        getSupportActionBar().hide();
-
         item_view = findViewById(R.id.rv_checkout);
 
         checkOutDetails.add(new CheckOutDetail(R.drawable.ayamgoreng,
