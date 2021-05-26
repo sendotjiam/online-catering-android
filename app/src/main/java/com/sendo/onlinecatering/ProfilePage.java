@@ -1,17 +1,23 @@
 package com.sendo.onlinecatering;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sendo.onlinecatering.activities.CartActivity;
 import com.sendo.onlinecatering.activities.MainActivity;
+
+import Admin.ChatAdmin;
+import Admin.CustomerOrder;
 
 public class ProfilePage extends AppCompatActivity {
     TextView fullname;
@@ -39,16 +45,18 @@ public class ProfilePage extends AppCompatActivity {
         confirmpassword = findViewById(R.id.et_confirmpassword);
 
         Intent profileintent = getIntent();
-        useridfromhome = profileintent.getIntExtra("IDFROMHOME",0);
+        useridfromhome = profileintent.getIntExtra("IDFROMHOME", 0);
         useridfromcart = profileintent.getIntExtra("IDFROMCART", 0);
 
         user_id = 0;
-        if(useridfromhome > user_id){
+        if (useridfromhome > user_id) {
             user_id = useridfromhome;
         }
-        if(useridfromcart > user_id){
+        if (useridfromcart > user_id) {
             user_id = useridfromcart;
         }
+
+        navbar();
 
         fullname.setText("Sendo Tjiamis");
         gender.setText("Male");
@@ -63,21 +71,33 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     public void topup(View view) {
+
     }
 
-    public void backhome(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("PROFILETOHOME", user_id);
-        startActivity(intent);
-        finish();
-    }
+    void navbar() {
+        BottomNavigationView nav_klient = findViewById(R.id.navbar_klient);
 
-    public void backcart(View view) {
-        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-        intent.putExtra("PROFILETOCART", user_id);
-        startActivity(intent);
-        finish();
+        nav_klient.setSelectedItemId(R.id.menu_profiles);
+        nav_klient.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.menu_home) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("PROFILETOHOME", user_id);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.menu_cart) {
+                    Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                    intent.putExtra("PROFILETOCART", user_id);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else {
+                    return true;
+                }
+            }
+        });
     }
-
 
 }
