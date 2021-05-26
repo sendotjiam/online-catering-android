@@ -1,0 +1,11 @@
+package com.sendo.onlinecatering;
+
+public class Users {
+    int id;
+    String username;
+    String password;
+    String phone;
+    String gender;
+    String dateOfBirth;
+    long wallet;
+}

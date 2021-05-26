@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineCatering">
-        <activity android:name=".activities.CartActivity"></activity>
-        <activity android:name=".MenuDetailsPage" />
+        <activity android:name=".MenuDetailsPage"/>
+        <activity android:name=".activities.CartActivity"/>
         <activity android:name="Admin.ChatwithCustomer" />
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name="Admin.OrderDetail" />
         <activity android:name="Admin.ChatAdmin" />
         <activity android:name="Admin.CustomerOrder" />
@@ -20,13 +22,15 @@
 <!--        <activity android:name=".ProfilePage" />-->
         <activity android:name=".AllMenuPage" />
         <activity android:name=".AddMenuPage" />
-        <activity android:name=".EditMenuPage" />
-        <activity android:name=".ProfilePage">
+        <activity android:name=".EditMenuPage"/>
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ProfilePage"/>
     </application>
 
 </manifest>
