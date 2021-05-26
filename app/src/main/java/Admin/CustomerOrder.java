@@ -26,7 +26,6 @@ public class CustomerOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_order);
-        getSupportActionBar().hide();
 
         order_list = findViewById(R.id.orderlist);
 
@@ -59,7 +58,7 @@ public class CustomerOrder extends AppCompatActivity {
         nav_admin.setSelectedItemId(R.id.menu_order);
         nav_admin.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull @org.jetbrains.annotations.NotNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_menus) {
                     Intent intent = new Intent(CustomerOrder.this, AllMenuPage.class);
                     startActivity(intent);
