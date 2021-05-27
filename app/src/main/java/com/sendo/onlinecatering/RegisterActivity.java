@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.sendo.onlinecatering.activities.MainActivity;
+
 import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -64,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void OpenRegisterActivity() {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

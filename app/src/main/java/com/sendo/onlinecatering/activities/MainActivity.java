@@ -1,4 +1,4 @@
-package com.sendo.onlinecatering;
+package com.sendo.onlinecatering.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

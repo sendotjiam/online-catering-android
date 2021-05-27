@@ -82,7 +82,7 @@ public class ProfilePage extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_home) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), com.sendo.onlinecatering.activities.MainActivity.class);
                     intent.putExtra("PROFILETOHOME", user_id);
                     startActivity(intent);
                     finish();
