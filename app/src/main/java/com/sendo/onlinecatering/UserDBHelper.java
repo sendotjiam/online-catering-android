@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class UserDBHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "UserDB";
+    private static final String DB_NAME = "Online_Catering.db";
     private static final int DB_VERSION = 1;
 
     public static final String TABLE_USERS = "Users";

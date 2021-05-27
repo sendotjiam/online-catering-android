@@ -11,10 +11,15 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sendo.onlinecatering.activities.CartActivity;
 import com.sendo.onlinecatering.activities.MainActivity;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import Admin.ChatAdmin;
 import Admin.CustomerOrder;
@@ -31,6 +36,9 @@ public class ProfilePage extends AppCompatActivity {
     int user_id;
     int useridfromhome;
     int useridfromcart;
+    UsersDB usersDB;
+    Users users;
+    NumberFormat formatter = new DecimalFormat("#,###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,8 @@ public class ProfilePage extends AppCompatActivity {
         olshopcash = findViewById(R.id.et_cash);
         nominalgroup = findViewById(R.id.nominalgroup);
         confirmpassword = findViewById(R.id.et_confirmpassword);
+
+        usersDB = new UsersDB(this);
 
         Intent profileintent = getIntent();
         useridfromhome = profileintent.getIntExtra("IDFROMHOME", 0);
@@ -58,11 +68,15 @@ public class ProfilePage extends AppCompatActivity {
 
         navbar();
 
-        fullname.setText("Sendo Tjiamis");
-        gender.setText("Male");
-        phonenumber.setText("081232342345");
-        dob.setText("5/7/2001");
-        olshopcash.setText("Rp200.000,00");
+        //1nya ingat ganti jdi user_id
+        users = usersDB.getUser(1);
+
+        fullname.setText(users.getUsername());
+        gender.setText(users.getGender());
+        phonenumber.setText(users.getPhone());
+        dob.setText(users.getDateOfBirth());
+        String formattemplate = formatter.format(users.getWallet());
+        olshopcash.setText("Rp." + formattemplate + ",00");
     }
 
     public void topupgroup(View view) {
@@ -71,7 +85,37 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     public void topup(View view) {
+        int check = 0;
+        String checkpassword = confirmpassword.getText().toString();
+        if(nominal == null || nominal.equals("")){
+            Toast.makeText(this,"Top Up Nominal must be selected!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            check++;
+        }
+        if(checkpassword == null || checkpassword.equals("")){
+            Toast.makeText(this,"Password must be filled!", Toast.LENGTH_SHORT).show();
+        }
+        else if(!checkpassword.equals(users.getPassword())){
+            Toast.makeText(this,"Input the right password!",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            check++;
+        }
 
+        if(check == 2) {
+            // ingat ganti id 1 nya jadi user_id juga;
+            Toast.makeText(this, "Top Up Successfully", Toast.LENGTH_SHORT).show();
+            if (nominal.getText().toString().equals("Rp.1.000.000,00")) {
+                usersDB.updateNominal(users, 1, 1000000);
+            } else{
+                usersDB.updateNominal(users, 1, 2000000);
+            }
+            Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+            intent.putExtra("PROFILETOCART", user_id);
+            startActivity(intent);
+            finish();
+        }
     }
 
     void navbar() {

@@ -41,4 +41,60 @@ public class UsersDB {
         else return false;
     }
 
+    public Users getUser(int id) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String selection = "id=?";
+        String[] selectionArgs = {"" + id};
+
+        Cursor cursor = db.query(dbHelper.TABLE_USERS, null, selection, selectionArgs, null, null, null);
+
+        Users users = null;
+
+        if (cursor.moveToFirst()) {
+            users = new Users();
+            users.setId(cursor.getInt(cursor.getColumnIndex(dbHelper.FIELD_USER_ID)));
+            users.setUsername(cursor.getString(cursor.getColumnIndex(dbHelper.FIELD_USER_USERNAME)));
+            users.setPassword(cursor.getString(cursor.getColumnIndex(dbHelper.FIELD_USER_PASSWORD)));
+            users.setPhone(cursor.getString(cursor.getColumnIndex(dbHelper.FIELD_USER_PHONE)));
+            users.setGender(cursor.getString(cursor.getColumnIndex(dbHelper.FIELD_USER_GENDER)));
+            users.setDateOfBirth(cursor.getString(cursor.getColumnIndex(dbHelper.FIELD_USER_DATEBIRTH)));
+            users.setWallet(cursor.getLong(cursor.getColumnIndex(dbHelper.FIELD_USER_WALLET)));
+        }
+
+        cursor.close();
+        db.close();
+        return users;
+    }
+
+    public void updateNominal(Users users, int id, int nominal) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String whereClause = "id=?";
+        String[] whereClauseArgs = {"" + id};
+
+        ContentValues cv = new ContentValues();
+        int temp = (int) (users.getWallet() + nominal);
+        cv.put(dbHelper.FIELD_USER_WALLET, temp);
+
+        db.update(dbHelper.TABLE_USERS, cv, whereClause, whereClauseArgs);
+
+        db.close();
+    }
+
+    public void minusNominal(Users users, int id, int nominal) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String whereClause = "id=?";
+        String[] whereClauseArgs = {"" + id};
+
+        ContentValues cv = new ContentValues();
+        int temp = (int) (users.getWallet() - nominal);
+        cv.put(dbHelper.FIELD_USER_WALLET, temp);
+
+        db.update(dbHelper.TABLE_USERS, cv, whereClause, whereClauseArgs);
+
+        db.close();
+    }
+
 }
