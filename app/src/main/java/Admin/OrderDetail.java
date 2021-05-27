@@ -20,7 +20,8 @@ public class OrderDetail extends AppCompatActivity {
     TextView ordercode, deliverydate, status;
     TextView totalorder;
     RecyclerView food_order;
-    ArrayList<OrderDetailList> foodlist = new ArrayList<>();
+    ArrayList<OrderList> foodlist = new ArrayList<>();
+    OrderDB orderDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +35,12 @@ public class OrderDetail extends AppCompatActivity {
         status = findViewById(R.id.status);
         food_order = findViewById(R.id.food_order);
         totalorder = findViewById(R.id.totalorder);
+        orderDB = new OrderDB(this);
 
         Intent intent = getIntent();
-        OrderList orderList = (OrderList) intent.getSerializableExtra("orderList");
-        ordercode.setText(orderList.getOrder_Code());
-        deliverydate.setText(orderList.getDate());
-        status.setText(orderList.getStatus());
+        int orderList = intent.getIntExtra("orderList", 0);
 
-        OrderDetailList list1 =new OrderDetailList("Ayam Goreng 50 pcs", 500000);
-        foodlist.add(list1);
-        OrderDetailList list2 =new OrderDetailList("Ikan Goreng 30 pcs", 300000);
-        foodlist.add(list2);
-        OrderDetailList list3 =new OrderDetailList("Sosis Goreng 100 pcs", 200000);
-        foodlist.add(list3);
+        foodlist = orderDB.getOrderData(orderList);
 
         OrderDetailListAdapter orderDetailListAdapter = new OrderDetailListAdapter();
         orderDetailListAdapter.setArrayListdata(foodlist);

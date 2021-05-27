@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sendo.onlinecatering.Order;
 import com.sendo.onlinecatering.R;
 
 import java.util.ArrayList;
@@ -35,17 +36,20 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
-        holder.ordercode.setText(list.get(position).getOrder_Code());
-        holder.deliverydate.setText(list.get(position).getDate());
-        holder.status.setText(list.get(position).getStatus());
+        holder.ordercode.setText(list.get(position).getOrder_code());
+        holder.deliverydate.setText(list.get(position).getOrder_transaction_date());
+        holder.status.setText(list.get(position).getOrder_status());
 
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderDetail.class);
-                OrderList orderlist = new OrderList(list.get(position).getOrder_Code(), list.get(position).getDate(),
-                        list.get(position).getStatus());
-                intent.putExtra("orderList", orderlist);
+//                OrderList orderlist = new OrderList(list.get(position).getOrder_id(), list.get(position).getOrder_user_id(),
+//                        list.get(position).getOrder_code(), list.get(position).getOrder_menu_name(),list.get(position).getOrder_menu_price(),
+//                        list.get(position).getOrder_transaction_date(), list.get(position).getOrder_status());
+
+                int orderList = Integer.parseInt(list.get(position).getOrder_user_id());
+                intent.putExtra("orderList", orderList);
                 context.startActivity(intent);
             }
         });

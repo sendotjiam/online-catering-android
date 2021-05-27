@@ -24,7 +24,7 @@ public class OrderDetailListAdapter extends RecyclerView.Adapter<OrderDetailList
     NumberFormat formatter = new DecimalFormat("#,###");
 
     Context context;
-    ArrayList<OrderDetailList> list = new ArrayList<>();
+    ArrayList<OrderList> list = new ArrayList<>();
 
     @NonNull
     @Override
@@ -36,9 +36,9 @@ public class OrderDetailListAdapter extends RecyclerView.Adapter<OrderDetailList
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        String formatnominal = formatter.format(list.get(position).getFoodprice());
+        String formatnominal = formatter.format(list.get(position).getOrder_menu_price());
 
-        holder.foodname.setText(list.get(position).getFoodname());
+        holder.foodname.setText(list.get(position).getOrder_menu_name());
         holder.foodprice.setText("Rp. " + formatnominal);
     }
 
@@ -47,7 +47,7 @@ public class OrderDetailListAdapter extends RecyclerView.Adapter<OrderDetailList
         return list.size();
     }
 
-    public void setArrayListdata(ArrayList<OrderDetailList> list) {
+    public void setArrayListdata(ArrayList<OrderList> list) {
         this.list = list;
     }
 

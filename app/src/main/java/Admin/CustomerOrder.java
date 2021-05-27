@@ -31,18 +31,18 @@ public class CustomerOrder extends AppCompatActivity {
 
         navigation_bar();
 
-        OrderList list1 =new OrderList("C2G3A", "3/25/2021", "Paid");
-        list.add(list1);
-        OrderList list2 =new OrderList("C2G3B", "3/27/2021", "Paid");
-        list.add(list2);
-        OrderList list3 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
-        list.add(list3);
-        OrderList list4 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
-        list.add(list3);
-        OrderList list5 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
-        list.add(list3);
-        OrderList list6 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
-        list.add(list3);
+//        OrderList list1 =new OrderList("C2G3A", "3/25/2021", "Paid");
+//        list.add(list1);
+//        OrderList list2 =new OrderList("C2G3B", "3/27/2021", "Paid");
+//        list.add(list2);
+//        OrderList list3 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
+//        list.add(list3);
+//        OrderList list4 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
+//        list.add(list3);
+//        OrderList list5 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
+//        list.add(list3);
+//        OrderList list6 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
+//        list.add(list3);
 
         OrderListAdapter orderListAdapter = new OrderListAdapter();
         orderListAdapter.setArrayListdata(list);
