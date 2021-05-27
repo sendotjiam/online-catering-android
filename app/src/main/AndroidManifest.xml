@@ -23,14 +23,14 @@
         <activity android:name=".AllMenuPage" />
         <activity android:name=".AddMenuPage" />
         <activity android:name=".EditMenuPage"/>
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"/>
+        <activity android:name=".ProfilePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProfilePage"/>
     </application>
 
 </manifest>
