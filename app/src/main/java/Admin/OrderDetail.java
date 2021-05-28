@@ -22,6 +22,7 @@ public class OrderDetail extends AppCompatActivity {
     RecyclerView food_order;
     ArrayList<OrderList> foodlist = new ArrayList<>();
     OrderDB orderDB;
+    int total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +39,24 @@ public class OrderDetail extends AppCompatActivity {
         orderDB = new OrderDB(this);
 
         Intent intent = getIntent();
-        int orderList = intent.getIntExtra("orderList", 0);
+        String orderList = intent.getStringExtra("orderList");
 
         foodlist = orderDB.getOrderData(orderList);
+
+        ordercode.setText(foodlist.get(0).getOrder_code());
+        deliverydate.setText(foodlist.get(0).getOrder_transaction_date());
+        status.setText(foodlist.get(0).getOrder_status());
+
+        for(int i = 0; i < foodlist.size() ; i++){
+            total = total + Integer.parseInt(foodlist.get(i).getOrder_menu_price());
+        }
+        totalorder.setText(String.valueOf(total));
 
         OrderDetailListAdapter orderDetailListAdapter = new OrderDetailListAdapter();
         orderDetailListAdapter.setArrayListdata(foodlist);
         food_order.setAdapter(orderDetailListAdapter);
         food_order.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     public void Icon_Back(View view) {

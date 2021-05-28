@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="#FFFFFF"
     tools:context="Admin.OrderDetail">
 
     <LinearLayout
@@ -17,11 +17,11 @@
 
         <ImageButton
             android:id="@+id/ic_back"
-            android:onClick="Icon_Back"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_back" />
+            android:background="@drawable/ic_back"
+            android:onClick="Icon_Back" />
 
         <TextView
             android:layout_width="match_parent"
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="Delivery Date : "
+            android:text="Transaction Date : "
             android:textColor="@color/black"
             android:textSize="22sp" />
 
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/btn_back">
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Total Order"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/totalorder"
@@ -151,24 +151,10 @@
                 android:gravity="right"
                 android:text="Rp 1.000.000,00"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="22dp" />
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/btn_custom"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Back"
-            android:onClick="Button_Back"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
