@@ -14,6 +14,8 @@ import com.sendo.onlinecatering.activities.CartActivity;
 
 import java.util.ArrayList;
 
+import Admin.CustomerOrder;
+
 public class InvoicePage extends AppCompatActivity {
     RecyclerView fnbview;
     TextView transactiondate;
@@ -66,9 +68,9 @@ public class InvoicePage extends AppCompatActivity {
     }
 
     public void backtohome(View view) {
-        Intent intent = new Intent(this, CartActivity.class);
+        Intent intent = new Intent(this, CustomerOrder.class);
         //ingat ganti 1 nya jdi user_id
-        intent.putExtra("USERIDFROMINVOICE", 1);
+//        intent.putExtra("USERIDFROMINVOICE", 1);
         startActivity(intent);
         finish();
     }

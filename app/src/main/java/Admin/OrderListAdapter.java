@@ -44,11 +44,8 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderDetail.class);
-//                OrderList orderlist = new OrderList(list.get(position).getOrder_id(), list.get(position).getOrder_user_id(),
-//                        list.get(position).getOrder_code(), list.get(position).getOrder_menu_name(),list.get(position).getOrder_menu_price(),
-//                        list.get(position).getOrder_transaction_date(), list.get(position).getOrder_status());
 
-                int orderList = list.get(position).getOrder_user_id();
+                String orderList = list.get(position).getOrder_code();
                 intent.putExtra("orderList", orderList);
                 context.startActivity(intent);
             }

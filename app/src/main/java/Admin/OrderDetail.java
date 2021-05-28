@@ -28,7 +28,6 @@ public class OrderDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
-        getSupportActionBar().hide();
 
         ic_back = findViewById(R.id.ic_back);
         ordercode = findViewById(R.id.ordercode);

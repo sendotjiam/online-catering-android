@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sendo.onlinecatering.AllMenuPage;
@@ -21,8 +22,7 @@ public class CustomerOrder extends AppCompatActivity {
     BottomNavigationView nav_admin;
     RecyclerView order_list;
     ArrayList<OrderList> list = new ArrayList();
-    ArrayList<OrderList> list2 = new ArrayList();
-    ArrayList<OrderList> listResult = new ArrayList();
+    ArrayList<OrderList> listResult = new ArrayList<>();
 
     OrderDB orderDB;
 
@@ -38,16 +38,20 @@ public class CustomerOrder extends AppCompatActivity {
         navigation_bar();
 
         list = orderDB.ViewAllData();
-        list2 = orderDB.ViewAllData();
 
-        for (int i = 0; i < list.size(); i++) {
-            for (int x = 0; x < list.size(); x++) {
-                if (listResult.get(x).getOrder_code() != null) {
+        OrderList orderlist = new OrderList(list.get(0).getOrder_id(), list.get(0).getOrder_user_id(),
+                list.get(0).getOrder_code(), list.get(0).getOrder_menu_name(), list.get(0).getOrder_menu_price(),
+                list.get(0).getOrder_transaction_date(), list.get(0).getOrder_status());
+        listResult.add(orderlist);
+
+        if (list.size() > 1) {
+            for (int i = 1; i < list.size(); i++) {
+                for (int x = 0; x < listResult.size(); x++) {
                     if (!list.get(i).getOrder_code().equals(listResult.get(x).getOrder_code())) {
-                        OrderList orderlist = new OrderList(list.get(i).getOrder_id(), list.get(i).getOrder_user_id(),
+                        OrderList orderlist1 = new OrderList(list.get(i).getOrder_id(), list.get(i).getOrder_user_id(),
                                 list.get(i).getOrder_code(), list.get(i).getOrder_menu_name(), list.get(i).getOrder_menu_price(),
                                 list.get(i).getOrder_transaction_date(), list.get(i).getOrder_status());
-                        listResult.add(orderlist);
+                        listResult.add(orderlist1);
                     }
                 }
             }

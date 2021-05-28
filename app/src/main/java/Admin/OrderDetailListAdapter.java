@@ -32,7 +32,7 @@ public class OrderDetailListAdapter extends RecyclerView.Adapter<OrderDetailList
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        String formatnominal = formatter.format(list.get(position).getOrder_menu_price());
+        String formatnominal = formatter.format(Integer.parseInt(list.get(position).getOrder_menu_price()));
 
         holder.foodname.setText(list.get(position).getOrder_menu_name());
         holder.foodprice.setText("Rp. " + formatnominal);

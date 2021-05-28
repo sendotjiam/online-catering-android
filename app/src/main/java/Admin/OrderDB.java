@@ -39,15 +39,16 @@ public class OrderDB {
 
         String get_subscription = "SELECT *" +
                 " FROM " + UserDBHelper.TABLE_ORDER + " t " +
-                " WHERE t. " + UserDBHelper.FIELD_ORDER_CODE + " LIKE " + orderCode;
+                " WHERE t. " + UserDBHelper.FIELD_ORDER_CODE + " = \"" + orderCode + "\"";
 
         Cursor cursor = db.rawQuery(get_subscription, null);
+        cursor.moveToFirst();
 
         ArrayList<OrderList> Order_List = new ArrayList<>();
 
         if (cursor.getCount() > 0) {
             while (!cursor.isAfterLast()) {
-                String order_id = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_ID));
+                String order_id = cursor.getString(cursor.getColumnIndex(String.valueOf(UserDBHelper.FIELD_ORDER_ID)));
                 int order_user_id = cursor.getInt(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_USER_ID));
                 String order_code = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_CODE));
                 String order_menu_name = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_MENU_NAME));
@@ -74,7 +75,7 @@ public class OrderDB {
         if (cursor.getCount() > 0) {
             orderLists = new ArrayList<>();
             while (!cursor.isAfterLast()) {
-                String order_id = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_ID));
+                String order_id = cursor.getString(cursor.getColumnIndex(String.valueOf(UserDBHelper.FIELD_ORDER_ID)));
                 int order_user_id = cursor.getInt(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_USER_ID));
                 String order_code = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_CODE));
                 String order_menu_name = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_MENU_NAME));
