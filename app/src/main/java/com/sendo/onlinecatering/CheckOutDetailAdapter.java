@@ -13,11 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Menus> menus;
+    NumberFormat formatter = new DecimalFormat("#,###");
 
     public CheckOutDetailAdapter(Context context) {
         this.context = context;
@@ -52,11 +56,12 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
 
     @Override
     public void onBindViewHolder(@NonNull CheckOutDetailAdapter.ViewHolder holder, int position) {
-        holder.fnbimage.setImageURI(Uri.parse(menus.get(position).getMenu_img_path()));
+        holder.fnbimage.setImageURI(Uri.parse(new File(menus.get(position).getMenu_img_path()).toString()));
         holder.fnbname.setText(menus.get(position).getMenu_name());
         holder.fnbdetail.setText(menus.get(position).getMenu_description());
         holder.fnbname2.setText(menus.get(position).getMenu_name());
-        holder.price.setText(menus.get(position).getMenu_price());
+        String formattampung = formatter.format(menus.get(position).getMenu_price());
+        holder.price.setText("Rp." + formattampung + ",00");
     }
 
     @Override

@@ -25,6 +25,8 @@ public class CheckOutPage extends AppCompatActivity {
     Users users;
     Menus menus;
     Cart cart;
+    int totalpembayaran = 0;
+    ArrayList<Menus> menus1 = new ArrayList<>();
     NumberFormat formatter = new DecimalFormat("#,###");
 
     @Override
@@ -41,20 +43,47 @@ public class CheckOutPage extends AppCompatActivity {
 
 //        /data/media/0/DCIM/ayamgoreng.PNG
 //        /data/media/0/DCIM/ikangoreng.PNG
+//        /storage/emulated/0/DCIM/ayamgoreng.PNG
+//        /storage/emulated/0/DCIM/ikangoreng.PNG
+
+//        users = new Users();
+//        users.setUsername("Hendry Gunawan");
+//        users.setPassword("hendry123");
+//        users.setGender("Male");
+//        users.setPhone("081276652918");
+//        users.setDateOfBirth("3/4/2001");
+//        users.setWallet(3000000);
+//        usersDB.insertUsers(users);
+
+//        menus = new Menus();
+//        menus.setMenu_name("Ayam Goreng Lengkuas");
+//        menus.setMenu_description("Ayam goreng dengan bumbu lengkuas yang gurih");
+//        menus.setMenu_img_path("/storage/emulated/0/DCIM/ayamgoreng.PNG");
+//        menus.setMenu_price(300000);
+//        menusDB.insertMenus(menus);
+//
 //        cart = new Cart();
 //        cart.setUser_id(1);
 //        cart.setMenu_id(2);
-//
 //        cartDB.insertCart(cart);
+
+        //ingat ganti 1 nya jadi user_id juga;
+        menus1 = cartDB.getMenu(1);
+
+        for(int i = 0; i < menus1.size(); i++){
+            totalpembayaran += menus1.get(i).getMenu_price();
+        }
+        String tampung = formatter.format(totalpembayaran);
+        totalpayment.setText("Rp." + tampung + ",00");
 
         item_view = findViewById(R.id.rv_checkout);
 
 
-//        CheckOutDetailAdapter checkOutDetailAdapter = new CheckOutDetailAdapter(this);
-//        checkOutDetailAdapter.setMenus(checkOutDetails);
+        CheckOutDetailAdapter checkOutDetailAdapter = new CheckOutDetailAdapter(this);
+        checkOutDetailAdapter.setMenus(menus1);
 //
-//        item_view.setAdapter(checkOutDetailAdapter);
-//        item_view.setLayoutManager(new LinearLayoutManager(this));
+        item_view.setAdapter(checkOutDetailAdapter);
+        item_view.setLayoutManager(new LinearLayoutManager(this));
 
         //ingat ganti 1 nya jadi user_id juga
         users = usersDB.getUser(1);
@@ -63,6 +92,11 @@ public class CheckOutPage extends AppCompatActivity {
         olshopcash.setText("Rp." + formattampung + ",00");
     }
 
+    public void backtocart(View view) {
+    }
+
     public void pay(View view) {
     }
+
+
 }

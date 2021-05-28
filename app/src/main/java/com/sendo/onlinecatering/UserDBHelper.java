@@ -41,7 +41,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
             FIELD_MENU_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             FIELD_MENU_NAME + " TEXT," +
             FIELD_MENU_IMAGE_PATH + " TEXT," +
-            FIELD_MENU_PRICE + " TEXT," +
+            FIELD_MENU_PRICE + " FLOAT," +
             FIELD_MENU_DESCRIPTION + " TEXT)";
 
     private static final String DROP_MENU = "DROP TABLE IF EXISTS " + TABLE_MENU;

@@ -26,14 +26,14 @@ public class CartDB {
         db.close();
     }
 
-    public ArrayList<Menus> getMenu(int cart_id, int menu_id) {
+    public ArrayList<Menus> getMenu(int user_id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String get_menu = "SELECT * " +
                 " FROM " + dbHelper.TABLE_MENU + " m " +
                 " JOIN " + dbHelper.TABLE_CART + " c " +
                 " ON m." + dbHelper.FIELD_MENU_ID + " = c." + dbHelper.FIELD_CART_MENU_ID +
-                " WHERE m. " + dbHelper.FIELD_MENU_ID + " = " + menu_id + " AND c." + dbHelper.FIELD_CART_MENU_ID + " = " + cart_id ;
+                " WHERE c. " + dbHelper.FIELD_CART_USER_ID + " = " + user_id;
 
         Cursor cursor = db.rawQuery(get_menu, null);
 
@@ -44,7 +44,7 @@ public class CartDB {
                 int menuid = cursor.getInt(0);
                 String menu_name = cursor.getString(1);
                 String menu_image_path = cursor.getString(2);
-                String menu_price = cursor.getString(3);
+                long menu_price = cursor.getLong(3);
                 String menu_description = cursor.getString(4);
 
                 Menus menus1 = new Menus();

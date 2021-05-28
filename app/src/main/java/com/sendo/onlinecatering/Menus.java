@@ -4,10 +4,10 @@ public class Menus {
     int menu_id;
     String menu_name;
     String menu_img_path;
-    String menu_price;
+    long menu_price;
     String menu_description;
 
-    public Menus(int menu_id, String menu_name, String menu_img_path, String menu_price, String menu_description) {
+    public Menus(int menu_id, String menu_name, String menu_img_path, long menu_price, String menu_description) {
         this.menu_id = menu_id;
         this.menu_name = menu_name;
         this.menu_img_path = menu_img_path;
@@ -43,11 +43,11 @@ public class Menus {
         this.menu_img_path = menu_img_path;
     }
 
-    public String getMenu_price() {
+    public long getMenu_price() {
         return menu_price;
     }
 
-    public void setMenu_price(String menu_price) {
+    public void setMenu_price(long menu_price) {
         this.menu_price = menu_price;
     }
 

@@ -18,7 +18,8 @@
             android:id="@+id/btn_backcheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_back" />
+            android:background="@drawable/ic_back"
+            android:onClick="backtocart"/>
 
         <TextView
             android:id="@+id/title_checkout"
