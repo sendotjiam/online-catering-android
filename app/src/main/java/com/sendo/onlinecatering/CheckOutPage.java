@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sendo.onlinecatering.activities.CartActivity;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -109,6 +111,10 @@ public class CheckOutPage extends AppCompatActivity {
     }
 
     public void backtocart(View view) {
+        Intent intent = new Intent(this, CartActivity.class);
+        intent.putExtra("USERIDFROMCHECKOUTTOCART", 1);
+        startActivity(intent);
+        finish();
     }
 
 
