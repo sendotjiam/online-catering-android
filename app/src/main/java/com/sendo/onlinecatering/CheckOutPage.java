@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import Admin.OrderDB;
 import Admin.OrderList;
 
 public class CheckOutPage extends AppCompatActivity {
@@ -29,6 +32,7 @@ public class CheckOutPage extends AppCompatActivity {
     UsersDB usersDB;
     MenusDB menusDB;
     CartDB cartDB;
+    OrderDB orderDB;
     Users users;
     Menus menus;
     Cart cart;
@@ -47,6 +51,11 @@ public class CheckOutPage extends AppCompatActivity {
         usersDB = new UsersDB(this);
         menusDB = new MenusDB(this);
         cartDB = new CartDB(this);
+        orderDB = new OrderDB(this);
+
+        /*
+        INGAT SEMUA 1 GANTI JADI user_id
+         */
 
 //        /data/media/0/DCIM/ayamgoreng.PNG
 //        /data/media/0/DCIM/ikangoreng.PNG
@@ -102,6 +111,7 @@ public class CheckOutPage extends AppCompatActivity {
     public void backtocart(View view) {
     }
 
+
     public void pay(View view) {
         if(users.getWallet() < totalpembayaran){
             Toast.makeText(this, "You dont have enough olshop cash", Toast.LENGTH_SHORT).show();
@@ -109,20 +119,44 @@ public class CheckOutPage extends AppCompatActivity {
         else{
             //ingat ganti 1 ke user_id
             usersDB.minusNominal(users, 1, totalpembayaran);
+            //ingat ganti 1 ke user_id
             cartDB.deleteCart(1);
-            RandomString randomString = new RandomString(5, ThreadLocalRandom.current());
+            String order_code = random();
             String transactiondate = new SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault()).format(new Date());
             for(int i = 0; i < menus1.size(); i++){
-                OrderList orderList = new OrderList();
-                orderList.setOrder_user_id(1);
-                orderList.setOrder_code(String.valueOf(randomString));
-                orderList.setOrder_menu_name(menus1.get(i).getMenu_name());
-                orderList.setOrder_menu_price(String.valueOf(menus1.get(i).getMenu_price()));
-                orderList.setOrder_transaction_date(transactiondate);
-                orderList.setOrder_status("Paid");
+                OrderList order = new OrderList();
+                //ingat ganti 1 ke user_id
+                order.setOrder_user_id(1);
+                order.setOrder_code(String.valueOf(order_code));
+                order.setOrder_menu_name(menus1.get(i).getMenu_name());
+                order.setOrder_menu_price(String.valueOf(menus1.get(i).getMenu_price()));
+                order.setOrder_transaction_date(transactiondate);
+                order.setOrder_status("Paid");
+
+                orderDB.insertUsers(order);
             }
+            Intent intent = new Intent(this, InvoicePage.class);
+            //ingat ganti 1 ke user_id
+            intent.putExtra("USERIDFROMCHECKOUT", 1);
+            intent.putExtra("TRANSACTIONDATE", transactiondate);
+            intent.putExtra("ORDERCODE", String.valueOf(order_code));
+            intent.putParcelableArrayListExtra("MENU", menus1);
+            Toast.makeText(this, String.valueOf(order_code), Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+            finish();
         }
     }
 
+    public String random() {
+        String random = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 6) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * random.length());
+            salt.append(random.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
 
+    }
 }

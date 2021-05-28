@@ -18,16 +18,16 @@ public class OrderDB {
         dbHelper = new UserDBHelper(ctx);
     }
 
-    public void insertUsers(Order order){
+    public void insertUsers(OrderList order){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(UserDBHelper.FIELD_ORDER_ID, order.getOrder_id());
-        cv.put(UserDBHelper.FIELD_ORDER_USER_ID, order.getUser_id());
+        cv.put(UserDBHelper.FIELD_ORDER_USER_ID, order.getOrder_user_id());
         cv.put(UserDBHelper.FIELD_ORDER_CODE, order.getOrder_code());
-        cv.put(UserDBHelper.FIELD_ORDER_MENU_NAME, order.getMenu_name());
-        cv.put(UserDBHelper.FIELD_ORDER_MENU_PRICE, order.getMenu_price());
-        cv.put(UserDBHelper.FIELD_ORDER_TRANSACTION_DATE, order.getTransaction_date());
-        cv.put(UserDBHelper.FIELD_ORDER_STATUS, order.getStatus());
+        cv.put(UserDBHelper.FIELD_ORDER_MENU_NAME, order.getOrder_menu_name());
+        cv.put(UserDBHelper.FIELD_ORDER_MENU_PRICE, order.getOrder_menu_price());
+        cv.put(UserDBHelper.FIELD_ORDER_TRANSACTION_DATE, order.getOrder_transaction_date());
+        cv.put(UserDBHelper.FIELD_ORDER_STATUS, order.getOrder_status());
 
         db.insert(UserDBHelper.TABLE_ORDER, null, cv );
 
@@ -75,7 +75,7 @@ public class OrderDB {
             orderLists = new ArrayList<>();
             while (!cursor.isAfterLast()) {
                 String order_id = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_ID));
-                String order_user_id = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_USER_ID));
+                int order_user_id = cursor.getInt(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_USER_ID));
                 String order_code = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_CODE));
                 String order_menu_name = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_MENU_NAME));
                 String order_menu_price = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_MENU_PRICE));

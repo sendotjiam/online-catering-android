@@ -1,6 +1,9 @@
 package com.sendo.onlinecatering;
 
-public class Menus {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Menus implements Parcelable {
     int menu_id;
     String menu_name;
     String menu_img_path;
@@ -18,6 +21,26 @@ public class Menus {
     public Menus(){
 
     }
+
+    protected Menus(Parcel in) {
+        menu_id = in.readInt();
+        menu_name = in.readString();
+        menu_img_path = in.readString();
+        menu_price = in.readLong();
+        menu_description = in.readString();
+    }
+
+    public static final Creator<Menus> CREATOR = new Creator<Menus>() {
+        @Override
+        public Menus createFromParcel(Parcel in) {
+            return new Menus(in);
+        }
+
+        @Override
+        public Menus[] newArray(int size) {
+            return new Menus[size];
+        }
+    };
 
     public int getMenu_id() {
         return menu_id;
@@ -57,5 +80,19 @@ public class Menus {
 
     public void setMenu_description(String menu_description) {
         this.menu_description = menu_description;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(menu_id);
+        parcel.writeString(menu_name);
+        parcel.writeString(menu_img_path);
+        parcel.writeLong(menu_price);
+        parcel.writeString(menu_description);
     }
 }

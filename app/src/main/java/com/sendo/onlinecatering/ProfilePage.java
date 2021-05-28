@@ -52,6 +52,10 @@ public class ProfilePage extends AppCompatActivity {
         nominalgroup = findViewById(R.id.nominalgroup);
         confirmpassword = findViewById(R.id.et_confirmpassword);
 
+         /*
+        INGAT SEMUA 1 GANTI JADI user_id
+         */
+
         usersDB = new UsersDB(this);
 
         Intent profileintent = getIntent();

@@ -10,11 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class FnBDetailAdapter extends RecyclerView.Adapter<FnBDetailAdapter.ViewHolder> {
     private Context context;
     private ArrayList<FnBDetail> fnBDetails;
+    NumberFormat formatter = new DecimalFormat("#,###");
 
     public FnBDetailAdapter(Context context) {
         this.context = context;
@@ -50,7 +53,7 @@ public class FnBDetailAdapter extends RecyclerView.Adapter<FnBDetailAdapter.View
     @Override
     public void onBindViewHolder(@NonNull FnBDetailAdapter.ViewHolder holder, int position) {
         holder.fnbname.setText(fnBDetails.get(position).getFnbname());
-        holder.fnbprice.setText(fnBDetails.get(position).getFnbprice());
+        holder.fnbprice.setText("Rp." + fnBDetails.get(position).getFnbprice() + ",00");
     }
 
     @Override

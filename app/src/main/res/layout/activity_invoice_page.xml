@@ -133,6 +133,7 @@
         android:text="BACK"
         android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/black"
+        android:onClick="backtohome"
         android:textSize="15sp"
         android:background="@drawable/btn_custom"
         />
