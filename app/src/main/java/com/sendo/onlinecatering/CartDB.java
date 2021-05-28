@@ -62,4 +62,13 @@ public class CartDB {
         return menus;
     }
 
+    public void deleteCart(int user_id){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String delete_cart = " DELETE FROM " + dbHelper.TABLE_CART +
+                " WHERE " + dbHelper.FIELD_CART_USER_ID + " = " + user_id + ";";
+
+        db.execSQL(delete_cart);
+    }
+
 }

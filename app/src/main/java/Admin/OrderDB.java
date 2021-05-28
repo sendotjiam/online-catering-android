@@ -49,7 +49,7 @@ public class OrderDB {
         if (cursor.getCount() > 0) {
             while (!cursor.isAfterLast()) {
                 String order_id = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_ID));
-                String order_user_id = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_USER_ID));
+                int order_user_id = cursor.getInt(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_USER_ID));
                 String order_code = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_CODE));
                 String order_menu_name = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_MENU_NAME));
                 String order_menu_price = cursor.getString(cursor.getColumnIndex(UserDBHelper.FIELD_ORDER_MENU_PRICE));

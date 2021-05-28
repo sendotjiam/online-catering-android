@@ -8,10 +8,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
+
+import Admin.OrderList;
 
 public class CheckOutPage extends AppCompatActivity {
     TextView olshopcash;
@@ -96,6 +103,25 @@ public class CheckOutPage extends AppCompatActivity {
     }
 
     public void pay(View view) {
+        if(users.getWallet() < totalpembayaran){
+            Toast.makeText(this, "You dont have enough olshop cash", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            //ingat ganti 1 ke user_id
+            usersDB.minusNominal(users, 1, totalpembayaran);
+            cartDB.deleteCart(1);
+            RandomString randomString = new RandomString(5, ThreadLocalRandom.current());
+            String transactiondate = new SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault()).format(new Date());
+            for(int i = 0; i < menus1.size(); i++){
+                OrderList orderList = new OrderList();
+                orderList.setOrder_user_id(1);
+                orderList.setOrder_code(String.valueOf(randomString));
+                orderList.setOrder_menu_name(menus1.get(i).getMenu_name());
+                orderList.setOrder_menu_price(String.valueOf(menus1.get(i).getMenu_price()));
+                orderList.setOrder_transaction_date(transactiondate);
+                orderList.setOrder_status("Paid");
+            }
+        }
     }
 
 

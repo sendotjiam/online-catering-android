@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class OrderList implements Serializable {
     private String order_id;
-    private String order_user_id;
+    private int order_user_id;
     private String order_code;
     private String order_menu_name;
     private String order_menu_price;
     private String order_transaction_date;
     private String order_status;
 
-    public OrderList(String order_id, String order_user_id, String order_code, String order_menu_name, String order_menu_price, String order_transaction_date, String order_status) {
+    public OrderList(String order_id, int order_user_id, String order_code, String order_menu_name, String order_menu_price, String order_transaction_date, String order_status) {
         this.order_id = order_id;
         this.order_user_id = order_user_id;
         this.order_code = order_code;
@@ -19,6 +19,10 @@ public class OrderList implements Serializable {
         this.order_menu_price = order_menu_price;
         this.order_transaction_date = order_transaction_date;
         this.order_status = order_status;
+    }
+
+    public OrderList(){
+
     }
 
     public String getOrder_id() {
@@ -29,11 +33,11 @@ public class OrderList implements Serializable {
         this.order_id = order_id;
     }
 
-    public String getOrder_user_id() {
+    public int getOrder_user_id() {
         return order_user_id;
     }
 
-    public void setOrder_user_id(String order_user_id) {
+    public void setOrder_user_id(int order_user_id) {
         this.order_user_id = order_user_id;
     }
 
