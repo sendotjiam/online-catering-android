@@ -1,6 +1,7 @@
 package com.sendo.onlinecatering;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,14 @@ import java.util.ArrayList;
 
 public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<CheckOutDetail> checkOutDetails;
+    private ArrayList<Menus> menus;
 
     public CheckOutDetailAdapter(Context context) {
         this.context = context;
     }
 
-    public CheckOutDetailAdapter(ArrayList<CheckOutDetail> checkOutDetails) {
-        this.checkOutDetails = checkOutDetails;
+    public CheckOutDetailAdapter(ArrayList<Menus> menus) {
+        this.menus = menus;
     }
 
     public Context getContext() {
@@ -34,12 +35,12 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
         this.context = context;
     }
 
-    public ArrayList<CheckOutDetail> getCheckOutDetails() {
-        return checkOutDetails;
+    public ArrayList<Menus> getMenus() {
+        return menus;
     }
 
-    public void setCheckOutDetails(ArrayList<CheckOutDetail> checkOutDetails) {
-        this.checkOutDetails = checkOutDetails;
+    public void setMenus(ArrayList<Menus> menus) {
+        this.menus = menus;
     }
 
     @NonNull
@@ -51,16 +52,16 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
 
     @Override
     public void onBindViewHolder(@NonNull CheckOutDetailAdapter.ViewHolder holder, int position) {
-        holder.fnbimage.setImageResource(checkOutDetails.get(position).getImage_src());
-        holder.fnbname.setText(checkOutDetails.get(position).getFnbname());
-        holder.fnbdetail.setText(checkOutDetails.get(position).getFnbdetail());
-        holder.fnbname2.setText(checkOutDetails.get(position).getFnbname2());
-        holder.price.setText(checkOutDetails.get(position).getFnbprice());
+        holder.fnbimage.setImageURI(Uri.parse(menus.get(position).getMenu_img_path()));
+        holder.fnbname.setText(menus.get(position).getMenu_name());
+        holder.fnbdetail.setText(menus.get(position).getMenu_description());
+        holder.fnbname2.setText(menus.get(position).getMenu_name());
+        holder.price.setText(menus.get(position).getMenu_price());
     }
 
     @Override
     public int getItemCount() {
-        return checkOutDetails.size();
+        return menus.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -68,7 +69,6 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
         TextView fnbname;
         TextView fnbdetail;
         TextView fnbname2;
-        TextView date;
         TextView price;
         public ViewHolder(View itemView) {
             super(itemView);

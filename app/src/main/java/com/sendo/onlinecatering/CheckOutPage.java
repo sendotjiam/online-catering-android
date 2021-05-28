@@ -20,7 +20,11 @@ public class CheckOutPage extends AppCompatActivity {
     RecyclerView item_view;
     ArrayList<CheckOutDetail> checkOutDetails = new ArrayList<>();
     UsersDB usersDB;
+    MenusDB menusDB;
+    CartDB cartDB;
     Users users;
+    Menus menus;
+    Cart cart;
     NumberFormat formatter = new DecimalFormat("#,###");
 
     @Override
@@ -32,38 +36,25 @@ public class CheckOutPage extends AppCompatActivity {
         pay = findViewById(R.id.btn_pay);
 
         usersDB = new UsersDB(this);
+        menusDB = new MenusDB(this);
+        cartDB = new CartDB(this);
+
+//        /data/media/0/DCIM/ayamgoreng.PNG
+//        /data/media/0/DCIM/ikangoreng.PNG
+//        cart = new Cart();
+//        cart.setUser_id(1);
+//        cart.setMenu_id(2);
+//
+//        cartDB.insertCart(cart);
 
         item_view = findViewById(R.id.rv_checkout);
 
-        checkOutDetails.add(new CheckOutDetail(R.drawable.ayamgoreng,
-                "Ayam Goreng Lengkuas",
-                "Ayam goreng dengan menggunakan bumbu lengkuas gurih dan sehat",
-                "Ayam Goreng Lengkuas",
-                "Rp500.000,00"));
 
-        checkOutDetails.add(new CheckOutDetail(R.drawable.ikangoreng,
-                "Ikan Goreng Lengkuas",
-                "Ikan goreng dengan menggunakan bumbu lengkuas gurih dan sehat",
-                "Ikan Goreng Lengkuas",
-                "Rp600.000,00"));
-
-        checkOutDetails.add(new CheckOutDetail(R.drawable.ayamgoreng,
-                "Ayam Goreng Lengkuas",
-                "Ayam goreng dengan menggunakan bumbu lengkuas gurih dan sehat",
-                "Ayam Goreng Lengkuas",
-                "Rp500.000,00"));
-
-        checkOutDetails.add(new CheckOutDetail(R.drawable.ikangoreng,
-                "Ikan Goreng Lengkuas",
-                "Ikan goreng dengan menggunakan bumbu lengkuas gurih dan sehat",
-                "Ikan Goreng Lengkuas",
-                "Rp600.000,00"));
-
-        CheckOutDetailAdapter checkOutDetailAdapter = new CheckOutDetailAdapter(this);
-        checkOutDetailAdapter.setCheckOutDetails(checkOutDetails);
-
-        item_view.setAdapter(checkOutDetailAdapter);
-        item_view.setLayoutManager(new LinearLayoutManager(this));
+//        CheckOutDetailAdapter checkOutDetailAdapter = new CheckOutDetailAdapter(this);
+//        checkOutDetailAdapter.setMenus(checkOutDetails);
+//
+//        item_view.setAdapter(checkOutDetailAdapter);
+//        item_view.setLayoutManager(new LinearLayoutManager(this));
 
         //ingat ganti 1 nya jadi user_id juga
         users = usersDB.getUser(1);
