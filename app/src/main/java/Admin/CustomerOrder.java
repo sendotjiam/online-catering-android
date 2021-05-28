@@ -20,7 +20,12 @@ public class CustomerOrder extends AppCompatActivity {
 
     BottomNavigationView nav_admin;
     RecyclerView order_list;
-    ArrayList<OrderList> list =new ArrayList();
+    ArrayList<OrderList> list = new ArrayList();
+    ArrayList<OrderList> list2 = new ArrayList();
+    ArrayList<OrderList> listResult = new ArrayList();
+
+    OrderDB orderDB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +33,25 @@ public class CustomerOrder extends AppCompatActivity {
         setContentView(R.layout.activity_customer_order);
 
         order_list = findViewById(R.id.orderlist);
+        orderDB = new OrderDB(this);
 
         navigation_bar();
 
-//        OrderList list1 =new OrderList("C2G3A", "3/25/2021", "Paid");
-//        list.add(list1);
-//        OrderList list2 =new OrderList("C2G3B", "3/27/2021", "Paid");
-//        list.add(list2);
-//        OrderList list3 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
-//        list.add(list3);
-//        OrderList list4 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
-//        list.add(list3);
-//        OrderList list5 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
-//        list.add(list3);
-//        OrderList list6 =new OrderList("C2G3C", "4/27/2021", "Unpaid");
-//        list.add(list3);
+        list = orderDB.ViewAllData();
+        list2 = orderDB.ViewAllData();
+
+        for (int i = 0; i < list.size(); i++) {
+            for (int x = 0; x < list.size(); x++) {
+                if (listResult.get(x).getOrder_code() != null) {
+                    if (!list.get(i).getOrder_code().equals(listResult.get(x).getOrder_code())) {
+                        OrderList orderlist = new OrderList(list.get(i).getOrder_id(), list.get(i).getOrder_user_id(),
+                                list.get(i).getOrder_code(), list.get(i).getOrder_menu_name(), list.get(i).getOrder_menu_price(),
+                                list.get(i).getOrder_transaction_date(), list.get(i).getOrder_status());
+                        listResult.add(orderlist);
+                    }
+                }
+            }
+        }
 
         OrderListAdapter orderListAdapter = new OrderListAdapter();
         orderListAdapter.setArrayListdata(list);
