@@ -79,7 +79,7 @@ public class CheckOutPage extends AppCompatActivity {
 //        menus.setMenu_img_path("/storage/emulated/0/DCIM/ayamgoreng.PNG");
 //        menus.setMenu_price(300000);
 //        menusDB.insertMenus(menus);
-//
+
 //        cart = new Cart();
 //        cart.setUser_id(1);
 //        cart.setMenu_id(2);

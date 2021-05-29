@@ -1,7 +1,10 @@
 package com.sendo.onlinecatering;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +14,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -56,7 +63,10 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
 
     @Override
     public void onBindViewHolder(@NonNull CheckOutDetailAdapter.ViewHolder holder, int position) {
-        holder.fnbimage.setImageURI(Uri.parse(new File(menus.get(position).getMenu_img_path()).toString()));
+//        String path = Environment.getExternalStorageState() + "/" +menus.get(position).getMenu_img_path() + "/";
+//        Bitmap bitmap = BitmapFactory.decodeFile(path);
+//        holder.fnbimage.setImageBitmap(bitmap);
+//        Glide.with(context).load(new File(menus.get(position).getMenu_img_path())).into(holder.fnbimage);
         holder.fnbname.setText(menus.get(position).getMenu_name());
         holder.fnbdetail.setText(menus.get(position).getMenu_description());
         holder.fnbname2.setText(menus.get(position).getMenu_name());
