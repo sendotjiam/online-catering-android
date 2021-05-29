@@ -157,7 +157,7 @@ public class CheckOutPage extends AppCompatActivity {
         String random = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 6) { // length of the random string.
+        while (salt.length() < 5) { // length of the random string.
             int index = (int) (rnd.nextFloat() * random.length());
             salt.append(random.charAt(index));
         }

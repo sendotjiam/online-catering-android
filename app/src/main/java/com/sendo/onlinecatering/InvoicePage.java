@@ -70,7 +70,7 @@ public class InvoicePage extends AppCompatActivity {
     public void backtohome(View view) {
         Intent intent = new Intent(this, CustomerOrder.class);
         //ingat ganti 1 nya jdi user_id
-//        intent.putExtra("USERIDFROMINVOICE", 1);
+        intent.putExtra("USERIDFROMINVOICE", 1);
         startActivity(intent);
         finish();
     }
