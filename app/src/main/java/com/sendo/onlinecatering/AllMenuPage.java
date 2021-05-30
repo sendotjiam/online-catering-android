@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import Admin.CustomerOrder;
+
 public class AllMenuPage extends AppCompatActivity {
 
-    ImageButton btnAddMenu;
+    ImageButton btnAddMenu, btn_order;
     RecyclerView rlMenuList;
 
     AllMenuAdapter menuAdapter;
@@ -31,8 +33,18 @@ public class AllMenuPage extends AppCompatActivity {
 
         btnAddMenu = findViewById(R.id.btn_add_menu);
         rlMenuList = findViewById(R.id.rv_menu_list);
+        btn_order = findViewById(R.id.btn_order);
 
         rlMenuList.setLayoutManager(new LinearLayoutManager(this));
+
+        btn_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addIntent = new Intent(AllMenuPage.this, CustomerOrder.class);
+
+                startActivity(addIntent);
+            }
+        });
 
         btnAddMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +54,7 @@ public class AllMenuPage extends AppCompatActivity {
                 startActivity(addIntent);
             }
         });
+
 
         menuArrayList.add(new Menu("Ayam Goreng 50pcs", 500000));
         menuArrayList.add(new Menu("Ikan Goreng 30pcs", 300000));

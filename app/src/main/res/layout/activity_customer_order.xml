@@ -8,16 +8,32 @@
     android:orientation="vertical"
     tools:context="Admin.CustomerOrder">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_bold"
-        android:gravity="center"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:text="Customer Order"
-        android:textColor="@color/yellow"
-        android:textSize="30sp" />
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ic_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_back"
+            android:onClick="Icon_Back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="Customer Order"
+            android:textColor="@color/yellow"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,20 +43,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/orderlist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="60dp"
-            app:layout_constraintBottom_toTopOf="@+id/nav_admin" />
+            android:layout_height="match_parent" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/yellow"
-            app:itemIconTint="@drawable/selected"
-            app:itemTextColor="@drawable/selected"
-            app:labelVisibilityMode="labeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/menu_admin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

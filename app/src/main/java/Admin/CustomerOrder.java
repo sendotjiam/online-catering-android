@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,27 +36,25 @@ public class CustomerOrder extends AppCompatActivity {
         order_list = findViewById(R.id.orderlist);
         orderDB = new OrderDB(this);
 
-        navigation_bar();
-
         list = orderDB.ViewAllData();
 
-        OrderList orderlist = new OrderList(list.get(0).getOrder_id(), list.get(0).getOrder_user_id(),
-                list.get(0).getOrder_code(), list.get(0).getOrder_menu_name(), list.get(0).getOrder_menu_price(),
-                list.get(0).getOrder_transaction_date(), list.get(0).getOrder_status());
-        listResult.add(orderlist);
-
-        if (list.size() > 1) {
-            for (int i = 1; i < list.size(); i++) {
-                for (int x = 0; x < listResult.size(); x++) {
-                    if (!list.get(i).getOrder_code().equals(listResult.get(x).getOrder_code())) {
-                        OrderList orderlist1 = new OrderList(list.get(i).getOrder_id(), list.get(i).getOrder_user_id(),
-                                list.get(i).getOrder_code(), list.get(i).getOrder_menu_name(), list.get(i).getOrder_menu_price(),
-                                list.get(i).getOrder_transaction_date(), list.get(i).getOrder_status());
-                        listResult.add(orderlist1);
-                    }
-                }
-            }
-        }
+//        OrderList orderlist = new OrderList(list.get(0).getOrder_id(), list.get(0).getOrder_user_id(),
+//                list.get(0).getOrder_code(), list.get(0).getOrder_menu_name(), list.get(0).getOrder_menu_price(),
+//                list.get(0).getOrder_transaction_date(), list.get(0).getOrder_status());
+//        listResult.add(orderlist);
+//
+//        if (list.size() > 1) {
+//            for (int i = 1; i < list.size(); i++) {
+//                for (int x = 0; x < listResult.size(); x++) {
+//                    if (!list.get(i).getOrder_code().equals(listResult.get(x).getOrder_code())) {
+//                        OrderList orderlist1 = new OrderList(list.get(i).getOrder_id(), list.get(i).getOrder_user_id(),
+//                                list.get(i).getOrder_code(), list.get(i).getOrder_menu_name(), list.get(i).getOrder_menu_price(),
+//                                list.get(i).getOrder_transaction_date(), list.get(i).getOrder_status());
+//                        listResult.add(orderlist1);
+//                    }
+//                }
+//            }
+//        }
 
         OrderListAdapter orderListAdapter = new OrderListAdapter();
         orderListAdapter.setArrayListdata(list);
@@ -65,30 +64,7 @@ public class CustomerOrder extends AppCompatActivity {
     }
 
 
-    void navigation_bar() {
-        BottomNavigationView nav_admin = findViewById(R.id.nav_admin);
-
-        nav_admin.setSelectedItemId(R.id.menu_order);
-        nav_admin.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.menu_menus) {
-                    Intent intent = new Intent(CustomerOrder.this, AllMenuPage.class);
-                    startActivity(intent);
-                    return true;
-                } else if (item.getItemId() == R.id.menu_chat) {
-                    Intent intent = new Intent(CustomerOrder.this, ChatAdmin.class);
-                    startActivity(intent);
-                    return true;
-                } else if (item.getItemId() == R.id.menu_order) {
-                    return true;
-                } else {
-                    Intent intent = new Intent(CustomerOrder.this, ChatAdmin.class);
-                    startActivity(intent);
-                    return true;
-                }
-            }
-        });
+    public void Icon_Back(View view) {
+        Intent intent = new Intent(this, AllMenuPage.class);
     }
-
 }

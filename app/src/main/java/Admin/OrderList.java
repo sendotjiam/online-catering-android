@@ -21,6 +21,12 @@ public class OrderList implements Serializable {
         this.order_status = order_status;
     }
 
+    public OrderList(String order_code, String order_transaction_date, String order_status ){
+        this.order_code = order_code;
+        this.order_transaction_date = order_transaction_date;
+        this.order_status = order_status;
+    }
+
     public OrderList(){
 
     }
