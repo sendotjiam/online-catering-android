@@ -2,6 +2,8 @@ package com.sendo.onlinecatering;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,16 +16,18 @@ import android.widget.TextView;
 
 import com.sendo.onlinecatering.activities.MainActivity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView ETUsername, ETPassword, ETPhone, ETConfirmationPass, TVerror;
-    Button BTNRegister;
+    Button BTNRegister, BTNDateBirth;
     RadioGroup radiogroupgender;
     RadioButton radioButtongender;
     CheckBox checkagreement;
     UsersDB usersDB;
-    DatePicker datebirth;
+    DatePickerDialog datebirth;
+    String date= null;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +38,12 @@ public class RegisterActivity extends AppCompatActivity {
         ETPhone = findViewById(R.id.edittextphone);
         ETConfirmationPass = findViewById(R.id.edittextrepassword);
         BTNRegister = findViewById(R.id.regbtnreg);
+        BTNDateBirth = findViewById(R.id.datebirthbutton);
         radiogroupgender = findViewById(R.id.radiogroup);
         checkagreement = findViewById(R.id.checkboxagreement);
-        datebirth = findViewById(R.id.datebirth);
         TVerror = findViewById(R.id.texterrors);
         usersDB = new UsersDB(this);
+        initDatePicker();
 
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,11 +52,11 @@ public class RegisterActivity extends AppCompatActivity {
                     Users user = new Users();
                     user.username = ETUsername.getText().toString();
                     user.password = ETPassword.getText().toString();
-                    user.phone = ETPhone.getText().toString();
+                    user.phone_number = ETPhone.getText().toString();
                     user.gender = radioButtongender.getText().toString();
-                    user.dateOfBirth = datebirth.getDayOfMonth() + "-" + (datebirth.getMonth() + 1) + "-" + datebirth.getYear();
+                    user.dob = date;
                     usersDB.insertUsers(user);
-                    OpenRegisterActivity();
+                    OpenLoginActivity();
                 }
             }
         });
@@ -65,7 +70,64 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void OpenRegisterActivity() {
+    private void initDatePicker() {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String monthstring = null;
+                if(month == 1){
+                    monthstring = "January";
+                }
+                if(month == 2){
+                    monthstring = "February";
+                }
+                if(month == 3){
+                    monthstring = "March";
+                }
+                if(month == 4){
+                    monthstring = "April";
+                }
+                if(month == 5){
+                    monthstring = "May";
+                }
+                if(month == 6){
+                    monthstring = "June";
+                }
+                if(month == 7){
+                    monthstring = "July";
+                }
+                if(month == 8){
+                    monthstring = "October";
+                }
+                if(month == 9){
+                    monthstring = "September";
+                }
+                if(month == 10){
+                    monthstring = "October";
+                }
+                if(month == 11){
+                    monthstring = "November";
+                }
+                if(month == 12){
+                    monthstring = "December";
+                }
+                date = date + " - " + monthstring + " - " +year;
+                BTNDateBirth.setText(date);
+            }
+        };
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datebirth = new DatePickerDialog(this, style, dateSetListener, year, month, day);
+        datebirth.getDatePicker().setMaxDate(System.currentTimeMillis());
+    }
+
+    private void OpenLoginActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -150,8 +212,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean checkDateOfBirth()
     {
-        Date dateOfBirth = new Date(datebirth.getYear(), datebirth.getMonth(), datebirth.getDayOfMonth());
-        if (!datebirth.isEnabled())
+        if (date == null)
         {
             TVerror.setText("DOB cannot be blank");
             return false;
@@ -224,4 +285,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    public void opendatepicker(View view) {
+        datebirth.show();
+    }
 }

@@ -49,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 user.username = ADMIN_USERNAME;
                 user.password = ADMIN_PASSWORD;
-                user.phone = ADMIN_PHONE;
+                user.phone_number = ADMIN_PHONE;
                 user.gender = ADMIN_GENDER;
-                user.dateOfBirth =  ADMIN_DOB;
+                user.dob =  ADMIN_DOB;
 
                 if(check_admin == 0){
                     usersDB.insertUsers(user);

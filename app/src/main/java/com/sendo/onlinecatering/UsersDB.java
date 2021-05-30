@@ -17,10 +17,10 @@ public class UsersDB {
         ContentValues cv = new ContentValues();
         cv.put(UserDBHelper.FIELD_USER_USERNAME, users.username);
         cv.put(UserDBHelper.FIELD_USER_PASSWORD, users.password);
-        cv.put(UserDBHelper.FIELD_USER_PHONE, users.phone);
-        cv.put(UserDBHelper.FIELD_USER_WALLET, users.wallet);
+        cv.put(UserDBHelper.FIELD_USER_PHONE, users.phone_number);
+        cv.put(UserDBHelper.FIELD_USER_WALLET, users.olshopcash);
         cv.put(UserDBHelper.FIELD_USER_GENDER, users.gender);
-        cv.put(UserDBHelper.FIELD_USER_DATEBIRTH, users.dateOfBirth);
+        cv.put(UserDBHelper.FIELD_USER_DATEBIRTH, users.dob);
 
         db.insert(UserDBHelper.TABLE_USERS, null, cv );
 

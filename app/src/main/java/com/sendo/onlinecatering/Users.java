@@ -1,22 +1,22 @@
 package com.sendo.onlinecatering;
 
 public class Users {
-    int id;
+    int user_id;
     String username;
     String password;
-    String phone;
+    String phone_number;
     String gender;
-    String dateOfBirth;
-    long wallet;
+    String dob;
+    long olshopcash;
 
-    public Users(int id, String username, String password, String phone, String gender, String dateOfBirth, long wallet) {
-        this.id = id;
+    public Users(int user_id, String username, String password, String phone_number, String gender, String dob, long olshopcash) {
+        this.user_id = user_id;
         this.username = username;
         this.password = password;
-        this.phone = phone;
+        this.phone_number = phone_number;
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.wallet = wallet;
+        this.dob = dob;
+        this.olshopcash = olshopcash;
     }
 
     public Users(){
@@ -24,11 +24,11 @@ public class Users {
     }
 
     public int getId() {
-        return id;
+        return user_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.user_id = id;
     }
 
     public String getUsername() {
@@ -47,12 +47,10 @@ public class Users {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
-    }
+    public String getPhone() { return phone_number; }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone_number = phone;
     }
 
     public String getGender() {
@@ -64,18 +62,18 @@ public class Users {
     }
 
     public String getDateOfBirth() {
-        return dateOfBirth;
+        return dob;
     }
 
     public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        this.dob = dateOfBirth;
     }
 
     public long getWallet() {
-        return wallet;
+        return olshopcash;
     }
 
     public void setWallet(long wallet) {
-        this.wallet = wallet;
+        this.olshopcash = wallet;
     }
 }
