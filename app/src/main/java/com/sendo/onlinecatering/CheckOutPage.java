@@ -83,7 +83,7 @@ public class CheckOutPage extends AppCompatActivity {
 
 //        cart = new Cart();
 //        cart.setUser_id(1);
-//        cart.setMenu_id(1);
+//        cart.setMenu_id(2);
 //        cartDB.insertCart(cart);
 
         //ingat ganti 1 nya jadi user_id juga;
@@ -104,7 +104,7 @@ public class CheckOutPage extends AppCompatActivity {
 
         CheckOutDetailAdapter checkOutDetailAdapter = new CheckOutDetailAdapter(this);
         checkOutDetailAdapter.setMenus(menus1);
-//
+
         item_view.setAdapter(checkOutDetailAdapter);
         item_view.setLayoutManager(new LinearLayoutManager(this));
 
@@ -153,7 +153,6 @@ public class CheckOutPage extends AppCompatActivity {
             intent.putExtra("TRANSACTIONDATE", transactiondate);
             intent.putExtra("ORDERCODE", String.valueOf(order_code));
             intent.putParcelableArrayListExtra("MENU", menus2);
-            Toast.makeText(this, String.valueOf(order_code), Toast.LENGTH_SHORT).show();
             startActivity(intent);
             finish();
         }
