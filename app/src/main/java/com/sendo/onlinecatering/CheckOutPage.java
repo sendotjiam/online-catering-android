@@ -5,12 +5,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.bitmap.BitmapDrawableResource;
 import com.sendo.onlinecatering.activities.CartActivity;
 
 import java.text.DecimalFormat;
@@ -63,21 +66,28 @@ public class CheckOutPage extends AppCompatActivity {
 //        /data/media/0/DCIM/ikangoreng.PNG
 //        /storage/emulated/0/DCIM/ayamgoreng.PNG
 //        /storage/emulated/0/DCIM/ikangoreng.PNG
-
+//        /data/data/com.sendo.onlinecatering/image/ayamgoreng.PNG
+//        /data/data/com.sendo.onlinecatering/image/ikangoreng.PNG
+//
 //        users = new Users();
 //        users.setUsername("Hendry Gunawan");
 //        users.setPassword("hendry123");
 //        users.setGender("Male");
 //        users.setPhone("081276652918");
 //        users.setDateOfBirth("3/4/2001");
-//        users.setWallet(3000000);
+//        users.setWallet(30000000);
 //        usersDB.insertUsers(users);
 
 //        menus = new Menus();
+//        menusDB.insertMenus(
+//                "Ayam Goreng Lengkuas",
+//                imagetoByte(),
+//                100000,
+//                "Ayam goreng dengan bumbu lengkuas yang gurih");
 //        menus.setMenu_name("Ayam Goreng Lengkuas");
 //        menus.setMenu_description("Ayam goreng dengan bumbu lengkuas yang gurih");
-//        menus.setMenu_img_path("/storage/emulated/0/DCIM/ayamgoreng.PNG");
-//        menus.setMenu_price(300000);
+//        menus.setMenu_img_path("/data/data/com.sendo.onlinecatering/image/ayamgoreng.PNG");
+//        menus.setMenu_price(100000);
 //        menusDB.insertMenus(menus);
 
 //        cart = new Cart();
@@ -109,6 +119,7 @@ public class CheckOutPage extends AppCompatActivity {
         String formattampung = formatter.format(users.getWallet());
         olshopcash.setText("Rp." + formattampung + ",00");
     }
+
 
     public void backtocart(View view) {
         Intent intent = new Intent(this, CartActivity.class);
@@ -164,5 +175,8 @@ public class CheckOutPage extends AppCompatActivity {
         String saltStr = salt.toString();
         return saltStr;
 
+    }
+
+    public void add(View view) {
     }
 }

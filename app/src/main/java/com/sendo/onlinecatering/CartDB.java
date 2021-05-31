@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 
 public class CartDB {
@@ -43,7 +44,7 @@ public class CartDB {
             do {
                 int menuid = cursor.getInt(0);
                 String menu_name = cursor.getString(1);
-                String menu_image_path = cursor.getString(2);
+                byte[] menu_image_path = cursor.getBlob(2);
                 long menu_price = cursor.getLong(3);
                 String menu_description = cursor.getString(4);
 

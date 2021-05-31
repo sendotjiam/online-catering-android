@@ -40,7 +40,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
     private static final String CREATE_MENU = "CREATE TABLE IF NOT EXISTS " + TABLE_MENU +" (" +
             FIELD_MENU_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             FIELD_MENU_NAME + " TEXT," +
-            FIELD_MENU_IMAGE_PATH + " TEXT," +
+            FIELD_MENU_IMAGE_PATH + " BLOB," +
             FIELD_MENU_PRICE + " FLOAT," +
             FIELD_MENU_DESCRIPTION + " TEXT)";
 

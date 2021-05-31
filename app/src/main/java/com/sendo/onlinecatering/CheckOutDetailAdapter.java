@@ -63,6 +63,11 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
 
     @Override
     public void onBindViewHolder(@NonNull CheckOutDetailAdapter.ViewHolder holder, int position) {
+        File imgfile = new File(String.valueOf(menus.get(position).getMenu_img_path()));
+        if(imgfile.exists()){
+            Bitmap bitmap = BitmapFactory.decodeFile(imgfile.getAbsolutePath());
+            holder.fnbimage.setImageBitmap(bitmap);
+        }
 //        String path = Environment.getExternalStorageState() + "/" +menus.get(position).getMenu_img_path() + "/";
 //        Bitmap bitmap = BitmapFactory.decodeFile(path);
 //        holder.fnbimage.setImageBitmap(bitmap);

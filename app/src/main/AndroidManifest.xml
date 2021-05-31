@@ -20,14 +20,14 @@
         <activity android:name="Admin.OrderDetail" />
         <activity android:name="Admin.ChatAdmin" />
         <activity android:name="Admin.CustomerOrder" />
-<!--        <activity android:name=".CheckOutPage" />-->
+        <activity android:name=".CheckOutPage" />
         <activity android:name=".InvoicePage" />
         <activity android:name=".ProfilePage" />
         <activity android:name=".AllMenuPage" />
-        <activity android:name=".AddMenuPage" />
+<!--        <activity android:name=".AddMenuPage" />-->
         <activity android:name=".EditMenuPage"/>
         <activity android:name=".activities.MainActivity"/>
-        <activity android:name=".CheckOutPage">
+        <activity android:name=".AddMenuPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
