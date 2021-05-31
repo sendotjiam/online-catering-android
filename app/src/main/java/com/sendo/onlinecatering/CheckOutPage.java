@@ -78,22 +78,10 @@ public class CheckOutPage extends AppCompatActivity {
 //        users.setWallet(30000000);
 //        usersDB.insertUsers(users);
 
-//        menus = new Menus();
-//        menusDB.insertMenus(
-//                "Ayam Goreng Lengkuas",
-//                imagetoByte(),
-//                100000,
-//                "Ayam goreng dengan bumbu lengkuas yang gurih");
-//        menus.setMenu_name("Ayam Goreng Lengkuas");
-//        menus.setMenu_description("Ayam goreng dengan bumbu lengkuas yang gurih");
-//        menus.setMenu_img_path("/data/data/com.sendo.onlinecatering/image/ayamgoreng.PNG");
-//        menus.setMenu_price(100000);
-//        menusDB.insertMenus(menus);
-
-//        cart = new Cart();
-//        cart.setUser_id(1);
-//        cart.setMenu_id(2);
-//        cartDB.insertCart(cart);
+        cart = new Cart();
+        cart.setUser_id(1);
+        cart.setMenu_id(1);
+        cartDB.insertCart(cart);
 
         //ingat ganti 1 nya jadi user_id juga;
         menus1 = cartDB.getMenu(1);
