@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaSession2Service;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,12 +44,14 @@ public class CheckOutPage extends AppCompatActivity {
     Cart cart;
     int totalpembayaran = 0;
     ArrayList<Menus> menus1 = new ArrayList<>();
+    ArrayList<Menu> menus2= new ArrayList<>();
     NumberFormat formatter = new DecimalFormat("#,###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out_page);
+
         olshopcash = findViewById(R.id.co_olcash);
         totalpayment = findViewById(R.id.co_totalpayment);
         pay = findViewById(R.id.btn_pay);
@@ -78,15 +81,19 @@ public class CheckOutPage extends AppCompatActivity {
 //        users.setWallet(30000000);
 //        usersDB.insertUsers(users);
 
-        cart = new Cart();
-        cart.setUser_id(1);
-        cart.setMenu_id(1);
-        cartDB.insertCart(cart);
+//        cart = new Cart();
+//        cart.setUser_id(1);
+//        cart.setMenu_id(1);
+//        cartDB.insertCart(cart);
 
         //ingat ganti 1 nya jadi user_id juga;
         menus1 = cartDB.getMenu(1);
 
         for(int i = 0; i < menus1.size(); i++){
+            Menu menu = new Menu();
+            menu.setName(menus1.get(i).getMenu_name());
+            menu.setPrice(menus1.get(i).getMenu_price());
+            menus2.add(menu);
             totalpembayaran += menus1.get(i).getMenu_price();
         }
         String tampung = formatter.format(totalpembayaran);
@@ -140,12 +147,12 @@ public class CheckOutPage extends AppCompatActivity {
 
                 orderDB.insertUsers(order);
             }
-            Intent intent = new Intent(this, InvoicePage.class);
+            Intent intent = new Intent(getApplicationContext(), InvoicePage.class);
             //ingat ganti 1 ke user_id
             intent.putExtra("USERIDFROMCHECKOUT", 1);
             intent.putExtra("TRANSACTIONDATE", transactiondate);
             intent.putExtra("ORDERCODE", String.valueOf(order_code));
-            intent.putParcelableArrayListExtra("MENU", menus1);
+            intent.putParcelableArrayListExtra("MENU", menus2);
             Toast.makeText(this, String.valueOf(order_code), Toast.LENGTH_SHORT).show();
             startActivity(intent);
             finish();
@@ -165,6 +172,4 @@ public class CheckOutPage extends AppCompatActivity {
 
     }
 
-    public void add(View view) {
-    }
 }

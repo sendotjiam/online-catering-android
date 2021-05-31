@@ -21,7 +21,7 @@ public class InvoicePage extends AppCompatActivity {
     TextView transactiondate;
     TextView order_code;
     ArrayList<FnBDetail> fnBDetails = new ArrayList<>();
-    ArrayList<Menus> menus = new ArrayList<>();
+    ArrayList<Menu> menus = new ArrayList<>();
     String transactiondate1;
     String order_code1;
     int user_id;
@@ -48,7 +48,7 @@ public class InvoicePage extends AppCompatActivity {
 
         if(menus != null) {
             for (int i = 0; i < menus.size(); i++) {
-                fnBDetails.add(new FnBDetail(menus.get(i).getMenu_name(), String.valueOf(menus.get(i).getMenu_price())));
+                fnBDetails.add(new FnBDetail(menus.get(i).getName(), String.valueOf(menus.get(i).getPrice())));
             }
         }
 
