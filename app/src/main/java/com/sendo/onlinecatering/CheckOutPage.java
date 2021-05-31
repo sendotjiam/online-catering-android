@@ -44,7 +44,7 @@ public class CheckOutPage extends AppCompatActivity {
     Cart cart;
     int totalpembayaran = 0;
     ArrayList<Menus> menus1 = new ArrayList<>();
-    ArrayList<Menu> menus2= new ArrayList<>();
+    ArrayList<FnBDetail> menus2= new ArrayList<>();
     NumberFormat formatter = new DecimalFormat("#,###");
 
     @Override
@@ -90,10 +90,10 @@ public class CheckOutPage extends AppCompatActivity {
         menus1 = cartDB.getMenu(1);
 
         for(int i = 0; i < menus1.size(); i++){
-            Menu menu = new Menu();
-            menu.setName(menus1.get(i).getMenu_name());
-            menu.setPrice(menus1.get(i).getMenu_price());
-            menus2.add(menu);
+            FnBDetail fnBDetail = new FnBDetail();
+            fnBDetail.setFnbname(menus1.get(i).getMenu_name());
+            fnBDetail.setFnbprice(menus1.get(i).getMenu_price());
+            menus2.add(fnBDetail);
             totalpembayaran += menus1.get(i).getMenu_price();
         }
         String tampung = formatter.format(totalpembayaran);

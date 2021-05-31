@@ -21,7 +21,6 @@ public class InvoicePage extends AppCompatActivity {
     TextView transactiondate;
     TextView order_code;
     ArrayList<FnBDetail> fnBDetails = new ArrayList<>();
-    ArrayList<Menu> menus = new ArrayList<>();
     String transactiondate1;
     String order_code1;
     int user_id;
@@ -42,15 +41,9 @@ public class InvoicePage extends AppCompatActivity {
         user_id = intent.getIntExtra("USERIDFROMCHECKOUT", 0);
         transactiondate1 = intent.getStringExtra("TRANSACTIONDATE");
         order_code1 = intent.getStringExtra("ORDERCODE");
-        menus = intent.getParcelableArrayListExtra("MENU");
+        fnBDetails = intent.getParcelableArrayListExtra("MENU");
 
         Toast.makeText(this, user_id+ "", Toast.LENGTH_SHORT).show();
-
-        if(menus != null) {
-            for (int i = 0; i < menus.size(); i++) {
-                fnBDetails.add(new FnBDetail(menus.get(i).getName(), String.valueOf(menus.get(i).getPrice())));
-            }
-        }
 
         transactiondate.setText(transactiondate1);
         order_code.setText(order_code1);

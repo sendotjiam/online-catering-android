@@ -53,7 +53,8 @@ public class FnBDetailAdapter extends RecyclerView.Adapter<FnBDetailAdapter.View
     @Override
     public void onBindViewHolder(@NonNull FnBDetailAdapter.ViewHolder holder, int position) {
         holder.fnbname.setText(fnBDetails.get(position).getFnbname());
-        holder.fnbprice.setText("Rp." + fnBDetails.get(position).getFnbprice() + ",00");
+        String formattampung = formatter.format(fnBDetails.get(position).getFnbprice());
+        holder.fnbprice.setText("Rp." + formattampung + ",00");
     }
 
     @Override
