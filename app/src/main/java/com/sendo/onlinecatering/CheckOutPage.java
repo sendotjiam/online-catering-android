@@ -83,7 +83,7 @@ public class CheckOutPage extends AppCompatActivity {
 
 //        cart = new Cart();
 //        cart.setUser_id(1);
-//        cart.setMenu_id(2);
+//        cart.setMenu_id(1);
 //        cartDB.insertCart(cart);
 
         //ingat ganti 1 nya jadi user_id juga;
