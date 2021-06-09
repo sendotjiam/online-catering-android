@@ -78,18 +78,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/image_48"/>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_camera_alt_24"
-                android:background="@drawable/circle_button"
-                android:padding="8dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp" />
-
         </RelativeLayout>
 
         <TextView
@@ -109,7 +97,16 @@
             android:fontFamily="@font/montserrat_bold"
             android:text="Menu price"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_menu_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Menu description"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

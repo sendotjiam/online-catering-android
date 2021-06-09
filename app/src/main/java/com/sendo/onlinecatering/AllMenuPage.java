@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,15 +22,15 @@ public class AllMenuPage extends AppCompatActivity {
     ImageButton btnAddMenu, btn_order;
     RecyclerView rlMenuList;
 
+    ArrayList<Menus> menuArrayList = new ArrayList<Menus>();
     AllMenuAdapter menuAdapter;
-    ArrayList<Menu> menuArrayList = new ArrayList<>();
+
+    MenusDB menusDB = new MenusDB(AllMenuPage.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_menu_page);
-
-        getSupportActionBar().hide();
 
         btnAddMenu = findViewById(R.id.btn_add_menu);
         rlMenuList = findViewById(R.id.rv_menu_list);
@@ -55,13 +56,16 @@ public class AllMenuPage extends AppCompatActivity {
             }
         });
 
-
-        menuArrayList.add(new Menu("Ayam Goreng 50pcs", 500000));
-        menuArrayList.add(new Menu("Ikan Goreng 30pcs", 300000));
-        menuArrayList.add(new Menu("Sosis Goreng 100pcs", 200000));
+//        menuArrayList = menusDB.getMenus();
 
         menuAdapter = new AllMenuAdapter(AllMenuPage.this, menuArrayList);
         rlMenuList.setAdapter(menuAdapter);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        menuAdapter.setMenuArrayList(menusDB.getMenus());
     }
 }

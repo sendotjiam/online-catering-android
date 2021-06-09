@@ -60,6 +60,7 @@
                 android:src="@drawable/image_48"/>
 
             <ImageButton
+                android:id="@+id/btn_change_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_camera_alt_24"
@@ -117,10 +118,35 @@
             android:textSize="17sp"
             android:inputType="numberDecimal"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Menu Description"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/et_menudesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext_custom"
+            android:fontFamily="@font/montserrat_light"
+            android:lines="4"
+            android:maxLines="4"
+            android:gravity="top|left"
+            android:paddingLeft="15dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_submit_menu"
+        android:id="@+id/btn_save_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SAVE MENU"
