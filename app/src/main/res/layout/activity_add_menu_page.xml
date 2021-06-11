@@ -52,12 +52,12 @@
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:background="@color/grey">
-            
+
             <ImageView
                 android:id="@+id/iv_menu_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/image_48"/>
+                android:src="@drawable/image_48" />
 
             <ImageButton
                 android:id="@+id/btn_add_image"

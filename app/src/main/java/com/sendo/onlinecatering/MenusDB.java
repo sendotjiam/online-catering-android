@@ -5,16 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenusDB {
-    private UserDBHelper dbHelper;
+    private DBHelper dbHelper;
 
     public MenusDB(Context ctx){
-        dbHelper = new UserDBHelper(ctx);
+        dbHelper = new DBHelper(ctx);
     }
 
     public void insertMenus(String menu, byte[] image, long price, String menu_description){
@@ -103,5 +101,21 @@ public class MenusDB {
         db.close();
         cursor.close();
         return menu;
+    }
+
+    public int getMenuIdByName(String name) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        int menuId = 0;
+
+        String selection = "menu_name=?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(DBHelper.TABLE_MENU, null, selection, selectionArgs, null, null, null, 1 + "");
+
+        if (cursor.moveToFirst()) {
+            menuId = cursor.getInt(cursor.getColumnIndex(DBHelper.FIELD_MENU_ID));
+        }
+        cursor.close();
+        db.close();
+        return menuId;
     }
 }

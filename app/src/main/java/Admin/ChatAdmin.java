@@ -58,7 +58,7 @@ public class ChatAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_admin);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         btn_search = findViewById(R.id.btn_search);
         et_search = findViewById(R.id.et_search);
