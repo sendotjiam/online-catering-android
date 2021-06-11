@@ -6,23 +6,23 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class UsersDB {
-    private UserDBHelper dbHelper;
+    private DBHelper dbHelper;
 
     public UsersDB(Context ctx){
-        dbHelper = new UserDBHelper(ctx);
+        dbHelper = new DBHelper(ctx);
     }
 
     public void insertUsers(Users users){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(UserDBHelper.FIELD_USER_USERNAME, users.username);
-        cv.put(UserDBHelper.FIELD_USER_PASSWORD, users.password);
-        cv.put(UserDBHelper.FIELD_USER_PHONE, users.phone_number);
-        cv.put(UserDBHelper.FIELD_USER_WALLET, users.olshopcash);
-        cv.put(UserDBHelper.FIELD_USER_GENDER, users.gender);
-        cv.put(UserDBHelper.FIELD_USER_DATEBIRTH, users.dob);
+        cv.put(DBHelper.FIELD_USER_USERNAME, users.username);
+        cv.put(DBHelper.FIELD_USER_PASSWORD, users.password);
+        cv.put(DBHelper.FIELD_USER_PHONE, users.phone_number);
+        cv.put(DBHelper.FIELD_USER_WALLET, users.olshopcash);
+        cv.put(DBHelper.FIELD_USER_GENDER, users.gender);
+        cv.put(DBHelper.FIELD_USER_DATEBIRTH, users.dob);
 
-        db.insert(UserDBHelper.TABLE_USERS, null, cv );
+        db.insert(DBHelper.TABLE_USERS, null, cv );
 
         db.close();
     }
@@ -33,8 +33,7 @@ public class UsersDB {
         String selection = "username=? AND password=?";
         String[] selectionargs = {"" + username, "" + password};
         int check = 0;
-        Cursor cursor = db.query(UserDBHelper.TABLE_USERS, null, selection, selectionargs,null, null ,null);
-
+        Cursor cursor = db.query(DBHelper.TABLE_USERS, null, selection, selectionargs,null, null ,null);
         if (cursor.moveToFirst()){
             return true;
         }

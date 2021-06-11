@@ -5,24 +5,25 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 
 public class CartDB {
-    private UserDBHelper dbHelper;
+    private DBHelper dbHelper;
+    Context context;
 
     public CartDB(Context ctx){
-        dbHelper = new UserDBHelper(ctx);
+        dbHelper = new DBHelper(ctx);
+        this.context = ctx;
     }
 
     public void insertCart(Cart cart){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(UserDBHelper.FIELD_CART_USER_ID, cart.getUser_id());
-        cv.put(UserDBHelper.FIELD_CART_MENU_ID, cart.getMenu_id());
+        cv.put(DBHelper.FIELD_CART_USER_ID, cart.getUser_id());
+        cv.put(DBHelper.FIELD_CART_MENU_ID, cart.getMenu_id());
 
-        db.insert(UserDBHelper.TABLE_CART, null, cv );
+        db.insert(DBHelper.TABLE_CART, null, cv );
 
         db.close();
     }
@@ -40,7 +41,7 @@ public class CartDB {
 
         ArrayList<Menus> menus = new ArrayList<>();
 
-        if (cursor.moveToFirst() == true) {
+        if (cursor.moveToFirst()) {
             do {
                 int menuid = cursor.getInt(0);
                 String menu_name = cursor.getString(1);
@@ -70,6 +71,15 @@ public class CartDB {
                 " WHERE " + dbHelper.FIELD_CART_USER_ID + " = " + user_id + ";";
 
         db.execSQL(delete_cart);
+    }
+
+
+    public void deleteCartItem(String menuName) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        MenusDB menusDB = new MenusDB(context);
+        int menuId = menusDB.getMenuIdByName(menuName);
+        sqLiteDatabase.delete(DBHelper.TABLE_CART, DBHelper.FIELD_CART_MENU_ID, new String[]{menuId + ""});
+        sqLiteDatabase.close();
     }
 
 }
