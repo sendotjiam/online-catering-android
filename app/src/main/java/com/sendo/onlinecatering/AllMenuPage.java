@@ -24,6 +24,7 @@ public class AllMenuPage extends AppCompatActivity {
 
     ArrayList<Menus> menuArrayList = new ArrayList<Menus>();
     AllMenuAdapter menuAdapter;
+    int userid;
 
     MenusDB menusDB = new MenusDB(AllMenuPage.this);
 
@@ -42,7 +43,7 @@ public class AllMenuPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent addIntent = new Intent(AllMenuPage.this, CustomerOrder.class);
-
+                addIntent.putExtra("userid", userid);
                 startActivity(addIntent);
             }
         });

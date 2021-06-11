@@ -26,6 +26,7 @@ public class CustomerOrder extends AppCompatActivity {
     ArrayList<OrderList> listResult = new ArrayList<>();
 
     OrderDB orderDB;
+    int userid;
 
 
     @Override
@@ -55,9 +56,10 @@ public class CustomerOrder extends AppCompatActivity {
 //                }
 //            }
 //        }
-
+        Intent intent = getIntent();
+        userid = intent.getIntExtra("userid", 0);
         OrderListAdapter orderListAdapter = new OrderListAdapter();
-        orderListAdapter.setArrayListdata(list);
+        orderListAdapter.setArrayListdata(list, userid);
         order_list.setAdapter(orderListAdapter);
         order_list.setLayoutManager(new LinearLayoutManager(this));
 
@@ -66,5 +68,8 @@ public class CustomerOrder extends AppCompatActivity {
 
     public void Icon_Back(View view) {
         Intent intent = new Intent(this, AllMenuPage.class);
+        intent.putExtra("userid", userid);
+        startActivity(intent);
+        finish();
     }
 }
