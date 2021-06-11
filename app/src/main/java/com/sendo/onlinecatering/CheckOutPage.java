@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.load.resource.bitmap.BitmapDrawableResource;
+//import com.bumptech.glide.load.resource.bitmap.BitmapDrawableResource;
 import com.sendo.onlinecatering.activities.CartActivity;
 
 import java.text.DecimalFormat;
