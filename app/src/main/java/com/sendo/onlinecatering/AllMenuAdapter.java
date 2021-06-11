@@ -3,6 +3,8 @@ package com.sendo.onlinecatering;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,17 @@ import java.util.ArrayList;
 public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.MenuViewHolder> {
 
     private Context context;
-    private ArrayList<Menu> menuArrayList;
+    private ArrayList<Menus> menuArrayList = new ArrayList<>();
 
-    public AllMenuAdapter(Context context, ArrayList<Menu> menuArrayList) {
+    public AllMenuAdapter(Context context, ArrayList<Menus> menuArrayList) {
         this.context = context;
         this.menuArrayList = menuArrayList;
+    }
+
+    public void setMenuArrayList(ArrayList<Menus> menuArrayList) {
+        this.menuArrayList.clear();
+        this.menuArrayList = menuArrayList;
+        this.notifyDataSetChanged();
     }
 
     @NonNull
@@ -36,16 +44,21 @@ public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.MenuView
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
 
-        Menu menu = menuArrayList.get(position);
+        Menus menu = menuArrayList.get(position);
 
-        holder.ivMenuImage.setImageResource(R.drawable.ayamgoreng);
-        holder.tvMenuName.setText(menu.getName());
-        holder.tvMenuPrice.setText(menu.getPrice() + "");
+        byte[] foodimage = menu.getMenu_img_path();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(foodimage, 0, foodimage.length);
+        holder.ivMenuImage.setImageBitmap(bitmap);
+        holder.ivMenuImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        holder.tvMenuName.setText(menu.getMenu_name());
+        holder.tvMenuPrice.setText(menu.getMenu_price() + "");
 
         holder.llMenuDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent detailIntent = new Intent(context, MenuDetailsPage.class);
+                detailIntent.putExtra("menuId", menu.getMenu_id());
                 ((Activity) context).startActivity(detailIntent);
             }
         });

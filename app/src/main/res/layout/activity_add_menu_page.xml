@@ -60,7 +60,7 @@
                 android:src="@drawable/image_48"/>
 
             <ImageButton
-                android:id="@+id/imageadd"
+                android:id="@+id/btn_add_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_camera_alt_24"
@@ -84,7 +84,7 @@
             android:textSize="17sp" />
 
         <EditText
-            android:id="@+id/et_menuname"
+            android:id="@+id/et_menu_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -106,7 +106,7 @@
             android:textSize="17sp" />
 
         <EditText
-            android:id="@+id/et_menuprice"
+            android:id="@+id/et_menu_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -129,12 +129,15 @@
             android:textSize="17sp" />
 
         <EditText
-            android:id="@+id/et_menudescript"
+            android:id="@+id/et_menu_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/edittext_custom"
             android:fontFamily="@font/montserrat_light"
+            android:lines="4"
+            android:maxLines="4"
+            android:gravity="top|left"
             android:paddingLeft="15dp"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"

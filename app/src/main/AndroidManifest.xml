@@ -23,17 +23,20 @@
 <!--        <activity android:name=".CheckOutPage" />-->
         <activity android:name=".InvoicePage" />
         <activity android:name=".ProfilePage" />
-        <activity android:name=".AllMenuPage" />
+        <activity android:name=".CheckOutPage" />
         <activity android:name=".AddMenuPage" />
         <activity android:name=".EditMenuPage"/>
         <activity android:name=".activities.MainActivity"/>
-        <activity android:name=".CheckOutPage">
+        <activity android:name=".AllMenuPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
 
 </manifest>

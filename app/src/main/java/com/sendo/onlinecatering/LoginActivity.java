@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sendo.onlinecatering.activities.MainActivity;
+
 import Admin.ChatAdmin;
 import Admin.CustomerOrder;
 
@@ -15,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView ETUsername, ETPassword,TVError;
     Button BTNLogin, BTNRegister;
     UsersDB usersDB;
-    int check_admin = 0;
+    int check_admin = 0, user_id;
 
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "admin1234";
@@ -66,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                         openadminactivity(view);
                     }
                     else if(usersDB.checkUsers(username, password)){
+                        user_id = user.user_id;
                         openhomeactivity(view);
                     }
                     else{
@@ -80,8 +83,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void openhomeactivity(View view) {
-        Intent intent = new Intent(this, ChatAdmin.class);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("USER_ID", user_id);
         startActivity(intent);
+        finish();
     }
 
     public void openadminactivity(View view) {
