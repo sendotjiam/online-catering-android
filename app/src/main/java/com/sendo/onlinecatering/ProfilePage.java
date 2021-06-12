@@ -70,6 +70,7 @@ public class ProfilePage extends AppCompatActivity {
 
         navbar();
 
+//        userId = 1;
         //1nya ingat ganti jdi user_id
         users = usersDB.getUser(userId);
 

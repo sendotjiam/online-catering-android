@@ -38,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tvName = findViewById(R.id.tv_name);
 
+        usersDB = new UsersDB(this);
         menusDB = new MenusDB(this);
         menus = menusDB.getMenus();
+
         Intent intent = getIntent();
         int useridlogin_home = intent.getIntExtra("USERIDLOGINTOHOME", 0);
         int useridcart_home = intent.getIntExtra("USERIDCARTTOHOME", 0);
@@ -56,8 +59,13 @@ public class MainActivity extends AppCompatActivity {
             userId = useridprofile_home;
         }
 
-        usersDB = new UsersDB(this);
+        //ingat hapus ini klo login activity udh bisa
+//        userId = 1;
+
+
+
         Log.v("USER", userId + "");
+
         user = usersDB.getUser(userId);
 
         Log.v("USER", user.getUsername());
@@ -80,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     void navbar() {
         BottomNavigationView nav_klient = findViewById(R.id.navbar_klient);
 
-        nav_klient.setSelectedItemId(R.id.menu_cart);
+        nav_klient.setSelectedItemId(R.id.menu_home);
         nav_klient.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

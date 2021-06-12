@@ -63,12 +63,14 @@ public class LoginActivity extends AppCompatActivity {
                 if(checkusername() && checkpassword()){
                     String username = ETUsername.getText().toString();
                     String password = ETPassword.getText().toString();
+                    int check = usersDB.checkUsers(username, password);
+
                     if(username.contentEquals("admin")  && password.contentEquals("admin1234") ){
 
                         openadminactivity(view);
                     }
-                    else if(usersDB.checkUsers(username, password)){
-                        user_id = user.user_id;
+                    else if(check != -1){
+                        user_id = check;
                         openhomeactivity(view);
                     }
                     else{

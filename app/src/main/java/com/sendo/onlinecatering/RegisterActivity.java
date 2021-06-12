@@ -128,8 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void OpenLoginActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 
 
@@ -176,15 +175,15 @@ public class RegisterActivity extends AppCompatActivity {
         if(checknumeric && checkalpha){
             return true;
         }
-        else if(passtext.isEmpty()){
+        if(passtext.isEmpty()){
             TVerror.setText("Password cannot be empty");
             return false;
         }
-        else if (passtext.length()<8){
+        if (passtext.length()<8){
             TVerror.setText("Password must be more than 8 characters");
             return false;
         }
-        else if(!checknumeric && !checkalpha){
+        if(!checknumeric && !checkalpha){
             TVerror.setText("Password must be alphanumeric");
             return false;
         }
