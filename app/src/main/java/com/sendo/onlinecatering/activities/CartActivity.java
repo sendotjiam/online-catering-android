@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sendo.onlinecatering.CartAdapter;
 import com.sendo.onlinecatering.CartDB;
+import com.sendo.onlinecatering.CheckOutPage;
 import com.sendo.onlinecatering.Menus;
 import com.sendo.onlinecatering.ProfilePage;
 import com.sendo.onlinecatering.R;
@@ -81,5 +83,11 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void openCheckOutActivity(View view) {
+        Intent intent = new Intent(this, CheckOutPage.class);
+        intent.putExtra("USERIDHOMETOCART", userId);
+        startActivity(intent);
     }
 }

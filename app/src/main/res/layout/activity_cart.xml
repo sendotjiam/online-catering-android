@@ -1,37 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.CartActivity"
     android:orientation="vertical"
-    android:padding="16dp">
+    >
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cart"
-        style="@style/TextTitle"
-        android:textColor="@color/yellow"
-        android:layout_marginBottom="34dp"/>
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/cart_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cart"
+            style="@style/TextTitle"
+            android:textColor="@color/yellow"
+            android:layout_marginBottom="34dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_below="@id/cart_title"/>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navbar_klient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/yellow"
-            app:itemIconTint="@drawable/selected"
-            app:itemTextColor="@drawable/selected"
-            app:labelVisibilityMode="labeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/menu_klient">
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/navbar_klient"
+        android:layout_alignParentEnd="true"
+        android:text="CHECKOUT"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:padding="16dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_custom"
+        android:onClick="openCheckOutActivity"
+        />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navbar_klient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        app:itemIconTint="@drawable/selected"
+        app:itemTextColor="@drawable/selected"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu_klient"
+        android:layout_alignParentBottom="true"
+        >
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-</LinearLayout>
+</RelativeLayout>

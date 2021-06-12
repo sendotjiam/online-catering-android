@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.sendo.onlinecatering.activities.MainActivity;
 
 import Admin.ChatAdmin;
-import Admin.CustomerOrder;
 
 public class LoginActivity extends AppCompatActivity {
     TextView ETUsername, ETPassword,TVError;
