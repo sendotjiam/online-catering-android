@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvMenus;
     MenusAdapter menusAdapter;
     TextView tvName;
-    int userId;
+    int userId = 0;
     Users user;
     UsersDB usersDB;
     MenusDB menusDB;
@@ -42,7 +42,20 @@ public class MainActivity extends AppCompatActivity {
         menusDB = new MenusDB(this);
         menus = menusDB.getMenus();
         Intent intent = getIntent();
-        userId = intent.getIntExtra("USER_ID", 0);
+        int useridlogin_home = intent.getIntExtra("USERIDLOGINTOHOME", 0);
+        int useridcart_home = intent.getIntExtra("USERIDCARTTOHOME", 0);
+        int useridprofile_home = intent.getIntExtra("USERIDPROFILETOHOME", 0);
+
+        if(useridlogin_home > userId){
+            userId = useridlogin_home;
+        }
+        if(useridcart_home > userId){
+            userId = useridcart_home;
+        }
+        if(useridprofile_home > userId){
+            userId = useridprofile_home;
+        }
+
         usersDB = new UsersDB(this);
         Log.v("USER", userId + "");
         user = usersDB.getUser(userId);
@@ -73,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_cart) {
                     Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-                    intent.putExtra("USER_ID", userId);
+                    intent.putExtra("USERIDHOMETOCART", userId);
                     startActivity(intent);
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.menu_profiles) {
                     Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
-                    intent.putExtra("PROFILETOCART", userId);
+                    intent.putExtra("USERIDHOMETOPROFILE", userId);
                     startActivity(intent);
                     finish();
                     return true;

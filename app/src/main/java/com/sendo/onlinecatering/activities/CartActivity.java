@@ -33,7 +33,20 @@ public class CartActivity extends AppCompatActivity {
 
         cartDB = new CartDB(this);
         Intent intent = getIntent();
-        userId = intent.getIntExtra("USER_ID", 0);
+        int useridhome_cart = intent.getIntExtra("USERIDHOMETOCART", 0);
+        int useridprofile_cart = intent.getIntExtra("USERIDPROFILETOCART", 0);
+        int useridcheckout_cart = intent.getIntExtra("USERIDCHECKOUTTOCART", 0);
+
+        if(useridhome_cart > userId){
+            userId = useridhome_cart;
+        }
+        if(useridprofile_cart > userId){
+            userId = useridprofile_cart;
+        }
+        if(useridcheckout_cart > userId){
+            userId = useridcheckout_cart;
+        }
+
         menuList =  cartDB.getMenu(userId);
 
         rvCart = findViewById(R.id.rv_cart);
@@ -53,13 +66,13 @@ public class CartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_home) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("PROFILETOHOME", userId);
+                    intent.putExtra("USERIDCARTTOHOME", userId);
                     startActivity(intent);
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.menu_profiles) {
                     Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
-                    intent.putExtra("PROFILETOCART", userId);
+                    intent.putExtra("USERIDCARTTOPROFILE", userId);
                     startActivity(intent);
                     finish();
                     return true;

@@ -42,6 +42,7 @@ public class CheckOutPage extends AppCompatActivity {
     Users users;
     Menus menus;
     Cart cart;
+    int userId = 0;
     int totalpembayaran = 0;
     ArrayList<Menus> menus1 = new ArrayList<>();
     ArrayList<FnBDetail> menus2= new ArrayList<>();
@@ -60,6 +61,9 @@ public class CheckOutPage extends AppCompatActivity {
         menusDB = new MenusDB(this);
         cartDB = new CartDB(this);
         orderDB = new OrderDB(this);
+
+        Intent intent = getIntent();
+        int useridcart_checkout = intent.getIntExtra("USERIDHOMETOCART", 0);
 
         /*
         INGAT SEMUA 1 GANTI JADI user_id
