@@ -27,6 +27,15 @@
                 android:text="Profile"
                 android:textColor="@color/yellow"
                 android:textSize="30sp" />
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/logout"
+                android:onClick="logout" />
+
         </RelativeLayout>
 
         <TextView
