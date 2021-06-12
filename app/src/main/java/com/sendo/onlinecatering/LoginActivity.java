@@ -49,12 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                user.username = ADMIN_USERNAME;
-                user.password = ADMIN_PASSWORD;
-                user.phone_number = ADMIN_PHONE;
-                user.gender = ADMIN_GENDER;
-                user.dob =  ADMIN_DOB;
-
                 if(check_admin == 0){
                     usersDB.insertUsers(user);
                     check_admin++;
