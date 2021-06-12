@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void openadminactivity(View view) {
-        Intent intent = new Intent(this, ChatAdmin.class);
+        Intent intent = new Intent(this, AllMenuPage.class);
         startActivity(intent);
     }
 

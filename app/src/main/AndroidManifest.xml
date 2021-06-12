@@ -26,7 +26,6 @@
         <activity android:name="Admin.OrderDetail" />
         <activity android:name="Admin.ChatAdmin" />
         <activity android:name="Admin.CustomerOrder" />
-<!--        <activity android:name=".CheckOutPage" />-->
         <activity android:name=".InvoicePage" />
         <activity android:name=".ProfilePage" />
         <activity android:name=".CheckOutPage" />
