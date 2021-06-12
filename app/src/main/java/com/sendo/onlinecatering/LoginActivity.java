@@ -49,11 +49,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //
-                user.username = "admin";
-                user.password = "admin1234";
-                user.phone_number = "01234567890";
-                user.gender = "Male";
-                user.dob = "01-01-2001";
+                user.username = ADMIN_USERNAME;
+                user.password = ADMIN_PASSWORD;
+                user.phone_number = ADMIN_PHONE;
+                user.gender = ADMIN_GENDER;
+                user.dob = ADMIN_DOB;
 
                 if(check_admin == 0){
                     usersDB.insertUsers(user);
