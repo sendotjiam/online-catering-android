@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         usersDB = new UsersDB(this);
         Users user = new Users();
 
-
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,11 +93,15 @@ public class LoginActivity extends AppCompatActivity {
 
     public void openadminactivity(View view) {
         Intent intent = new Intent(this, AllMenuPage.class);
+        ETUsername.setText(null);
+        ETPassword.setText(null);
         startActivity(intent);
     }
 
     private void OpenRegisterActivity() {
         Intent intent = new Intent(this,RegisterActivity.class);
+        ETUsername.setText(null);
+        ETPassword.setText(null);
         startActivity(intent);
     }
 

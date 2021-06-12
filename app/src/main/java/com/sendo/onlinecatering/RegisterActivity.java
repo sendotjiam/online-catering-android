@@ -21,7 +21,7 @@ import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView ETUsername, ETPassword, ETPhone, ETConfirmationPass, TVerror;
-    Button BTNRegister, BTNDateBirth;
+    Button BTNRegister, BTNDateBirth, BTNLogin;
     RadioGroup radiogroupgender;
     RadioButton radioButtongender;
     CheckBox checkagreement;
@@ -39,11 +39,19 @@ public class RegisterActivity extends AppCompatActivity {
         ETConfirmationPass = findViewById(R.id.edittextrepassword);
         BTNRegister = findViewById(R.id.regbtnreg);
         BTNDateBirth = findViewById(R.id.datebirthbutton);
+        BTNLogin = findViewById(R.id.regbtnlogin);
         radiogroupgender = findViewById(R.id.radiogroup);
         checkagreement = findViewById(R.id.checkboxagreement);
         TVerror = findViewById(R.id.texterrors);
         usersDB = new UsersDB(this);
         initDatePicker();
+
+        BTNLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenLoginActivity();
+            }
+        });
 
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
