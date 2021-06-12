@@ -75,6 +75,7 @@ public class AddMenuPage extends AppCompatActivity {
                                 etMenuDesc.getText().toString().trim()
                         );
                         Toast.makeText(AddMenuPage.this, "Menu Added", Toast.LENGTH_SHORT).show();
+                        finish();
                 }
                 catch (Exception e){
                     e.printStackTrace();
