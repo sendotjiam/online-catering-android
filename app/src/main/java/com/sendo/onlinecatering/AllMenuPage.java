@@ -29,7 +29,7 @@ public class AllMenuPage extends AppCompatActivity {
 
     ArrayList<Menus> menuArrayList = new ArrayList<Menus>();
     AllMenuAdapter menuAdapter;
-    int userid;
+    int userid = 0;
 
     MenusDB menusDB = new MenusDB(AllMenuPage.this);
 
@@ -49,9 +49,7 @@ public class AllMenuPage extends AppCompatActivity {
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addIntent = new Intent(AllMenuPage.this, CustomerOrder.class);
-                addIntent.putExtra("userid", userid);
-                startActivity(addIntent);
+                orderIntent();
             }
         });
 
@@ -88,15 +86,33 @@ public class AllMenuPage extends AppCompatActivity {
                     return true;
                 }   else if (item.getItemId() == R.id.menu_order) {
                     Toast.makeText(AllMenuPage.this, "orders", Toast.LENGTH_SHORT).show();
+
+                    Intent orderIntent = new Intent(AllMenuPage.this, CustomerOrder.class);
+                    orderIntent.putExtra("userid", userid);
+                    startActivity(orderIntent);
+
                     return true;
                 } else if (item.getItemId() == R.id.menu_profile) {
                     Toast.makeText(AllMenuPage.this, "profile", Toast.LENGTH_SHORT).show();
+
+                    //PROFILE
+                    /*Intent profileIntent = new Intent(AllMenuPage.this, CustomerOrder.class);
+                    profileIntent.putExtra("userid", userid);
+                    startActivity(profileIntent);*/
+
                     return true;
                 } else {
+
 
                     return true;
                 }
             }
         });
+    }
+
+    void orderIntent() {
+        Intent addIntent = new Intent(AllMenuPage.this, CustomerOrder.class);
+        addIntent.putExtra("userid", userid);
+        startActivity(addIntent);
     }
 }
