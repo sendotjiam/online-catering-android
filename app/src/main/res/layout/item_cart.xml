@@ -50,30 +50,23 @@
         android:orientation="vertical"
         android:layout_marginStart="8dp">
         <TextView
+            android:id="@+id/menu_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Notes"
+            android:text="Ayam Goreng"
             style="@style/TextTitle"
             android:textColor="@color/black"
             android:layout_marginBottom="10dp"
             />
         <TextView
-            android:id="@+id/notes"
+            android:id="@+id/menu_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ayam Goreng Lengkuas 50pcs untuk nikahan anak."
+            android:text="Rp130200"
             style="@style/TextRegular"
             android:textColor="@color/black"
             android:layout_marginBottom="16dp"
             />
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tanggal 13 Mei 2021"
-            style="@style/TextRegular"
-            android:textColor="@color/black"
-            android:layout_marginBottom="10dp"/>
         <RelativeLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -83,14 +76,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/ic_delete"
-                android:layout_marginEnd="64dp"
-                />
-            <ImageButton
-                android:id="@+id/btn_next"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/ic_next"
-                android:layout_toEndOf="@id/btn_delete"
+                android:layout_alignParentStart="true"
                 />
         </RelativeLayout>
     </LinearLayout>

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class UserDBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "Online_Catering.db";
     private static final int DB_VERSION = 1;
 
@@ -80,7 +80,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
 
 
 
-    public UserDBHelper(@Nullable Context context) {
+    public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 

@@ -2,21 +2,44 @@ package com.sendo.onlinecatering.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sendo.onlinecatering.CartAdapter;
+import com.sendo.onlinecatering.CartDB;
+import com.sendo.onlinecatering.Menus;
 import com.sendo.onlinecatering.ProfilePage;
 import com.sendo.onlinecatering.R;
 
+import java.util.ArrayList;
+
 public class CartActivity extends AppCompatActivity {
-    int user_id = 0;
+    int userId = 0;
+
+    RecyclerView rvCart;
+    ArrayList<Menus> menuList;
+    CartAdapter cartAdapter;
+    CartDB cartDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        cartDB = new CartDB(this);
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("USER_ID", 0);
+        menuList =  cartDB.getMenu(userId);
+
+        rvCart = findViewById(R.id.rv_cart);
+        rvCart.setLayoutManager(new LinearLayoutManager(this));
+        cartAdapter = new CartAdapter(this, menuList, cartDB);
+        rvCart.setAdapter(cartAdapter);
 
         navbar();
     }
@@ -30,13 +53,13 @@ public class CartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_home) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("PROFILETOHOME", user_id);
+                    intent.putExtra("PROFILETOHOME", userId);
                     startActivity(intent);
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.menu_profiles) {
                     Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
-                    intent.putExtra("PROFILETOCART", user_id);
+                    intent.putExtra("PROFILETOCART", userId);
                     startActivity(intent);
                     finish();
                     return true;

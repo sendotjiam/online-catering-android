@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sendo.onlinecatering.activities.MainActivity;
 
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     public void openhomeactivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("USER_ID", user_id);
+        Toast.makeText(this, user_id + "", Toast.LENGTH_SHORT).show();
         startActivity(intent);
         finish();
     }

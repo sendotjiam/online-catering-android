@@ -64,7 +64,7 @@ public class ChatAdmin extends AppCompatActivity {
         et_search = findViewById(R.id.et_search);
         chatlist = findViewById(R.id.chatlist);
 
-        navigation_bar();
+//        navigation_bar();
 
         ChatAdminList list1 = new ChatAdminList("test1", "Andy", "selamat siang !", "16.30");
         list.add(list1);
@@ -118,15 +118,13 @@ public class ChatAdmin extends AppCompatActivity {
     void navigation_bar() {
         BottomNavigationView nav_admin = findViewById(R.id.nav_admin);
 
-        nav_admin.setSelectedItemId(R.id.menu_chat);
+//        nav_admin.setSelectedItemId(R.id.menu_chat);
         nav_admin.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @org.jetbrains.annotations.NotNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_menus) {
                     Intent intent = new Intent(ChatAdmin.this, AllMenuPage.class);
                     startActivity(intent);
-                    return true;
-                } else if (item.getItemId() == R.id.menu_chat) {
                     return true;
                 } else if (item.getItemId() == R.id.menu_order) {
                     Intent intent = new Intent(ChatAdmin.this, CustomerOrder.class);

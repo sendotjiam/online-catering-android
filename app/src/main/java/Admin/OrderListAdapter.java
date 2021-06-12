@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.ViewHolder> {
 
     public static final int REQUEST_CODE_REPLY = 1;
+    int userid;
 
     Context context;
     ArrayList<OrderList> list = new ArrayList<>();
@@ -53,12 +54,13 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
     }
 
     @Override
-    public int getItemCount(    ) {
+    public int getItemCount() {
         return list.size();
     }
 
-    public void setArrayListdata(ArrayList<OrderList> list) {
+    public void setArrayListdata(ArrayList<OrderList> list, int userid) {
         this.list = list;
+        this.userid = userid;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

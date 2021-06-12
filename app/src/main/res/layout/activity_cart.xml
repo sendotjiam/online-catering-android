@@ -5,14 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.CartActivity"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:background="@color/white"
-        >
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -20,13 +14,7 @@
         android:text="Cart"
         style="@style/TextTitle"
         android:textColor="@color/yellow"
-        android:layout_marginBottom="35dp"/>
-
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_marginBottom="34dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cart"
@@ -45,6 +33,5 @@
             app:menu="@menu/menu_klient">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

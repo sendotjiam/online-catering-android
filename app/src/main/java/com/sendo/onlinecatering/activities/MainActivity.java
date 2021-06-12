@@ -1,19 +1,37 @@
 package com.sendo.onlinecatering.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sendo.onlinecatering.Menus;
+import com.sendo.onlinecatering.MenusAdapter;
+import com.sendo.onlinecatering.MenusDB;
+import com.sendo.onlinecatering.ProfilePage;
 import com.sendo.onlinecatering.R;
+import com.sendo.onlinecatering.Users;
+import com.sendo.onlinecatering.UsersDB;
 
-import Admin.ChatAdmin;
-import Admin.CustomerOrder;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    Button sementara;
+
+    ArrayList<Menus> menus;
+    RecyclerView rvMenus;
+    MenusAdapter menusAdapter;
+    TextView tvName;
+    int userId;
+    Users user;
+    UsersDB usersDB;
+    MenusDB menusDB;
 
 
     @Override
@@ -21,10 +39,54 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        menusDB = new MenusDB(this);
+        menus = menusDB.getMenus();
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("USER_ID", 0);
+        usersDB = new UsersDB(this);
+        Log.v("USER", userId + "");
+        user = usersDB.getUser(userId);
+
+        Log.v("USER", user.getUsername());
+        tvName.setText(user.getUsername());
+
+        rvMenus = findViewById(R.id.rv_menu);
+        rvMenus.setLayoutManager(new LinearLayoutManager(this));
+        menusAdapter = new MenusAdapter(this, menus, userId);
+        rvMenus.setAdapter(menusAdapter);
+
+        navbar();
     }
 
-    public void pindah(View view) {
-        Intent intent = new Intent(this, ChatAdmin.class);
-        startActivity(intent);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        menusAdapter.setMenuArrayList(menusDB.getMenus());
+    }
+
+    void navbar() {
+        BottomNavigationView nav_klient = findViewById(R.id.navbar_klient);
+
+        nav_klient.setSelectedItemId(R.id.menu_cart);
+        nav_klient.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.menu_cart) {
+                    Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                    intent.putExtra("USER_ID", userId);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.menu_profiles) {
+                    Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
+                    intent.putExtra("PROFILETOCART", userId);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                } else {
+                    return true;
+                }
+            }
+        });
     }
 }
