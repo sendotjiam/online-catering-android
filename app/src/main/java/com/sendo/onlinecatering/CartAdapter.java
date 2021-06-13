@@ -29,6 +29,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         this.cartDB = cartDB;
     }
 
+    public void setCartMenuArrayList(ArrayList<Menus> cartMenus) {
+        this.cartMenus.clear();
+        this.cartMenus = cartMenus;
+        this.notifyDataSetChanged();
+    }
+
     @NonNull
     @NotNull
     @Override
@@ -45,14 +51,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.menuImg.setImageBitmap(bitmap);
         holder.menuImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.menuName.setText(menu.getMenu_name());
+        holder.itemName.setText(menu.getMenu_name());
+        holder.menuPrice.setText(menu.getMenu_price() +  "");
         holder.menuDescription.setText(menu.getMenu_description());
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
 
     @Override
@@ -73,13 +81,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             menuPrice = itemView.findViewById(R.id.menu_price);
             menuImg = itemView.findViewById(R.id.fnbimage);
 
-            btnDelete = itemView.findViewById(R.id.btn_delete);
-            btnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    cartDB.deleteCartItem(menuName.toString());
-                }
-            });
+//            btnDelete = itemView.findViewById(R.id.btn_delete);
+//            btnDelete.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    cartDB.deleteCartItem(menuName.toString());
+//                }
+//            });
         }
     }
 

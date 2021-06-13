@@ -25,7 +25,8 @@
             android:id="@+id/rv_cart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/cart_title"/>
+            android:layout_below="@id/cart_title"
+            android:layout_marginBottom="56dp"/>
 
     </RelativeLayout>
     <Button

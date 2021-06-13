@@ -37,7 +37,7 @@ public class CartActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int useridhome_cart = intent.getIntExtra("USERIDHOMETOCART", 0);
         int useridprofile_cart = intent.getIntExtra("USERIDPROFILETOCART", 0);
-        int useridcheckout_cart = intent.getIntExtra("USERIDCHECKOUTTOCART", 0);
+        int useridcheckout_cart = intent.getIntExtra("USERIDFROMCHECKOUTTOCART", 0);
 
         if(useridhome_cart > userId){
             userId = useridhome_cart;
@@ -54,6 +54,7 @@ public class CartActivity extends AppCompatActivity {
         rvCart = findViewById(R.id.rv_cart);
         rvCart.setLayoutManager(new LinearLayoutManager(this));
         cartAdapter = new CartAdapter(this, menuList, cartDB);
+        cartAdapter.notifyDataSetChanged();
         rvCart.setAdapter(cartAdapter);
 
         navbar();
@@ -61,7 +62,6 @@ public class CartActivity extends AppCompatActivity {
 
     void navbar() {
         BottomNavigationView nav_klient = findViewById(R.id.navbar_klient);
-
         nav_klient.setSelectedItemId(R.id.menu_cart);
         nav_klient.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

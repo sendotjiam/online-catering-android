@@ -1,6 +1,8 @@
 package com.sendo.onlinecatering;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -63,7 +65,7 @@ public class MenusAdapter extends RecyclerView.Adapter<MenusAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView menuImg;
         TextView menuName, menuDescription;
-
+        CartDB cartDB = new CartDB(context);
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             menuImg = itemView.findViewById(R.id.fnbimage);
@@ -76,10 +78,27 @@ public class MenusAdapter extends RecyclerView.Adapter<MenusAdapter.ViewHolder> 
         public void onClick(View view) {
             int position = getAdapterPosition();
             Menus menu = menuList.get(position);
-            Intent intent = new Intent(context, MenuDetailsPage.class);
-            intent.putExtra("menuId", menu.getMenu_id());
-            intent.putExtra("userId", userId);
-            (context).startActivity(intent);
+            showDetail(menu);
+        }
+
+        public void showDetail(Menus menu) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+            alertDialogBuilder.setTitle(menu.getMenu_name());
+            alertDialogBuilder
+                    .setMessage(menu.getMenu_description())
+                    .setCancelable(false)
+                    .setPositiveButton("Add to Cart", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cartDB.addToCart(userId, menu.getMenu_id());
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialogBuilder.show();
         }
     }
 

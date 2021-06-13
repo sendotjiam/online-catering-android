@@ -17,22 +17,22 @@
         <activity android:name="Admin.ChatwithCustomer" />
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name="Admin.OrderDetail" />
+        <activity android:name="Admin.ChatAdmin" />
+        <activity android:name="Admin.CustomerOrder" />
+        <activity android:name=".InvoicePage" />
+        <activity android:name=".ProfilePage" />
+        <activity android:name=".CheckOutPage" />
+        <activity android:name=".AddMenuPage" />
+        <activity android:name=".EditMenuPage"/>
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Admin.OrderDetail" />
-        <activity android:name="Admin.ChatAdmin" />
-        <activity android:name="Admin.CustomerOrder" />
-<!--        <activity android:name=".CheckOutPage" />-->
-        <activity android:name=".InvoicePage" />
-        <activity android:name=".ProfilePage" />
-        <activity android:name=".CheckOutPage" />
-        <activity android:name=".AddMenuPage" />
-        <activity android:name=".EditMenuPage"/>
-        <activity android:name=".activities.MainActivity"/>
         <activity android:name=".AllMenuPage">
         </activity>
 

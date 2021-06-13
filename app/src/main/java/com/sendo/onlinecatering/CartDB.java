@@ -28,6 +28,15 @@ public class CartDB {
         db.close();
     }
 
+    public void addToCart(int userId, int menuId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DBHelper.FIELD_CART_USER_ID, userId);
+        cv.put(DBHelper.FIELD_CART_MENU_ID, menuId);
+        db.insert(DBHelper.TABLE_CART, null, cv);
+        db.close();
+    }
+
     public ArrayList<Menus> getMenu(int user_id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 

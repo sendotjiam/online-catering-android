@@ -2,12 +2,12 @@ package com.sendo.onlinecatering.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -56,16 +56,16 @@ public class MainActivity extends AppCompatActivity {
             userId = useridprofile_home;
         }
 
+        userId = 1;
         usersDB = new UsersDB(this);
-        Log.v("USER", userId + "");
         user = usersDB.getUser(userId);
-
-        Log.v("USER", user.getUsername());
+        tvName = findViewById(R.id.tv_name);
         tvName.setText(user.getUsername());
 
         rvMenus = findViewById(R.id.rv_menu);
-        rvMenus.setLayoutManager(new LinearLayoutManager(this));
+        rvMenus.setLayoutManager(new GridLayoutManager(this, 2));
         menusAdapter = new MenusAdapter(this, menus, userId);
+//        menusAdapter.notifyDataSetChanged();
         rvMenus.setAdapter(menusAdapter);
 
         navbar();
@@ -79,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     void navbar() {
         BottomNavigationView nav_klient = findViewById(R.id.navbar_klient);
-
-        nav_klient.setSelectedItemId(R.id.menu_cart);
+        nav_klient.setSelectedItemId(R.id.menu_home);
         nav_klient.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

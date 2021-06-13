@@ -68,9 +68,7 @@ public class MenusDB {
                 menu.setMenu_img_path(cursor.getBlob(2));
                 menu.setMenu_price(cursor.getInt(3));
                 menu.setMenu_description(cursor.getString(4));
-
                 menus.add(menu);
-
             } while (cursor.moveToNext());
         }
 
