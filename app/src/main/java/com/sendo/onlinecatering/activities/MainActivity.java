@@ -38,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tvName = findViewById(R.id.tv_name);
 
+        usersDB = new UsersDB(this);
         menusDB = new MenusDB(this);
         menus = menusDB.getMenus();
+
         Intent intent = getIntent();
         int useridlogin_home = intent.getIntExtra("USERIDLOGINTOHOME", 0);
         int useridcart_home = intent.getIntExtra("USERIDCARTTOHOME", 0);
@@ -56,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
             userId = useridprofile_home;
         }
 
-        userId = 1;
-        usersDB = new UsersDB(this);
         user = usersDB.getUser(userId);
         tvName = findViewById(R.id.tv_name);
         tvName.setText(user.getUsername());

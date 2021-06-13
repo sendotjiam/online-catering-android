@@ -16,6 +16,7 @@
         <activity android:name=".activities.CartActivity"/>
         <activity android:name="Admin.ChatwithCustomer" />
         <activity android:name=".RegisterActivity"/>
+<!--        <activity android:name=".LoginActivity"/>-->
         <activity android:name=".LoginActivity">
         </activity>
         <activity android:name="Admin.OrderDetail" />

@@ -70,6 +70,7 @@ public class ProfilePage extends AppCompatActivity {
 
         navbar();
 
+//        userId = 1;
         //1nya ingat ganti jdi user_id
         users = usersDB.getUser(userId);
 
@@ -146,4 +147,9 @@ public class ProfilePage extends AppCompatActivity {
         });
     }
 
+    public void logout(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

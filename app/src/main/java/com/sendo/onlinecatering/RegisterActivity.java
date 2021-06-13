@@ -21,7 +21,7 @@ import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView ETUsername, ETPassword, ETPhone, ETConfirmationPass, TVerror;
-    Button BTNRegister, BTNDateBirth;
+    Button BTNRegister, BTNDateBirth, BTNLogin;
     RadioGroup radiogroupgender;
     RadioButton radioButtongender;
     CheckBox checkagreement;
@@ -39,11 +39,19 @@ public class RegisterActivity extends AppCompatActivity {
         ETConfirmationPass = findViewById(R.id.edittextrepassword);
         BTNRegister = findViewById(R.id.regbtnreg);
         BTNDateBirth = findViewById(R.id.datebirthbutton);
+        BTNLogin = findViewById(R.id.regbtnlogin);
         radiogroupgender = findViewById(R.id.radiogroup);
         checkagreement = findViewById(R.id.checkboxagreement);
         TVerror = findViewById(R.id.texterrors);
         usersDB = new UsersDB(this);
         initDatePicker();
+
+        BTNLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenLoginActivity();
+            }
+        });
 
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +120,8 @@ public class RegisterActivity extends AppCompatActivity {
                 if(month == 12){
                     monthstring = "December";
                 }
-                date = date + " - " + monthstring + " - " +year;
+                date = dayOfMonth + " - " + monthstring + " - " +year;
+                BTNDateBirth.setText(null);
                 BTNDateBirth.setText(date);
             }
         };
@@ -128,8 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void OpenLoginActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 
 
@@ -158,10 +166,14 @@ public class RegisterActivity extends AppCompatActivity {
             passtextarray[i] = passtext.charAt(i);
         }
 
-        if(passLength > 8){
+        if(passtext.isEmpty()){
+            TVerror.setText("Password cannot be empty");
+            return false;
+        }
+        if(passLength >= 8){
             for (char cekchar:passtextarray) {
                 if(checknumeric && checkalpha) {
-                    break;
+                    return true;
                 }
                 else{
                     if (cekchar >= '0' && cekchar <= '9') {
@@ -169,29 +181,20 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     if (cekchar >= 'A' && cekchar <= 'Z' || cekchar >= 'a' && cekchar <= 'z') {
                         checkalpha = true;
+
                     }
                 }
             }
         }
-        if(checknumeric && checkalpha){
-            return true;
-        }
-        else if(passtext.isEmpty()){
-            TVerror.setText("Password cannot be empty");
-            return false;
-        }
-        else if (passtext.length()<8){
+        else if (passLength < 8){
             TVerror.setText("Password must be more than 8 characters");
             return false;
         }
-        else if(!checknumeric && !checkalpha){
+        else{
             TVerror.setText("Password must be alphanumeric");
             return false;
         }
-
-        else{
-            return false;
-        }
+        return false;
     }
 
     private boolean checkconfirmationpass(){
@@ -231,35 +234,30 @@ public class RegisterActivity extends AppCompatActivity {
         for(int i=0 ; i<PhoneNumberlength ; i++){
             PhoneNumberArray[i] = PhoneNumber.charAt(i);
         }
-
+        if(PhoneNumber.isEmpty()){
+            TVerror.setText("Phone Number cannot be emtpy");
+            return false;
+        }
         if(PhoneNumberlength >=10 && PhoneNumberlength <=12){
             phonedigit = true;
             for (char cekphone:PhoneNumberArray) {
                 if(phonenum) {
-                    break;
+                    TVerror.setText("Phone Number must contain only numbers");
+                    return false;
                 }
                 else{
                     if (cekphone >= '0' && cekphone <= '9') {
                         phonenum = true;
+                        return true;
                     }
                 }
             }
         }
-        if(phonenum){
-            return true;
-        }
-        else if(PhoneNumber.isEmpty()){
-            TVerror.setText("Phone Number cannot be emtpy");
-            return false;
-        }
-        else if(!phonenum){
-            TVerror.setText("Phone Number must contain only numbers");
-            return false;
-        }
-        else {
+        else{
             TVerror.setText("Phone Number must be between 10 to 12 digits");
             return false;
         }
+        return false;
     }
 
     private boolean checkTerms()

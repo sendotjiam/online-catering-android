@@ -19,6 +19,7 @@
             android:layout_marginTop="10dp"
             android:text="Login Page"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/montserrat_bold"
             android:textSize="28dp" />
 
         <TextView
@@ -29,6 +30,7 @@
             android:layout_marginBottom="10dp"
             android:text=" Input Username"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/montserrat_regular"
             android:textSize="20dp" />
 
         <EditText
@@ -38,16 +40,18 @@
             android:hint="Username"
             android:textColorHint="@color/white"
             android:textAlignment="center"
+            android:fontFamily="@font/montserrat_light"
             android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="10dp"
             android:text=" Input Password"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/montserrat_regular"
             android:textSize="20dp" />
 
         <EditText
@@ -58,6 +62,7 @@
             android:inputType="textPassword"
             android:textColorHint="@color/white"
             android:textAlignment="center"
+            android:fontFamily="@font/montserrat_light"
             android:textSize="18sp" />
 
         <TextView
@@ -65,28 +70,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="120dp"
             android:textColor="#FF0000"
+            android:fontFamily="@font/montserrat_regular"
             android:textSize="14dp" />
 
         <Button
             android:id="@+id/btnregister"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/btn_custom_white"
             android:text="Register"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/black" />
 
         <Button
             android:id="@+id/btnlogin"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/btn_custom_white"
             android:text="Login"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/black" />
 
 

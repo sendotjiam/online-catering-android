@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
+        android:layout_marginTop="16dp"
         android:orientation="vertical">
 
         <TextView
@@ -21,19 +22,22 @@
             android:layout_marginBottom="10dp"
             android:text="Register Page"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="24sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:layout_marginTop="14dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" Input new Username"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp" />
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/edittextusername"
@@ -42,19 +46,23 @@
                 android:hint="Username"
                 android:textColorHint="@color/white"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:fontFamily="@font/montserrat_light"
+                android:textSize="14sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" Input new Password"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp" />
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/edittextpassword"
@@ -64,20 +72,24 @@
                 android:inputType="textPassword"
                 android:textColorHint="@color/white"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:fontFamily="@font/montserrat_light"
+                android:textSize="14dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" Input Phone Number"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp" />
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/edittextphone"
@@ -87,20 +99,24 @@
                 android:inputType="number"
                 android:textColorHint="@color/white"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:fontFamily="@font/montserrat_light"
+                android:textSize="14dp" />
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" Confirm Password"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp" />
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/edittextrepassword"
@@ -110,22 +126,27 @@
                 android:hint="Confirmation Password"
                 android:textColorHint="@color/white"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:fontFamily="@font/montserrat_light"
+                android:textSize="14dp" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="14dp"
+            >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" Gender"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp"/>
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="16dp"/>
 
             <RadioGroup
                 android:id="@+id/radiogroup"
@@ -141,17 +162,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male"
-                    android:textSize="18sp"
+                    android:textSize="14dp"
                     android:textColor="#FFFFFF"
-                    android:layout_marginLeft="70dp"/>
+                    android:fontFamily="@font/montserrat_regular"
+                    />
 
                 <RadioButton
                     android:id="@+id/RadioFemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Female"
-                    android:textSize="18sp"
+                    android:textSize="14dp"
                     android:textColor="#FFFFFF"
+                    android:fontFamily="@font/montserrat_regular"
                     android:layout_marginLeft="70dp"/>
 
             </RadioGroup>
@@ -159,34 +182,43 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" Date of Birth"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="16dp" />
 
             <Button
                 android:id="@+id/datebirthbutton"
-                android:text="Select Date of Birth"
-                android:layout_marginLeft="40dp"
-                android:layout_width="200dp"
-                android:layout_height="42dp"
-                android:background="@drawable/btn_custom_white"
                 style="?android:spinnerItemStyle"
-                android:onClick="opendatepicker"/>
+                android:layout_width="200dp"
+                android:layout_height="32dp"
+                android:background="@drawable/btn_custom_white"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center"
+                android:onClick="opendatepicker"
+                android:textSize="14dp"
+                android:text="Select Date of Birth" />
 
         </LinearLayout>
 
         <CheckBox
             android:id="@+id/checkboxagreement"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I agree terms and conditions"
             android:textColor="@color/white"
+            android:textSize="16dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="14dp"
             android:layout_gravity="center"/>
 
         <TextView
@@ -195,15 +227,30 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#FF0000"
-            android:textSize="14sp" />
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/regbtnlogin"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_custom_white"
+            android:text="Login"
+            android:textSize="16dp"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/regbtnreg"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             android:background="@drawable/btn_custom_white"
             android:text="Register"
+            android:textSize="16dp"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/black"/>
 
     </LinearLayout>

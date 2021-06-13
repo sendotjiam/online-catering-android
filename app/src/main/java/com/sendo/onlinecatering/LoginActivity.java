@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         usersDB = new UsersDB(this);
         Users user = new Users();
 
-
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,12 +47,12 @@ public class LoginActivity extends AppCompatActivity {
         BTNLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //
                 user.username = ADMIN_USERNAME;
                 user.password = ADMIN_PASSWORD;
                 user.phone_number = ADMIN_PHONE;
                 user.gender = ADMIN_GENDER;
-                user.dob =  ADMIN_DOB;
+                user.dob = ADMIN_DOB;
 
                 if(check_admin == 0){
                     usersDB.insertUsers(user);
@@ -63,12 +62,14 @@ public class LoginActivity extends AppCompatActivity {
                 if(checkusername() && checkpassword()){
                     String username = ETUsername.getText().toString();
                     String password = ETPassword.getText().toString();
+                    int check = usersDB.checkUsers(username, password);
+
                     if(username.contentEquals("admin")  && password.contentEquals("admin1234") ){
 
                         openadminactivity(view);
                     }
-                    else if(usersDB.checkUsers(username, password)){
-                        user_id = user.user_id;
+                    else if(check != -1){
+                        user_id = check;
                         openhomeactivity(view);
                     }
                     else{
@@ -91,12 +92,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void openadminactivity(View view) {
-        Intent intent = new Intent(this, ChatAdmin.class);
+        Intent intent = new Intent(this, AllMenuPage.class);
+        ETUsername.setText(null);
+        ETPassword.setText(null);
         startActivity(intent);
     }
 
     private void OpenRegisterActivity() {
         Intent intent = new Intent(this,RegisterActivity.class);
+        ETUsername.setText(null);
+        ETPassword.setText(null);
         startActivity(intent);
     }
 
