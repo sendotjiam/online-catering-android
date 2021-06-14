@@ -42,6 +42,17 @@
             android:layout_height="wrap_content"
             android:src="@drawable/add"
             android:background="@color/white"
+            android:layout_toLeftOf="@id/btn_logout"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_logout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logout"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"/>

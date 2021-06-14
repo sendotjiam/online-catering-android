@@ -24,7 +24,7 @@ import Admin.CustomerOrder;
 
 public class AllMenuPage extends AppCompatActivity {
 
-    ImageButton btnAddMenu, btn_order;
+    ImageButton btnAddMenu, btn_order, btnLogout;
     RecyclerView rlMenuList;
 
     ArrayList<Menus> menuArrayList = new ArrayList<Menus>();
@@ -41,6 +41,7 @@ public class AllMenuPage extends AppCompatActivity {
         btnAddMenu = findViewById(R.id.btn_add_menu);
         rlMenuList = findViewById(R.id.rv_menu_list);
         btn_order = findViewById(R.id.btn_order);
+        btnLogout = findViewById(R.id.btn_logout);
 
         rlMenuList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -57,6 +58,15 @@ public class AllMenuPage extends AppCompatActivity {
                 Intent addIntent = new Intent(AllMenuPage.this, AddMenuPage.class);
 
                 startActivity(addIntent);
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent logoutIntent = new Intent(AllMenuPage.this, LoginActivity.class);
+                startActivity(logoutIntent);
+                finish();
             }
         });
 
