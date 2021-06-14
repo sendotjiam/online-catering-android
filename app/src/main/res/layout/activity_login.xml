@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:text="Login Page"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/montserrat_bold"
@@ -27,11 +27,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="150dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:text=" Input Username"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/montserrat_regular"
-            android:textSize="20dp" />
+            android:textSize="16dp" />
 
         <EditText
             android:id="@+id/edittextusernamelogin"
@@ -41,7 +43,9 @@
             android:textColorHint="@color/white"
             android:textAlignment="center"
             android:fontFamily="@font/montserrat_light"
-            android:textSize="18sp" />
+            android:textSize="14dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -52,7 +56,9 @@
             android:text=" Input Password"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/montserrat_regular"
-            android:textSize="20dp" />
+            android:textSize="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
 
         <EditText
             android:id="@+id/edittextpasswordlogin"
@@ -63,7 +69,9 @@
             android:textColorHint="@color/white"
             android:textAlignment="center"
             android:fontFamily="@font/montserrat_light"
-            android:textSize="18sp" />
+            android:textSize="14sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
 
         <TextView
             android:id="@+id/txterrormessage"
@@ -81,6 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:background="@drawable/btn_custom_white"
             android:text="Register"
             android:fontFamily="@font/montserrat_bold"
@@ -92,6 +102,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:background="@drawable/btn_custom_white"
             android:text="Login"
             android:fontFamily="@font/montserrat_bold"
