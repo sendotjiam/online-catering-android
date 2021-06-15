@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,7 @@ public class AddMenuPage extends AppCompatActivity {
     MenusDB menusDB;
 
     final int REQUEST_GALLERY = 101;
+    final int REQUEST_STORAGE = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,23 +89,23 @@ public class AddMenuPage extends AppCompatActivity {
     }
 
     public void addimage(View view) {
-//        ActivityCompat.requestPermissions(AddMenuPage.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GALLERY);
-
         CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setAspectRatio(4, 3)
                 .setFixAspectRatio(true)
                 .start(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_STORAGE);
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
         if(requestCode == REQUEST_GALLERY){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_GALLERY);
-            }
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){}
             else{
                 Toast.makeText(this, "You don't have permission to access file location!", Toast.LENGTH_SHORT).show();
             }
