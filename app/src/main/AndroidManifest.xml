@@ -16,8 +16,8 @@
         <activity android:name=".activities.CartActivity"/>
         <activity android:name="Admin.ChatwithCustomer" />
         <activity android:name=".RegisterActivity"/>
-<!--        <activity android:name=".LoginActivity"/>-->
-        <activity android:name=".LoginActivity">
+        <!--        <activity android:name=".LoginActivity">-->
+        <activity android:name=".activities.MainActivity">
         </activity>
         <activity android:name="Admin.OrderDetail" />
         <activity android:name="Admin.ChatAdmin" />
@@ -27,7 +27,7 @@
         <activity android:name=".CheckOutPage" />
         <activity android:name=".AddMenuPage" />
         <activity android:name=".EditMenuPage"/>
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

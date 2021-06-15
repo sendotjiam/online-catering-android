@@ -64,6 +64,7 @@ public class CheckOutPage extends AppCompatActivity {
 
         Intent intent = getIntent();
         int useridcart_checkout = intent.getIntExtra("USERIDCARTTOCHECKOUT", 0);
+        userId = useridcart_checkout;
 
         /*
         INGAT SEMUA 1 GANTI JADI user_id

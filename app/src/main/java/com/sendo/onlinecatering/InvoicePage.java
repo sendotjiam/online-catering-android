@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sendo.onlinecatering.activities.CartActivity;
+import com.sendo.onlinecatering.activities.MainActivity;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,6 @@ public class InvoicePage extends AppCompatActivity {
         order_code1 = intent.getStringExtra("ORDERCODE");
         fnBDetails = intent.getParcelableArrayListExtra("MENU");
 
-        Toast.makeText(this, user_id+ "", Toast.LENGTH_SHORT).show();
 
         transactiondate.setText(transactiondate1);
         order_code.setText(order_code1);
@@ -61,7 +61,7 @@ public class InvoicePage extends AppCompatActivity {
     }
 
     public void backtohome(View view) {
-        Intent intent = new Intent(this, CustomerOrder.class);
+        Intent intent = new Intent(this, MainActivity.class);
         //ingat ganti 1 nya jdi user_id
         intent.putExtra("USERIDFROMINVOICETOHOME", user_id);
         startActivity(intent);

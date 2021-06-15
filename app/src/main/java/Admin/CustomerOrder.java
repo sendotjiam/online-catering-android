@@ -24,7 +24,6 @@ public class CustomerOrder extends AppCompatActivity {
     RecyclerView order_list;
     ArrayList<OrderList> list = new ArrayList();
     ArrayList<OrderList> listResult = new ArrayList<>();
-
     OrderDB orderDB;
     int userid;
 
@@ -39,36 +38,21 @@ public class CustomerOrder extends AppCompatActivity {
 
         list = orderDB.ViewAllData();
 
-//        OrderList orderlist = new OrderList(list.get(0).getOrder_id(), list.get(0).getOrder_user_id(),
-//                list.get(0).getOrder_code(), list.get(0).getOrder_menu_name(), list.get(0).getOrder_menu_price(),
-//                list.get(0).getOrder_transaction_date(), list.get(0).getOrder_status());
-//        listResult.add(orderlist);
-//
-//        if (list.size() > 1) {
-//            for (int i = 1; i < list.size(); i++) {
-//                for (int x = 0; x < listResult.size(); x++) {
-//                    if (!list.get(i).getOrder_code().equals(listResult.get(x).getOrder_code())) {
-//                        OrderList orderlist1 = new OrderList(list.get(i).getOrder_id(), list.get(i).getOrder_user_id(),
-//                                list.get(i).getOrder_code(), list.get(i).getOrder_menu_name(), list.get(i).getOrder_menu_price(),
-//                                list.get(i).getOrder_transaction_date(), list.get(i).getOrder_status());
-//                        listResult.add(orderlist1);
-//                    }
-//                }
-//            }
-//        }
         Intent intent = getIntent();
         userid = intent.getIntExtra("userid", 0);
-        OrderListAdapter orderListAdapter = new OrderListAdapter();
-        orderListAdapter.setArrayListdata(list, userid);
-        order_list.setAdapter(orderListAdapter);
-        order_list.setLayoutManager(new LinearLayoutManager(this));
 
+        if(list != null){
+
+            OrderListAdapter orderListAdapter = new OrderListAdapter();
+            orderListAdapter.setArrayListdata(list, userid);
+            order_list.setAdapter(orderListAdapter);
+            order_list.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
 
     public void Icon_Back(View view) {
         Intent intent = new Intent(this, AllMenuPage.class);
-        intent.putExtra("userid", userid);
         startActivity(intent);
         finish();
     }

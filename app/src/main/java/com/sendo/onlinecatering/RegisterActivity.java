@@ -20,8 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextView ETUsername, ETPassword, ETPhone, ETConfirmationPass, TVerror;
-    Button BTNRegister, BTNDateBirth, BTNLogin;
+    TextView ETUsername, ETPassword, ETPhone, ETConfirmationPass, TVerror, BTNLogin;
+    Button BTNRegister, BTNDateBirth;
     RadioGroup radiogroupgender;
     RadioButton radioButtongender;
     CheckBox checkagreement;
