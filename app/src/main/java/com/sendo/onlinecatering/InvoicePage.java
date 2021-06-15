@@ -38,7 +38,7 @@ public class InvoicePage extends AppCompatActivity {
          */
 
         Intent intent = getIntent();
-        user_id = intent.getIntExtra("USERIDFROMCHECKOUT", 0);
+        user_id = intent.getIntExtra("USERIDFROMCHECKOUTTOINVOICE", 0);
         transactiondate1 = intent.getStringExtra("TRANSACTIONDATE");
         order_code1 = intent.getStringExtra("ORDERCODE");
         fnBDetails = intent.getParcelableArrayListExtra("MENU");
@@ -63,7 +63,7 @@ public class InvoicePage extends AppCompatActivity {
     public void backtohome(View view) {
         Intent intent = new Intent(this, CustomerOrder.class);
         //ingat ganti 1 nya jdi user_id
-        intent.putExtra("USERIDFROMINVOICE", 1);
+        intent.putExtra("USERIDFROMINVOICETOHOME", user_id);
         startActivity(intent);
         finish();
     }

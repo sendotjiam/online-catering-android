@@ -63,7 +63,7 @@ public class CheckOutPage extends AppCompatActivity {
         orderDB = new OrderDB(this);
 
         Intent intent = getIntent();
-        int useridcart_checkout = intent.getIntExtra("USERIDHOMETOCART", 0);
+        int useridcart_checkout = intent.getIntExtra("USERIDCARTTOCHECKOUT", 0);
 
         /*
         INGAT SEMUA 1 GANTI JADI user_id
@@ -91,7 +91,7 @@ public class CheckOutPage extends AppCompatActivity {
 //        cartDB.insertCart(cart);
 
         //ingat ganti 1 nya jadi user_id juga;
-        menus1 = cartDB.getMenu(1);
+        menus1 = cartDB.getMenu(userId);
 
         for(int i = 0; i < menus1.size(); i++){
             FnBDetail fnBDetail = new FnBDetail();
@@ -113,7 +113,7 @@ public class CheckOutPage extends AppCompatActivity {
         item_view.setLayoutManager(new LinearLayoutManager(this));
 
         //ingat ganti 1 nya jadi user_id juga
-        users = usersDB.getUser(1);
+        users = usersDB.getUser(userId);
 
         String formattampung = formatter.format(users.getWallet());
         olshopcash.setText("Rp." + formattampung + ",00");
@@ -122,7 +122,7 @@ public class CheckOutPage extends AppCompatActivity {
 
     public void backtocart(View view) {
         Intent intent = new Intent(this, CartActivity.class);
-        intent.putExtra("USERIDFROMCHECKOUTTOCART", 1);
+        intent.putExtra("USERIDFROMCHECKOUTTOCART", userId);
         startActivity(intent);
         finish();
     }
@@ -134,15 +134,15 @@ public class CheckOutPage extends AppCompatActivity {
         }
         else{
             //ingat ganti 1 ke user_id
-            usersDB.minusNominal(users, 1, totalpembayaran);
+            usersDB.minusNominal(users, userId, totalpembayaran);
             //ingat ganti 1 ke user_id
-            cartDB.deleteCart(1);
+            cartDB.deleteCart(userId);
             String order_code = random();
             String transactiondate = new SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault()).format(new Date());
             for(int i = 0; i < menus1.size(); i++){
                 OrderList order = new OrderList();
                 //ingat ganti 1 ke user_id
-                order.setOrder_user_id(1);
+                order.setOrder_user_id(userId);
                 order.setOrder_code(String.valueOf(order_code));
                 order.setOrder_menu_name(menus1.get(i).getMenu_name());
                 order.setOrder_menu_price(String.valueOf(menus1.get(i).getMenu_price()));
@@ -153,7 +153,7 @@ public class CheckOutPage extends AppCompatActivity {
             }
             Intent intent = new Intent(getApplicationContext(), InvoicePage.class);
             //ingat ganti 1 ke user_id
-            intent.putExtra("USERIDFROMCHECKOUT", 1);
+            intent.putExtra("USERIDFROMCHECKOUTTOINVOICE", userId);
             intent.putExtra("TRANSACTIONDATE", transactiondate);
             intent.putExtra("ORDERCODE", String.valueOf(order_code));
             intent.putParcelableArrayListExtra("MENU", menus2);

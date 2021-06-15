@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         int useridlogin_home = intent.getIntExtra("USERIDLOGINTOHOME", 0);
         int useridcart_home = intent.getIntExtra("USERIDCARTTOHOME", 0);
         int useridprofile_home = intent.getIntExtra("USERIDPROFILETOHOME", 0);
+        int useridinvoice_home = intent.getIntExtra("USERIDFROMINVOICETOHOME", 0);
 
         if(useridlogin_home > userId){
             userId = useridlogin_home;
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         }
         if(useridprofile_home > userId){
             userId = useridprofile_home;
+        }
+        if(useridinvoice_home > userId){
+            userId = useridinvoice_home;
         }
 
         user = usersDB.getUser(userId);

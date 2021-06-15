@@ -87,7 +87,7 @@ public class CartActivity extends AppCompatActivity {
 
     public void openCheckOutActivity(View view) {
         Intent intent = new Intent(this, CheckOutPage.class);
-        intent.putExtra("USERIDHOMETOCART", userId);
+        intent.putExtra("USERIDCARTTOCHECKOUT", userId);
         startActivity(intent);
     }
 }
