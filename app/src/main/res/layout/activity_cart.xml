@@ -20,13 +20,18 @@
             style="@style/TextTitle"
             android:textColor="@color/yellow"
             android:layout_marginBottom="34dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_cart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/cart_title"
-            android:layout_marginBottom="56dp"/>
+<!--        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--            android:id="@+id/swipe_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_below="@id/cart_title">-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="56dp"
+                android:layout_below="@id/cart_title"/>
+<!--        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
     </RelativeLayout>
     <Button

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,16 +24,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     ArrayList<Menus> cartMenus;
     CartDB cartDB;
 
+    private OnItemClickListener clickListener;
+
+    public interface OnItemClickListener {
+        void onDeleteClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener clickListener){
+        this.clickListener = clickListener;
+    }
+
     public CartAdapter(Context context, ArrayList<Menus> cartMenus, CartDB cartDB) {
         this.cartMenus = cartMenus;
         this.context = context;
         this.cartDB = cartDB;
-    }
-
-    public void setCartMenuArrayList(ArrayList<Menus> cartMenus) {
-        this.cartMenus.clear();
-        this.cartMenus = cartMenus;
-        this.notifyDataSetChanged();
     }
 
     @NonNull
@@ -40,7 +45,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_cart, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, clickListener);
     }
 
     @Override
@@ -54,13 +59,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.itemName.setText(menu.getMenu_name());
         holder.menuPrice.setText(menu.getMenu_price() +  "");
         holder.menuDescription.setText(menu.getMenu_description());
-
-//        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
     }
 
     @Override
@@ -68,27 +66,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return cartMenus.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder{
         TextView menuName, menuDescription, menuPrice, itemName;
         ImageView menuImg;
         Button btnDelete;
 
-        public ViewHolder(@NonNull @NotNull View itemView) {
+        public ViewHolder(@NonNull @NotNull View itemView, final OnItemClickListener clickListener) {
             super(itemView);
             menuName = itemView.findViewById(R.id.name);
             itemName = itemView.findViewById(R.id.menu_name);
             menuDescription = itemView.findViewById(R.id.detail);
             menuPrice = itemView.findViewById(R.id.menu_price);
             menuImg = itemView.findViewById(R.id.fnbimage);
-
-//            btnDelete = itemView.findViewById(R.id.btn_delete);
-//            btnDelete.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    cartDB.deleteCartItem(menuName.toString());
-//                }
-//            });
+            btnDelete = itemView.findViewById(R.id.btn_delete);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (clickListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            clickListener.onDeleteClick(position);
+                            Toast.makeText(context, getItemCount() + " items", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
         }
+
     }
 
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sendo.onlinecatering.Cart;
 import com.sendo.onlinecatering.CartAdapter;
 import com.sendo.onlinecatering.CartDB;
 import com.sendo.onlinecatering.CheckOutPage;
@@ -24,15 +26,17 @@ public class CartActivity extends AppCompatActivity {
     int userId = 0;
 
     RecyclerView rvCart;
-    ArrayList<Menus> menuList;
+    ArrayList<Menus> menuList = new ArrayList<>();
+    ArrayList<Cart> cartList = new ArrayList<>();
     CartAdapter cartAdapter;
     CartDB cartDB;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
+        swipeRefreshLayout = findViewById(R.id.swipe_layout);
         cartDB = new CartDB(this);
         Intent intent = getIntent();
         int useridhome_cart = intent.getIntExtra("USERIDHOMETOCART", 0);
@@ -50,14 +54,34 @@ public class CartActivity extends AppCompatActivity {
         }
 
         menuList =  cartDB.getMenu(userId);
+        cartList = cartDB.getAllCart(userId);
 
         rvCart = findViewById(R.id.rv_cart);
         rvCart.setLayoutManager(new LinearLayoutManager(this));
         cartAdapter = new CartAdapter(this, menuList, cartDB);
-        cartAdapter.notifyDataSetChanged();
         rvCart.setAdapter(cartAdapter);
+        cartAdapter.setOnItemClickListener(new CartAdapter.OnItemClickListener() {
+            @Override
+            public void onDeleteClick(int position) {
+                deleteCart(position);
+            }
+        });
+
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                cartAdapter.notifyDataSetChanged();
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        });
 
         navbar();
+    }
+
+    public void deleteCart(int position) {
+        int id = cartList.get(position).getCart_id();
+        cartDB.deleteCartItem(id);
+        cartAdapter.notifyItemRemoved(position);
     }
 
     void navbar() {
@@ -90,4 +114,5 @@ public class CartActivity extends AppCompatActivity {
         intent.putExtra("USERIDCARTTOCHECKOUT", userId);
         startActivity(intent);
     }
+
 }

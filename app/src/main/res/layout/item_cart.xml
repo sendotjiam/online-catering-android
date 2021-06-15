@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             >
-            <ImageButton
+            <Button
                 android:id="@+id/btn_delete"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

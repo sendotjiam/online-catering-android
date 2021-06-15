@@ -73,6 +73,28 @@ public class CartDB {
         return menus;
     }
 
+    public ArrayList<Cart> getAllCart(int userId) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        ArrayList<Cart> carts = new ArrayList<>();
+        String query = "SELECT * FROM " + dbHelper.TABLE_CART + " WHERE " + DBHelper.FIELD_CART_USER_ID + " = " + userId;
+
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Cart cart = new Cart();
+                cart.setCart_id(cursor.getInt(0));
+                cart.setMenu_id(cursor.getInt(1));
+                cart.setUser_id(cursor.getInt(2));
+                carts.add(cart);
+            } while (cursor.moveToNext());
+        }
+
+        sqLiteDatabase.close();
+        cursor.close();
+        return carts;
+    }
+
     public void deleteCart(int user_id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -80,15 +102,14 @@ public class CartDB {
                 " WHERE " + dbHelper.FIELD_CART_USER_ID + " = " + user_id + ";";
 
         db.execSQL(delete_cart);
+        db.close();
     }
 
-
-    public void deleteCartItem(String menuName) {
+    public void deleteCartItem(int cartId) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        MenusDB menusDB = new MenusDB(context);
-        int menuId = menusDB.getMenuIdByName(menuName);
-        sqLiteDatabase.delete(DBHelper.TABLE_CART, DBHelper.FIELD_CART_MENU_ID, new String[]{menuId + ""});
+        String deleteCartItem = " DELETE FROM " + dbHelper.TABLE_CART +
+                " WHERE " + dbHelper.FIELD_CART_ID + " = " + cartId + ";";
+        sqLiteDatabase.execSQL(deleteCartItem);
         sqLiteDatabase.close();
     }
-
 }
