@@ -30,9 +30,21 @@ public class UsersDB {
     public int checkUsers(String username, String password){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-
         String selection = "username=? AND password=?";
         String[] selectionargs = {"" + username, "" + password};
+        int check = 0;
+        Cursor cursor = db.query(DBHelper.TABLE_USERS, null, selection, selectionargs,null, null ,null);
+        if (cursor.moveToFirst()){
+            int userid = cursor.getInt(cursor.getColumnIndex(dbHelper.FIELD_USER_ID));
+            return userid;
+        }
+        else return -1;
+    }
+
+    public int checkAdmin(String username, String password){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selection = "username=? AND password=?";
+        String[] selectionargs = {"admin", "admin1234"};
         int check = 0;
         Cursor cursor = db.query(DBHelper.TABLE_USERS, null, selection, selectionargs,null, null ,null);
         if (cursor.moveToFirst()){
