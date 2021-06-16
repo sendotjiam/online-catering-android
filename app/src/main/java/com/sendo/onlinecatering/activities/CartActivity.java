@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -30,13 +31,11 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<Cart> cartList = new ArrayList<>();
     CartAdapter cartAdapter;
     CartDB cartDB;
-    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        swipeRefreshLayout = findViewById(R.id.swipe_layout);
         cartDB = new CartDB(this);
         Intent intent = getIntent();
         int useridhome_cart = intent.getIntExtra("USERIDHOMETOCART", 0);
@@ -79,9 +78,14 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void deleteCart(int position) {
-        int id = cartList.get(position).getCart_id();
-        cartDB.deleteCartItem(id);
-        cartAdapter.notifyItemRemoved(position);
+        int cartIdRemoved = cartList.get(position).getCart_id();
+        Log.v("Cart Id", cartIdRemoved + "");
+        int menuIdRemoved = cartDB.getCartMenuId(cartIdRemoved);
+        Log.v("Menu Id", menuIdRemoved + "");
+        cartDB.deleteCartItem(cartIdRemoved);
+        cartAdapter.remove(position);
+        cartAdapter.notifyDataSetChanged();
+//        cartAdapter.notifyItemRemoved(position);
     }
 
     void navbar() {

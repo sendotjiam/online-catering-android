@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -71,6 +72,15 @@ public class CartDB {
         }
         cursor.close();
         return menus;
+    }
+
+    public int getCartMenuId(int cartId) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        String query = "SELECT * FROM " + dbHelper.TABLE_CART + " WHERE " + DBHelper.FIELD_CART_ID + " = " + cartId;
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        int id = -1;
+        if (cursor.moveToFirst()) id = cursor.getInt(2);
+        return id;
     }
 
     public ArrayList<Cart> getAllCart(int userId) {
