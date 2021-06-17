@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                         user.dob = ADMIN_DOB;
                         usersDB.insertUsers(user);
                     }
-                    else if(username.contentEquals("admin")  && password.contentEquals("admin1234") ){
+                    else if(checkadmin !=1 && username.contentEquals("admin")  && password.contentEquals("admin1234") ){
                             openadminactivity(view);
                     }
 
