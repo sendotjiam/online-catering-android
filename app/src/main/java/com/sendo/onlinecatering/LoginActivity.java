@@ -82,11 +82,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void openhomeactivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("USERIDLOGINTOHOME", user_id);
         ETUsername.setText(null);
         ETPassword.setText(null);
         TVError.setText("");
         startActivity(intent);
-        finish();
     }
 
     public void openadminactivity(View view) {
