@@ -92,7 +92,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         clickListener.onDeleteClick(position);
-                        Toast.makeText(context, getItemCount() + " items", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, getItemCount() + " items", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
