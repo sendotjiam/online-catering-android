@@ -37,6 +37,10 @@ public class LoginActivity extends AppCompatActivity {
         usersDB = new UsersDB(this);
         Users user = new Users();
 
+        ETUsername.setText(null);
+        ETPassword.setText(null);
+        TVError.setText("");
+
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,8 +68,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(checkusername() && checkpassword()){
                     int check = usersDB.checkUsers(username, password);
-
-                    if(check != -1){
+                    checkadmin = usersDB.checkAdmin(username, password);
+                    if(checkadmin !=-1 && username.contentEquals("admin") && password.contentEquals("admin1234")){
+                        openadminactivity(view);
+                    }
+                    else if(check != -1){
                         user_id = check;
                         openhomeactivity(view);
                     }
@@ -95,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         ETPassword.setText(null);
         TVError.setText("");
         startActivity(intent);
+        finish();
     }
 
     private void OpenRegisterActivity() {
