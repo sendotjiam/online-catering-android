@@ -3,8 +3,10 @@ package com.sendo.onlinecatering;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -66,6 +68,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return cartMenus.size();
     }
 
+    public void remove(int id) {
+        Log.v("id remove", id + "");
+        cartMenus.remove(id);
+        notifyItemRemoved(id);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView menuName, menuDescription, menuPrice, itemName;
         ImageView menuImg;
@@ -79,20 +87,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             menuPrice = itemView.findViewById(R.id.menu_price);
             menuImg = itemView.findViewById(R.id.fnbimage);
             btnDelete = itemView.findViewById(R.id.btn_delete);
-
-            btnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (clickListener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            clickListener.onDeleteClick(position);
-                            Toast.makeText(context, getItemCount() + " items", Toast.LENGTH_SHORT).show();
-                        }
+            btnDelete.setOnClickListener(view -> {
+                if (clickListener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        clickListener.onDeleteClick(position);
+                        Toast.makeText(context, getItemCount() + " items", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-
         }
 
     }

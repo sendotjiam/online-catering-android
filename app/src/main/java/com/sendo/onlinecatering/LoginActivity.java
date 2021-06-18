@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView ETUsername, ETPassword,TVError;
     Button BTNLogin, BTNRegister;
     UsersDB usersDB;
-    int check_admin = 0, user_id;
+    int user_id;
 
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "admin1234";
@@ -48,27 +48,27 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //
-                user.username = ADMIN_USERNAME;
-                user.password = ADMIN_PASSWORD;
-                user.phone_number = ADMIN_PHONE;
-                user.gender = ADMIN_GENDER;
-                user.dob = ADMIN_DOB;
 
-                if(check_admin == 0){
-                    usersDB.insertUsers(user);
-                    check_admin++;
-                }
 
                 if(checkusername() && checkpassword()){
                     String username = ETUsername.getText().toString();
                     String password = ETPassword.getText().toString();
                     int check = usersDB.checkUsers(username, password);
+                    int checkadmin = usersDB.checkAdmin(username,password);
 
-                    if(username.contentEquals("admin")  && password.contentEquals("admin1234") ){
-
-                        openadminactivity(view);
+                    if(checkadmin == -1){
+                        user.username = ADMIN_USERNAME;
+                        user.password = ADMIN_PASSWORD;
+                        user.phone_number = ADMIN_PHONE;
+                        user.gender = ADMIN_GENDER;
+                        user.dob = ADMIN_DOB;
+                        usersDB.insertUsers(user);
                     }
-                    else if(check != -1){
+                    else if(checkadmin !=1 && username.contentEquals("admin")  && password.contentEquals("admin1234") ){
+                            openadminactivity(view);
+                    }
+
+                    if(check != -1){
                         user_id = check;
                         openhomeactivity(view);
                     }
