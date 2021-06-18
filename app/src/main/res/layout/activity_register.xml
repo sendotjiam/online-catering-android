@@ -79,6 +79,7 @@
                     android:id="@+id/edittextpassword"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:inputType="textPassword"
                     android:background="@drawable/edittext_custom"
                     android:fontFamily="@font/montserrat_semibold"
                     android:paddingLeft="10dp"
