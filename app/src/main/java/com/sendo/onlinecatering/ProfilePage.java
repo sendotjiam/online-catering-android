@@ -19,10 +19,6 @@ import com.sendo.onlinecatering.activities.MainActivity;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-
-import Admin.ChatAdmin;
-import Admin.CustomerOrder;
 
 public class ProfilePage extends AppCompatActivity {
     TextView fullname;

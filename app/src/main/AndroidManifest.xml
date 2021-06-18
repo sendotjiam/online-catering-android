@@ -15,13 +15,11 @@
         android:theme="@style/Theme.OnlineCatering">
         <activity android:name=".MenuDetailsPage"/>
         <activity android:name=".activities.CartActivity"/>
-        <activity android:name="Admin.ChatwithCustomer" />
         <activity android:name=".RegisterActivity"/>
         <!--        <activity android:name=".LoginActivity">-->
         <activity android:name=".activities.MainActivity">
         </activity>
         <activity android:name="Admin.OrderDetail" />
-        <activity android:name="Admin.ChatAdmin" />
         <activity android:name="Admin.CustomerOrder" />
         <activity android:name=".InvoicePage" />
         <activity android:name=".ProfilePage" />
