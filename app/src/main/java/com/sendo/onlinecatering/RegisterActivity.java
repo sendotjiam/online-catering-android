@@ -185,6 +185,11 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 }
             }
+
+            if(!checknumeric || !checkalpha){
+                TVerror.setText("Password must contain both characters and numbers");
+                return false;
+            }
         }
         else if (passLength < 8){
             TVerror.setText("Password must be more than 8 characters");
