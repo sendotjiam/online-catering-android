@@ -47,26 +47,23 @@ public class LoginActivity extends AppCompatActivity {
         BTNLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //
-
+                String username = ETUsername.getText().toString();
+                String password = ETPassword.getText().toString();
+                int checkadmin = usersDB.checkAdmin(username,password);
+                if(checkadmin == -1){
+                    user.username = ADMIN_USERNAME;
+                    user.password = ADMIN_PASSWORD;
+                    user.phone_number = ADMIN_PHONE;
+                    user.gender = ADMIN_GENDER;
+                    user.dob = ADMIN_DOB;
+                    usersDB.insertUsers(user);
+                }
+                else if(checkadmin !=-1 && username.contentEquals("admin") && password.contentEquals("admin1234")){
+                    openadminactivity(view);
+                }
 
                 if(checkusername() && checkpassword()){
-                    String username = ETUsername.getText().toString();
-                    String password = ETPassword.getText().toString();
                     int check = usersDB.checkUsers(username, password);
-                    int checkadmin = usersDB.checkAdmin(username,password);
-
-                    if(checkadmin == -1){
-                        user.username = ADMIN_USERNAME;
-                        user.password = ADMIN_PASSWORD;
-                        user.phone_number = ADMIN_PHONE;
-                        user.gender = ADMIN_GENDER;
-                        user.dob = ADMIN_DOB;
-                        usersDB.insertUsers(user);
-                    }
-                    else if(checkadmin !=1 && username.contentEquals("admin")  && password.contentEquals("admin1234") ){
-                            openadminactivity(view);
-                    }
 
                     if(check != -1){
                         user_id = check;
@@ -85,8 +82,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void openhomeactivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("USERIDLOGINTOHOME", user_id);
-        Toast.makeText(this, user_id + "", Toast.LENGTH_SHORT).show();
+        ETUsername.setText(null);
+        ETPassword.setText(null);
+        TVError.setText("");
         startActivity(intent);
         finish();
     }
@@ -95,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AllMenuPage.class);
         ETUsername.setText(null);
         ETPassword.setText(null);
+        TVError.setText("");
         startActivity(intent);
     }
 
@@ -102,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this,RegisterActivity.class);
         ETUsername.setText(null);
         ETPassword.setText(null);
+        TVError.setText("");
         startActivity(intent);
     }
 
