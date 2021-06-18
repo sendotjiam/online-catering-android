@@ -79,6 +79,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             menuPrice = itemView.findViewById(R.id.menu_price);
             menuImg = itemView.findViewById(R.id.fnbimage);
             btnDelete = itemView.findViewById(R.id.btn_delete);
+
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -91,6 +92,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                     }
                 }
             });
+
         }
 
     }
