@@ -1,26 +1,42 @@
 package com.sendo.onlinecatering;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.sendo.onlinecatering.activities.MainActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextView ETUsername, ETPassword, ETPhone, ETConfirmationPass, TVerror, BTNLogin;
+    TextView TVerror, BTNLogin;
+    EditText ETUsername, ETPassword, ETPhone, ETConfirmationPass, ETemail;
     Button BTNRegister, BTNDateBirth;
     RadioGroup radiogroupgender;
     RadioButton radioButtongender;
@@ -28,12 +44,22 @@ public class RegisterActivity extends AppCompatActivity {
     UsersDB usersDB;
     DatePickerDialog datebirth;
     String date= null;
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
+    private CollectionReference userReference;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+        userReference = mFirestore.collection("Users");
+
         ETUsername = findViewById(R.id.edittextusername);
+        ETemail = findViewById(R.id.edittextemail);
         ETPassword = findViewById(R.id.edittextpassword);
         ETPhone = findViewById(R.id.edittextphone);
         ETConfirmationPass = findViewById(R.id.edittextrepassword);
@@ -56,15 +82,48 @@ public class RegisterActivity extends AppCompatActivity {
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkusername() && checkpassword() && checkPhone() && checkconfirmationpass() && checkGender() && checkDateOfBirth() && checkTerms() ){
-                    Users user = new Users();
-                    user.username = ETUsername.getText().toString();
-                    user.password = ETPassword.getText().toString();
-                    user.phone_number = ETPhone.getText().toString();
-                    user.gender = radioButtongender.getText().toString();
-                    user.dob = date;
-                    usersDB.insertUsers(user);
-                    OpenLoginActivity();
+                if(checkusername() && checkpassword() && checkPhone() && checkconfirmationpass() && checkGender() && checkTerms() ){
+
+                    String username = ETUsername.getText().toString();
+                    String email = ETemail.getText().toString();
+                    String password = ETPassword.getText().toString();
+                    String gender = radioButtongender.getText().toString();
+                    String phone = ETPhone.getText().toString();
+
+                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("AUTH", "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+
+                                Map<String, String> userMap = new HashMap<>();
+                                userMap.put("username", username);
+                                userMap.put("email", email);
+                                userMap.put("gender", gender);
+                                userMap.put("phone", phone);
+
+                                userReference.document(user.getUid()).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(RegisterActivity.this, "REGISTERED", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Log.e("AUTH", "registerUsertoFirestore:failure", task.getException());
+                                            Toast.makeText(RegisterActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.e("AUTH", "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Form error", Toast.LENGTH_SHORT).show();
                 }
             }
         });

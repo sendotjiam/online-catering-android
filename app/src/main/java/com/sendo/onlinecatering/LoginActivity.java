@@ -1,20 +1,33 @@
 package com.sendo.onlinecatering;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.sendo.onlinecatering.activities.MainActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 public class LoginActivity extends AppCompatActivity {
-    TextView ETUsername, ETPassword,TVError;
+    TextView TVError;
+    EditText ETEmail, ETPassword;
     Button BTNLogin, BTNRegister;
     UsersDB usersDB;
     int user_id;
+
+    private FirebaseAuth mAuth;
 
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "admin1234";
@@ -26,7 +39,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ETUsername =findViewById(R.id.edittextusernamelogin);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        ETEmail =findViewById(R.id.edittextemaillogin);
         ETPassword = findViewById(R.id.edittextpasswordlogin);
         BTNLogin = findViewById(R.id.btnlogin);
         BTNRegister = findViewById(R.id.btnregister);
@@ -34,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         usersDB = new UsersDB(this);
         Users user = new Users();
 
-        ETUsername.setText(null);
+        ETEmail.setText(null);
         ETPassword.setText(null);
         TVError.setText("");
 
@@ -48,36 +64,20 @@ public class LoginActivity extends AppCompatActivity {
         BTNLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = ETUsername.getText().toString();
+                String email = ETEmail.getText().toString();
                 String password = ETPassword.getText().toString();
-                int checkadmin = usersDB.checkAdmin(username,password);
-                if(checkadmin == -1){
-                    user.username = ADMIN_USERNAME;
-                    user.password = ADMIN_PASSWORD;
-                    user.phone_number = ADMIN_PHONE;
-                    user.gender = ADMIN_GENDER;
-                    user.dob = ADMIN_DOB;
-                    usersDB.insertUsers(user);
-                }
-                else if(checkadmin !=-1 && username.contentEquals("admin") && password.contentEquals("admin1234")){
-                    openadminactivity(view);
-                }
 
-                if(checkusername() && checkpassword()){
-                    int check = usersDB.checkUsers(username, password);
-                    checkadmin = usersDB.checkAdmin(username, password);
-                    if(checkadmin !=-1 && username.contentEquals("admin") && password.contentEquals("admin1234")){
-                        openadminactivity(view);
+                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Log.d("AUTH", "Login:Success");
+                            Toast.makeText(LoginActivity.this, "Authed", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e("AUTH", "Login:failure", task.getException());
+                        }
                     }
-                    else if(check != -1){
-                        user_id = check;
-                        openhomeactivity(view);
-                    }
-                    else{
-                        TVError.setText("Username or Password are wrong");
-                    }
-
-                }
+                });
             }
         });
 
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     public void openhomeactivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("USERIDLOGINTOHOME", user_id);
-        ETUsername.setText(null);
+        ETEmail.setText(null);
         ETPassword.setText(null);
         TVError.setText("");
         startActivity(intent);
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void openadminactivity(View view) {
         Intent intent = new Intent(this, AllMenuPage.class);
-        ETUsername.setText(null);
+        ETEmail.setText(null);
         ETPassword.setText(null);
         TVError.setText("");
         startActivity(intent);
@@ -104,14 +104,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void OpenRegisterActivity() {
         Intent intent = new Intent(this,RegisterActivity.class);
-        ETUsername.setText(null);
+        ETEmail.setText(null);
         ETPassword.setText(null);
         TVError.setText("");
         startActivity(intent);
     }
 
     private Boolean checkusername(){
-        if(ETUsername.getText().toString().isEmpty()){
+        if(ETEmail.getText().toString().isEmpty()){
             TVError.setText("Username cannot be empty");
             return false;
         }
