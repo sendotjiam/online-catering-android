@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         BTNRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkusername() && checkpassword() && checkPhone() && checkconfirmationpass() && checkGender() && checkTerms() ){
+                if(checkusername() && checkpassword() && checkPhone() && checkconfirmationpass() && checkGender() && checkDateOfBirth() && checkTerms()){
 
                     String username = ETUsername.getText().toString();
                     String email = ETemail.getText().toString();
@@ -90,25 +90,29 @@ public class RegisterActivity extends AppCompatActivity {
                     String gender = radioButtongender.getText().toString();
                     String phone = ETPhone.getText().toString();
 
+                    Users user = new Users();
+                    user.username = username;
+                    user.email = email;
+                    user.phone_number = phone;
+                    user.gender = gender;
+                    user.dob = date;
+
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("AUTH", "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
+                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-                                Map<String, String> userMap = new HashMap<>();
-                                userMap.put("username", username);
-                                userMap.put("email", email);
-                                userMap.put("gender", gender);
-                                userMap.put("phone", phone);
-
-                                userReference.document(user.getUid()).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                userReference.document(firebaseUser.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                         if(task.isSuccessful()){
                                             Toast.makeText(RegisterActivity.this, "REGISTERED", Toast.LENGTH_SHORT).show();
+
+                                            Intent modeIntent = new Intent(RegisterActivity.this, ChooseModeActivity.class);
+                                            startActivity(modeIntent);
                                         } else {
                                             Log.e("AUTH", "registerUsertoFirestore:failure", task.getException());
                                             Toast.makeText(RegisterActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();

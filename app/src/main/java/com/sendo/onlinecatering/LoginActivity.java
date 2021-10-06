@@ -72,7 +72,10 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Log.d("AUTH", "Login:Success");
-                            Toast.makeText(LoginActivity.this, "Authed", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoginActivity.this, "Authed", Toast.LENGTH_SHORT).show();
+
+                            Intent modeIntent = new Intent(LoginActivity.this, ChooseModeActivity.class);
+                            startActivity(modeIntent);
                         } else {
                             Log.e("AUTH", "Login:failure", task.getException());
                         }
