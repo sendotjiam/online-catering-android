@@ -130,13 +130,6 @@ public class EditMenuPage extends AppCompatActivity {
                 menuMap.put("menu_description", etMenuDesc.getText().toString());
 
                 documentReference.update(menuMap);
-
-                /*byte[] imageBytes = imageviewtobyte(ivMenuImage);
-                String name = etMenuName.getText().toString();
-                int price = Integer.parseInt(etMenuPrice.getText().toString());
-                String desc = etMenuDesc.getText().toString();*/
-
-//                menusDB.updateMenus(menuId, imageBytes, name, price, desc);
             }
         });
 
