@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -13,22 +14,41 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
 public class MenuDetailsPage extends AppCompatActivity {
 
     ImageButton btnBack, btnEdit, btnDelete;
     ImageView ivMenuImage;
     TextView tvMenuName, tvMenuPrice, tvMenuDesc;
 
-    MenusDB menusDB = new MenusDB(MenuDetailsPage.this);
     Menus curMenu;
-    int menuId;
+    String menuId;
+
+    private FirebaseFirestore mFirestore;
+    private CollectionReference menusReference;
+    private FirebaseStorage mStorage;
+    private StorageReference menuPicStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_details_page);
 
-        menuId = getIntent().getExtras().getInt("menuId");
+        mFirestore = FirebaseFirestore.getInstance();
+        menusReference = mFirestore.collection("Menus");
+        mStorage = FirebaseStorage.getInstance();
+        menuPicStorage = mStorage.getReference().child("menus");
+
+        menuId = getIntent().getExtras().getString("menuId");
+        curMenu = getIntent().getParcelableExtra("menu");
 
         btnBack = findViewById(R.id.btn_back);
         btnEdit = findViewById(R.id.btn_edit);
@@ -50,7 +70,7 @@ public class MenuDetailsPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent editIntent = new Intent(MenuDetailsPage.this, EditMenuPage.class);
-                editIntent.putExtra("menuId", menuId);
+                editIntent.putExtra("menu", curMenu);
                 startActivity(editIntent);
             }
         });
@@ -58,28 +78,42 @@ public class MenuDetailsPage extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menusDB.deleteMenu(menuId);
-                finish();
+
+                menuPicStorage.child(curMenu.getMenu_name()).delete();
+
+                menusReference.document(curMenu.getMenu_id()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        finish();
+                    }
+                });
             }
         });
 
-        loadMenu(menuId);
+        loadMenu(curMenu);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        loadMenu(menuId);
+        menusReference.document(menuId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                curMenu = documentSnapshot.toObject(Menus.class);
+                loadMenu(curMenu);
+            }
+        });
     }
 
-    void loadMenu(int menuId){
+    void loadMenu(Menus menu){
 
-        Menus menu = menusDB.getMenu(menuId);
-
-        byte[] foodimage = menu.getMenu_img_path();
+        /*byte[] foodimage = menu.getMenu_img_path();
         Bitmap bitmap = BitmapFactory.decodeByteArray(foodimage, 0, foodimage.length);
         ivMenuImage.setImageBitmap(bitmap);
+        ivMenuImage.setScaleType(ImageView.ScaleType.CENTER_CROP);*/
+
+        Picasso.get().load(menu.getMenu_img_path()).into(ivMenuImage);
         ivMenuImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         tvMenuName.setText(menu.getMenu_name());

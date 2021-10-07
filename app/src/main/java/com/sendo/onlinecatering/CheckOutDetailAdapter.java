@@ -63,9 +63,9 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
 
     @Override
     public void onBindViewHolder(@NonNull CheckOutDetailAdapter.ViewHolder holder, int position) {
-        byte[] foodimage = menus.get(position).getMenu_img_path();
+        /*byte[] foodimage = menus.get(position).getMenu_img_path();
         Bitmap bitmap = BitmapFactory.decodeByteArray(foodimage, 0, foodimage.length);
-        holder.fnbimage.setImageBitmap(bitmap);
+        holder.fnbimage.setImageBitmap(bitmap);*/
         holder.fnbname.setText(menus.get(position).getMenu_name());
         holder.fnbdetail.setText(menus.get(position).getMenu_description());
         holder.fnbname2.setText(menus.get(position).getMenu_name());

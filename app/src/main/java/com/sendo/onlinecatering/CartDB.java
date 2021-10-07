@@ -60,9 +60,9 @@ public class CartDB {
                 String menu_description = cursor.getString(4);
 
                 Menus menus1 = new Menus();
-                menus1.setMenu_id(menuid);
+//                menus1.setMenu_id(menuid);
                 menus1.setMenu_name(menu_name);
-                menus1.setMenu_img_path(menu_image_path);
+//                menus1.setMenu_img_path(menu_image_path);
                 menus1.setMenu_price(menu_price);
                 menus1.setMenu_description(menu_description);
 

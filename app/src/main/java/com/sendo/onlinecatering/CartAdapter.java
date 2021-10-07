@@ -53,9 +53,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull @NotNull CartAdapter.ViewHolder holder, int position) {
         Menus menu = cartMenus.get(position);
-        byte[] foodImage = menu.getMenu_img_path();
+        /*byte[] foodImage = menu.getMenu_img_path();
         Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage, 0, foodImage.length);
-        holder.menuImg.setImageBitmap(bitmap);
+        holder.menuImg.setImageBitmap(bitmap);*/
+
         holder.menuImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.menuName.setText(menu.getMenu_name());
         holder.itemName.setText(menu.getMenu_name());

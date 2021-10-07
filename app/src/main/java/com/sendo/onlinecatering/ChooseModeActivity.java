@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sendo.onlinecatering.activities.MainActivity;
 
 public class ChooseModeActivity extends AppCompatActivity {
@@ -37,5 +38,12 @@ public class ChooseModeActivity extends AppCompatActivity {
                 startActivity(homeIntent);*/
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        FirebaseAuth.getInstance().signOut();
     }
 }

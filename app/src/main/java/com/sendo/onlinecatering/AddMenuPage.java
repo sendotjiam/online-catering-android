@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -31,6 +42,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddMenuPage extends AppCompatActivity {
 
@@ -40,6 +53,12 @@ public class AddMenuPage extends AppCompatActivity {
     Button btnSubmitMenu;
     MenusDB menusDB;
 
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
+    private CollectionReference menusReference;
+    private FirebaseStorage mStorage;
+    private StorageReference menuPicStorage;
+
     final int REQUEST_GALLERY = 101;
     final int REQUEST_STORAGE = 102;
 
@@ -48,7 +67,11 @@ public class AddMenuPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_menu_page);
 
-
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+        menusReference = mFirestore.collection("Menus");
+        mStorage = FirebaseStorage.getInstance();
+        menuPicStorage = mStorage.getReference().child("menus");
 
         btnBack = findViewById(R.id.btn_back);
         etMenuName = findViewById(R.id.et_menu_name);
@@ -71,14 +94,65 @@ public class AddMenuPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                        menusDB.insertMenus(
-                                etMenuName.getText().toString().trim(),
-                                imageviewtobyte(ivMenuImage),
-                                Integer.parseInt(etMenuPrice.getText().toString()),
-                                etMenuDesc.getText().toString().trim()
-                        );
-                        Toast.makeText(AddMenuPage.this, "Menu Added", Toast.LENGTH_SHORT).show();
-                        finish();
+                    /*menusDB.insertMenus(
+                            etMenuName.getText().toString().trim(),
+                            imageviewtobyte(ivMenuImage),
+                            Integer.parseInt(etMenuPrice.getText().toString()),
+                            etMenuDesc.getText().toString().trim()
+                    );*/
+
+                    String menuName = etMenuName.getText().toString().trim();
+                    int menuPrice = Integer.parseInt(etMenuPrice.getText().toString());
+                    String menuDesc = etMenuDesc.getText().toString().trim();
+
+                    Menus newMenu = new Menus();
+                    newMenu.setMenu_name(menuName);
+                    newMenu.setUser_id(mAuth.getUid());
+                    newMenu.setMenu_price(menuPrice);
+                    newMenu.setMenu_description(menuDesc);
+
+                    menusReference.add(newMenu).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<DocumentReference> task) {
+                            if(task.isSuccessful()){
+
+                                DocumentReference document = task.getResult();
+                                String documentId = document.getId();
+
+                                StorageReference menuImgReference = menuPicStorage.child(documentId);
+                                menuImgReference.putBytes(imageviewtobyte(ivMenuImage)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            menuImgReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
+                                                    String imageUrl = uri.toString();
+
+                                                    Map<String, Object> updateMap = new HashMap<>();
+                                                    updateMap.put("menu_id", documentId);
+                                                    updateMap.put("menu_img_path", imageUrl);
+
+                                                    document.update(updateMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(AddMenuPage.this, "Menu Added", Toast.LENGTH_SHORT).show();
+                                                            finish();
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        } else {
+
+                                        }
+                                    }
+                                });
+                            } else {
+                                Log.e("MENU", "Add Menu fail:" + task.getException());
+                                Toast.makeText(AddMenuPage.this, "Fail to add menu", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
                 catch (Exception e){
                     e.printStackTrace();

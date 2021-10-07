@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
-    private CollectionReference userReference;
+    private CollectionReference usersReference;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
-        userReference = mFirestore.collection("Users");
+        usersReference = mFirestore.collection("Users");
 
         ETUsername = findViewById(R.id.edittextusername);
         ETemail = findViewById(R.id.edittextemail);
@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Log.d("AUTH", "createUserWithEmail:success");
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-                                userReference.document(firebaseUser.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                usersReference.document(firebaseUser.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                         if(task.isSuccessful()){

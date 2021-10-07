@@ -6,13 +6,14 @@ import android.os.Parcelable;
 import java.sql.Blob;
 
 public class Menus implements Parcelable {
-    int menu_id;
+    String menu_id;
+    String user_id;
     String menu_name;
-    byte[] menu_img_path;
+    String menu_img_path;
     long menu_price;
     String menu_description;
 
-    public Menus(int menu_id, String menu_name, byte[] menu_img_path, long menu_price, String menu_description) {
+    public Menus(String menu_id, String menu_name, String menu_img_path, long menu_price, String menu_description) {
         this.menu_id = menu_id;
         this.menu_name = menu_name;
         this.menu_img_path = menu_img_path;
@@ -25,9 +26,10 @@ public class Menus implements Parcelable {
     }
 
     protected Menus(Parcel in) {
-        menu_id = in.readInt();
+        menu_id = in.readString();
+        user_id = in.readString();
         menu_name = in.readString();
-        menu_img_path = in.createByteArray();
+        menu_img_path = in.readString();
         menu_price = in.readLong();
         menu_description = in.readString();
     }
@@ -44,12 +46,20 @@ public class Menus implements Parcelable {
         }
     };
 
-    public int getMenu_id() {
+    public String getMenu_id() {
         return menu_id;
     }
 
-    public void setMenu_id(int menu_id) {
+    public void setMenu_id(String menu_id) {
         this.menu_id = menu_id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getMenu_name() {
@@ -60,11 +70,11 @@ public class Menus implements Parcelable {
         this.menu_name = menu_name;
     }
 
-    public byte[] getMenu_img_path() {
+    public String getMenu_img_path() {
         return menu_img_path;
     }
 
-    public void setMenu_img_path(byte[] menu_img_path) {
+    public void setMenu_img_path(String menu_img_path) {
         this.menu_img_path = menu_img_path;
     }
 
@@ -91,9 +101,10 @@ public class Menus implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(menu_id);
+        parcel.writeString(menu_id);
+        parcel.writeString(user_id);
         parcel.writeString(menu_name);
-        parcel.writeByteArray(menu_img_path);
+        parcel.writeString(menu_img_path);
         parcel.writeLong(menu_price);
         parcel.writeString(menu_description);
     }

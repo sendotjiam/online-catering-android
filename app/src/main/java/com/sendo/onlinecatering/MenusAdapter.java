@@ -49,9 +49,10 @@ public class MenusAdapter extends RecyclerView.Adapter<MenusAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull @NotNull MenusAdapter.ViewHolder holder, int position) {
         Menus menu = menuList.get(position);
-        byte[] foodImage = menu.getMenu_img_path();
+        /*byte[] foodImage = menu.getMenu_img_path();
         Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage, 0, foodImage.length);
-        holder.menuImg.setImageBitmap(bitmap);
+        holder.menuImg.setImageBitmap(bitmap);*/
+
         holder.menuImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.menuName.setText(menu.getMenu_name());
         holder.menuDescription.setText(menu.getMenu_description());
@@ -91,7 +92,7 @@ public class MenusAdapter extends RecyclerView.Adapter<MenusAdapter.ViewHolder> 
                     .setPositiveButton("Add to Cart", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            cartDB.addToCart(userId, menu.getMenu_id());
+//                            cartDB.addToCart(userId, menu.getMenu_id());
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

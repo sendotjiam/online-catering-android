@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.MenuViewHolder> {
@@ -46,9 +48,12 @@ public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.MenuView
 
         Menus menu = menuArrayList.get(position);
 
-        byte[] foodimage = menu.getMenu_img_path();
+        /*byte[] foodimage = menu.getMenu_img_path();
         Bitmap bitmap = BitmapFactory.decodeByteArray(foodimage, 0, foodimage.length);
         holder.ivMenuImage.setImageBitmap(bitmap);
+        holder.ivMenuImage.setScaleType(ImageView.ScaleType.CENTER_CROP);*/
+
+        Picasso.get().load(menu.getMenu_img_path()).into(holder.ivMenuImage);
         holder.ivMenuImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         holder.tvMenuName.setText(menu.getMenu_name());
@@ -59,6 +64,7 @@ public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.MenuView
             public void onClick(View view) {
                 Intent detailIntent = new Intent(context, MenuDetailsPage.class);
                 detailIntent.putExtra("menuId", menu.getMenu_id());
+                detailIntent.putExtra("menu", menu);
                 ((Activity) context).startActivity(detailIntent);
             }
         });

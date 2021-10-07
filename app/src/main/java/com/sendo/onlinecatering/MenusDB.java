@@ -63,9 +63,9 @@ public class MenusDB {
         if(cursor.moveToFirst()){
             do {
                 Menus menu = new Menus();
-                menu.setMenu_id(cursor.getInt(0));
+//                menu.setMenu_id(cursor.getInt(0));
                 menu.setMenu_name(cursor.getString(1));
-                menu.setMenu_img_path(cursor.getBlob(2));
+//                menu.setMenu_img_path(cursor.getBlob(2));
                 menu.setMenu_price(cursor.getInt(3));
                 menu.setMenu_description(cursor.getString(4));
                 menus.add(menu);
@@ -87,9 +87,9 @@ public class MenusDB {
 
         if(cursor.moveToFirst()){
             do {
-                menu.setMenu_id(cursor.getInt(0));
+//                menu.setMenu_id(cursor.getInt(0));
                 menu.setMenu_name(cursor.getString(1));
-                menu.setMenu_img_path(cursor.getBlob(2));
+//                menu.setMenu_img_path(cursor.getBlob(2));
                 menu.setMenu_price(cursor.getInt(3));
                 menu.setMenu_description(cursor.getString(4));
 
