@@ -1,5 +1,6 @@
 package com.sendo.onlinecatering;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.bumptech.glide.load.resource.bitmap.BitmapDrawableResource;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.sendo.onlinecatering.activities.CartActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -35,6 +45,7 @@ public class CheckOutPage extends AppCompatActivity {
     Button pay;
     RecyclerView item_view;
     ArrayList<CheckOutDetail> checkOutDetails = new ArrayList<>();
+    CheckOutDetailAdapter checkOutDetailAdapter;
     UsersDB usersDB;
     MenusDB menusDB;
     CartDB cartDB;
@@ -48,132 +59,82 @@ public class CheckOutPage extends AppCompatActivity {
     ArrayList<FnBDetail> menus2= new ArrayList<>();
     NumberFormat formatter = new DecimalFormat("#,###");
 
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
+    private CollectionReference ordersReference, cartReference;
+
+    String orderId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out_page);
 
-        olshopcash = findViewById(R.id.co_olcash);
+        orderId = getIntent().getStringExtra("OrderId");
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+        ordersReference = mFirestore.collection("Orders");
+        cartReference = ordersReference.document(orderId).collection("Cart");
+
         totalpayment = findViewById(R.id.co_totalpayment);
         pay = findViewById(R.id.btn_pay);
 
-        usersDB = new UsersDB(this);
-        menusDB = new MenusDB(this);
-        cartDB = new CartDB(this);
-        orderDB = new OrderDB(this);
-
-        Intent intent = getIntent();
-        int useridcart_checkout = intent.getIntExtra("USERIDCARTTOCHECKOUT", 0);
-        userId = useridcart_checkout;
-
-        /*
-        INGAT SEMUA 1 GANTI JADI user_id
-         */
-
-//        /data/media/0/DCIM/ayamgoreng.PNG
-//        /data/media/0/DCIM/ikangoreng.PNG
-//        /storage/emulated/0/DCIM/ayamgoreng.PNG
-//        /storage/emulated/0/DCIM/ikangoreng.PNG
-//        /data/data/com.sendo.onlinecatering/image/ayamgoreng.PNG
-//        /data/data/com.sendo.onlinecatering/image/ikangoreng.PNG
-//
-//        users = new Users();
-//        users.setUsername("Hendry Gunawan");
-//        users.setPassword("hendry123");
-//        users.setGender("Male");
-//        users.setPhone("081276652918");
-//        users.setDateOfBirth("3/4/2001");
-//        users.setWallet(30000000);
-//        usersDB.insertUsers(users);
-
-//        cart = new Cart();
-//        cart.setUser_id(1);
-//        cart.setMenu_id(1);
-//        cartDB.insertCart(cart);
-
-        //ingat ganti 1 nya jadi user_id juga;
-        menus1 = cartDB.getMenu(userId);
-
-        for(int i = 0; i < menus1.size(); i++){
-            FnBDetail fnBDetail = new FnBDetail();
-            fnBDetail.setFnbname(menus1.get(i).getMenu_name());
-            fnBDetail.setFnbprice(menus1.get(i).getMenu_price());
-            menus2.add(fnBDetail);
-            totalpembayaran += menus1.get(i).getMenu_price();
-        }
-        String tampung = formatter.format(totalpembayaran);
-        totalpayment.setText("Rp." + tampung + ",00");
-
         item_view = findViewById(R.id.rv_checkout);
 
-
-        CheckOutDetailAdapter checkOutDetailAdapter = new CheckOutDetailAdapter(this);
+        checkOutDetailAdapter = new CheckOutDetailAdapter(this);
         checkOutDetailAdapter.setMenus(menus1);
 
         item_view.setAdapter(checkOutDetailAdapter);
         item_view.setLayoutManager(new LinearLayoutManager(this));
 
-        //ingat ganti 1 nya jadi user_id juga
-        users = usersDB.getUser(userId);
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pay(view);
+            }
+        });
 
-        String formattampung = formatter.format(users.getWallet());
-        olshopcash.setText("Rp." + formattampung + ",00");
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        cartReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for(DocumentSnapshot document : task.getResult().getDocuments()){
+                        Menus menu = document.toObject(Menus.class);
+
+                        menus1.add(menu);
+                        checkOutDetailAdapter.notifyItemInserted(menus1.size() - 1);
+
+                        totalpembayaran += menu.getMenu_price();
+
+                        String tampung = formatter.format(totalpembayaran);
+                        totalpayment.setText("Rp." + tampung + ",00");
+                    }
+                } else {
+                    Toast.makeText(CheckOutPage.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
     public void backtocart(View view) {
         Intent intent = new Intent(this, CartActivity.class);
-        intent.putExtra("USERIDFROMCHECKOUTTOCART", userId);
+        intent.putExtra("OrderId", orderId);
         startActivity(intent);
         finish();
     }
 
-
     public void pay(View view) {
-        if(users.getWallet() < totalpembayaran){
-            Toast.makeText(this, "You dont have enough olshop cash", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            //ingat ganti 1 ke user_id
-            usersDB.minusNominal(users, userId, totalpembayaran);
-            //ingat ganti 1 ke user_id
-            cartDB.deleteCart(userId);
-            String order_code = random();
-            String transactiondate = new SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault()).format(new Date());
-            for(int i = 0; i < menus1.size(); i++){
-                OrderList order = new OrderList();
-                //ingat ganti 1 ke user_id
-                order.setOrder_user_id(userId);
-                order.setOrder_code(String.valueOf(order_code));
-                order.setOrder_menu_name(menus1.get(i).getMenu_name());
-                order.setOrder_menu_price(String.valueOf(menus1.get(i).getMenu_price()));
-                order.setOrder_transaction_date(transactiondate);
-                order.setOrder_status("Paid");
-
-                orderDB.insertUsers(order);
-            }
-            Intent intent = new Intent(getApplicationContext(), InvoicePage.class);
-            //ingat ganti 1 ke user_id
-            intent.putExtra("USERIDFROMCHECKOUTTOINVOICE", userId);
-            intent.putExtra("TRANSACTIONDATE", transactiondate);
-            intent.putExtra("ORDERCODE", String.valueOf(order_code));
-            intent.putParcelableArrayListExtra("MENU", menus2);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-    public String random() {
-        String random = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < 5) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * random.length());
-            salt.append(random.charAt(index));
-        }
-        String saltStr = salt.toString();
-        return saltStr;
-
+        Intent intent = new Intent(getApplicationContext(), InvoicePage.class);
+        intent.putExtra("OrderId", orderId);
+        startActivity(intent);
+        finish();
     }
 
 }

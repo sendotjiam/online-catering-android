@@ -19,27 +19,8 @@ public class FnBDetailAdapter extends RecyclerView.Adapter<FnBDetailAdapter.View
     private ArrayList<FnBDetail> fnBDetails;
     NumberFormat formatter = new DecimalFormat("#,###");
 
-    public FnBDetailAdapter(Context context) {
+    public FnBDetailAdapter(Context context, ArrayList<FnBDetail> fnBDetails) {
         this.context = context;
-    }
-
-    public FnBDetailAdapter(ArrayList<FnBDetail> fnBDetails) {
-        this.fnBDetails = fnBDetails;
-    }
-
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    public ArrayList<FnBDetail> getFnBDetails() {
-        return fnBDetails;
-    }
-
-    public void setFnBDetails(ArrayList<FnBDetail> fnBDetails) {
         this.fnBDetails = fnBDetails;
     }
 

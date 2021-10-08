@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -63,9 +64,9 @@ public class CheckOutDetailAdapter extends RecyclerView.Adapter<CheckOutDetailAd
 
     @Override
     public void onBindViewHolder(@NonNull CheckOutDetailAdapter.ViewHolder holder, int position) {
-        /*byte[] foodimage = menus.get(position).getMenu_img_path();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(foodimage, 0, foodimage.length);
-        holder.fnbimage.setImageBitmap(bitmap);*/
+
+        Picasso.get().load(menus.get(position).getMenu_img_path()).into(holder.fnbimage);
+
         holder.fnbname.setText(menus.get(position).getMenu_name());
         holder.fnbdetail.setText(menus.get(position).getMenu_description());
         holder.fnbname2.setText(menus.get(position).getMenu_name());

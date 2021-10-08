@@ -61,29 +61,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        usersDB = new UsersDB(this);
-//        menusDB = new MenusDB(this);
-//        menus = menusDB.getMenus();
-
-//        Intent intent = getIntent();
-//        int useridlogin_home = intent.getIntExtra("USERIDLOGINTOHOME", 0);
-//        int useridcart_home = intent.getIntExtra("USERIDCARTTOHOME", 0);
-//        int useridprofile_home = intent.getIntExtra("USERIDPROFILETOHOME", 0);
-//        int useridinvoice_home = intent.getIntExtra("USERIDFROMINVOICETOHOME", 0);
-//
-//        if(useridlogin_home > userId){
-//            userId = useridlogin_home;
-//        }
-//        if(useridcart_home > userId){
-//            userId = useridcart_home;
-//        }
-//        if(useridprofile_home > userId){
-//            userId = useridprofile_home;
-//        }
-//        if(useridinvoice_home > userId){
-//            userId = useridinvoice_home;
-//        }
-
         orderId = getIntent().getStringExtra("OrderId");
 
         mAuth = FirebaseAuth.getInstance();
@@ -120,14 +97,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//
-//        navbar();
+        navbar();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        menusAdapter.setMenuArrayList(menusDB.getMenus());
 
         menus.clear();
 
@@ -159,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_cart) {
                     Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-                    intent.putExtra("USERIDHOMETOCART", userId);
+                    intent.putExtra("OrderId", orderId);
                     startActivity(intent);
                     finish();
                     return true;

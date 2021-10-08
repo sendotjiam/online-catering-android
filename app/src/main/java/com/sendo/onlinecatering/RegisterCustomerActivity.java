@@ -18,7 +18,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sendo.onlinecatering.activities.MainActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RegisterCustomerActivity extends AppCompatActivity {
@@ -76,9 +79,12 @@ public class RegisterCustomerActivity extends AppCompatActivity {
                         return;
                     }
 
+                    String transactiondate = new SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault()).format(new Date());
+
                     Map<String, Object> customerMap = new HashMap<>();
                     customerMap.put("name", name);
                     customerMap.put("tableNumber", tableNum);
+                    customerMap.put("date", transactiondate);
                     customerMap.put("DineIn", RadioDineIn.isChecked());
 
                     ordersReference.add(customerMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

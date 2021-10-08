@@ -24,14 +24,14 @@ public class CustomerOrder extends AppCompatActivity {
     RecyclerView order_list;
     ArrayList<OrderList> list = new ArrayList();
     ArrayList<OrderList> listResult = new ArrayList<>();
-    OrderDB orderDB;
-    int userid;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_order);
+
+
 
         order_list = findViewById(R.id.orderlist);
         orderDB = new OrderDB(this);

@@ -10,8 +10,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.sendo.onlinecatering.Cart;
 import com.sendo.onlinecatering.CartAdapter;
 import com.sendo.onlinecatering.CartDB;
@@ -20,6 +29,8 @@ import com.sendo.onlinecatering.Menus;
 import com.sendo.onlinecatering.ProfilePage;
 import com.sendo.onlinecatering.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
@@ -27,41 +38,46 @@ public class CartActivity extends AppCompatActivity {
 
     RecyclerView rvCart;
     ArrayList<Menus> menuList = new ArrayList<>();
-    ArrayList<Cart> cartList = new ArrayList<>();
     CartAdapter cartAdapter;
-    CartDB cartDB;
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
+    private CollectionReference ordersReference, cartReference;
+
+    String orderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        cartDB = new CartDB(this);
-        Intent intent = getIntent();
-        int useridhome_cart = intent.getIntExtra("USERIDHOMETOCART", 0);
-        int useridprofile_cart = intent.getIntExtra("USERIDPROFILETOCART", 0);
-        int useridcheckout_cart = intent.getIntExtra("USERIDFROMCHECKOUTTOCART", 0);
 
-        if(useridhome_cart > userId){
-            userId = useridhome_cart;
-        }
-        if(useridprofile_cart > userId){
-            userId = useridprofile_cart;
-        }
-        if(useridcheckout_cart > userId){
-            userId = useridcheckout_cart;
-        }
+        orderId = getIntent().getStringExtra("OrderId");
 
-        menuList =  cartDB.getMenu(userId);
-        cartList = cartDB.getAllCart(userId);
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+        ordersReference = mFirestore.collection("Orders");
+        cartReference = ordersReference.document(orderId).collection("Cart");
 
         rvCart = findViewById(R.id.rv_cart);
         rvCart.setLayoutManager(new LinearLayoutManager(this));
-        cartAdapter = new CartAdapter(this, menuList, cartDB);
+        cartAdapter = new CartAdapter(this, menuList, cartReference);
         rvCart.setAdapter(cartAdapter);
-        cartAdapter.setOnItemClickListener(new CartAdapter.OnItemClickListener() {
+
+        cartReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onDeleteClick(int position) {
-                deleteCart(position);
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for(DocumentSnapshot document : task.getResult().getDocuments()){
+                        Menus menu = document.toObject(Menus.class);
+
+                        menu.setMenu_id(document.getId());
+
+                        menuList.add(menu);
+                        cartAdapter.notifyItemInserted(menuList.size() - 1);
+                    }
+                } else {
+                    Toast.makeText(CartActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -76,17 +92,6 @@ public class CartActivity extends AppCompatActivity {
         navbar();
     }
 
-    public void deleteCart(int position) {
-        int cartIdRemoved = cartList.get(position).getCart_id();
-        Log.v("Cart Id", cartIdRemoved + "");
-        int menuIdRemoved = cartDB.getCartMenuId(cartIdRemoved);
-        Log.v("Menu Id", menuIdRemoved + "");
-        cartDB.deleteCartItem(cartIdRemoved);
-        cartAdapter.remove(position);
-        cartAdapter.notifyDataSetChanged();
-//        cartAdapter.notifyItemRemoved(position);
-    }
-
     void navbar() {
         BottomNavigationView nav_klient = findViewById(R.id.navbar_klient);
         nav_klient.setSelectedItemId(R.id.menu_cart);
@@ -95,7 +100,7 @@ public class CartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_home) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("USERIDCARTTOHOME", userId);
+                    intent.putExtra("OrderId", orderId);
                     startActivity(intent);
                     finish();
                     return true;
@@ -114,8 +119,9 @@ public class CartActivity extends AppCompatActivity {
 
     public void openCheckOutActivity(View view) {
         Intent intent = new Intent(this, CheckOutPage.class);
-        intent.putExtra("USERIDCARTTOCHECKOUT", userId);
+        intent.putExtra("OrderId", orderId);
         startActivity(intent);
+        finish();
     }
 
 }
