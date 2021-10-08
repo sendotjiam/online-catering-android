@@ -16,6 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.squareup.picasso.Picasso;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -24,12 +27,12 @@ public class MenusAdapter extends RecyclerView.Adapter<MenusAdapter.ViewHolder> 
 
     Context context;
     ArrayList<Menus> menuList;
-    int userId = 0;
+    CollectionReference cartReference;
 
-    public MenusAdapter(Context context, ArrayList<Menus> menuList, int userId) {
+    public MenusAdapter(Context context, ArrayList<Menus> menuList, CollectionReference cartReference) {
         this.context = context;
         this.menuList = menuList;
-        this.userId = userId;
+        this.cartReference = cartReference;
     }
 
     public void setMenuArrayList(ArrayList<Menus> menuArrayList) {
@@ -49,9 +52,8 @@ public class MenusAdapter extends RecyclerView.Adapter<MenusAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull @NotNull MenusAdapter.ViewHolder holder, int position) {
         Menus menu = menuList.get(position);
-        /*byte[] foodImage = menu.getMenu_img_path();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage, 0, foodImage.length);
-        holder.menuImg.setImageBitmap(bitmap);*/
+
+        Picasso.get().load(menu.getMenu_img_path()).into(holder.menuImg);
 
         holder.menuImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.menuName.setText(menu.getMenu_name());
@@ -93,6 +95,7 @@ public class MenusAdapter extends RecyclerView.Adapter<MenusAdapter.ViewHolder> 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 //                            cartDB.addToCart(userId, menu.getMenu_id());
+                            cartReference.add(menu);
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

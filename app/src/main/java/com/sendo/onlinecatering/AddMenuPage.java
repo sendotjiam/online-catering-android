@@ -51,7 +51,6 @@ public class AddMenuPage extends AppCompatActivity {
     EditText etMenuName, etMenuPrice, etMenuDesc;
     ImageView ivMenuImage;
     Button btnSubmitMenu;
-    MenusDB menusDB;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
@@ -80,8 +79,6 @@ public class AddMenuPage extends AppCompatActivity {
         ivMenuImage = findViewById(R.id.iv_menu_image);
 
         btnSubmitMenu = findViewById(R.id.btn_submit_menu);
-
-        menusDB = new MenusDB(this);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

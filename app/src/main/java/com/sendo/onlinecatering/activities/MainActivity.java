@@ -8,10 +8,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.sendo.onlinecatering.AllMenuPage;
 import com.sendo.onlinecatering.Menus;
 import com.sendo.onlinecatering.MenusAdapter;
 import com.sendo.onlinecatering.MenusDB;
@@ -20,64 +34,121 @@ import com.sendo.onlinecatering.R;
 import com.sendo.onlinecatering.Users;
 import com.sendo.onlinecatering.UsersDB;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Menus> menus;
+    ArrayList<Menus> menus = new ArrayList<>();
     RecyclerView rvMenus;
     MenusAdapter menusAdapter;
+    Button btnCancel;
     TextView tvName;
     int userId = 0;
     Users user;
-    UsersDB usersDB;
-    MenusDB menusDB;
+
+    String orderId;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurUser;
+    private FirebaseFirestore mFirestore;
+    private CollectionReference menusReference, ordersReference, cartReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        usersDB = new UsersDB(this);
+//        menusDB = new MenusDB(this);
+//        menus = menusDB.getMenus();
+
+//        Intent intent = getIntent();
+//        int useridlogin_home = intent.getIntExtra("USERIDLOGINTOHOME", 0);
+//        int useridcart_home = intent.getIntExtra("USERIDCARTTOHOME", 0);
+//        int useridprofile_home = intent.getIntExtra("USERIDPROFILETOHOME", 0);
+//        int useridinvoice_home = intent.getIntExtra("USERIDFROMINVOICETOHOME", 0);
+//
+//        if(useridlogin_home > userId){
+//            userId = useridlogin_home;
+//        }
+//        if(useridcart_home > userId){
+//            userId = useridcart_home;
+//        }
+//        if(useridprofile_home > userId){
+//            userId = useridprofile_home;
+//        }
+//        if(useridinvoice_home > userId){
+//            userId = useridinvoice_home;
+//        }
+
+        orderId = getIntent().getStringExtra("OrderId");
+
+        mAuth = FirebaseAuth.getInstance();
+        mCurUser = mAuth.getCurrentUser();
+        mFirestore = FirebaseFirestore.getInstance();
+        menusReference = mFirestore.collection("Menus");
+        ordersReference = mFirestore.collection("Orders");
+        cartReference = ordersReference.document(orderId).collection("Cart");
+
         tvName = findViewById(R.id.tv_name);
-        usersDB = new UsersDB(this);
-        menusDB = new MenusDB(this);
-        menus = menusDB.getMenus();
-
-        Intent intent = getIntent();
-        int useridlogin_home = intent.getIntExtra("USERIDLOGINTOHOME", 0);
-        int useridcart_home = intent.getIntExtra("USERIDCARTTOHOME", 0);
-        int useridprofile_home = intent.getIntExtra("USERIDPROFILETOHOME", 0);
-        int useridinvoice_home = intent.getIntExtra("USERIDFROMINVOICETOHOME", 0);
-
-        if(useridlogin_home > userId){
-            userId = useridlogin_home;
-        }
-        if(useridcart_home > userId){
-            userId = useridcart_home;
-        }
-        if(useridprofile_home > userId){
-            userId = useridprofile_home;
-        }
-        if(useridinvoice_home > userId){
-            userId = useridinvoice_home;
-        }
-
-        user = usersDB.getUser(userId);
-        tvName = findViewById(R.id.tv_name);
-        tvName.setText(user.getUsername());
-
         rvMenus = findViewById(R.id.rv_menu);
+        btnCancel = findViewById(R.id.btn_cancel);
+
+        tvName.setText(orderId);
+
         rvMenus.setLayoutManager(new GridLayoutManager(this, 2));
-        menusAdapter = new MenusAdapter(this, menus, userId);
-//        menusAdapter.notifyDataSetChanged();
+        menusAdapter = new MenusAdapter(this, menus, cartReference);
         rvMenus.setAdapter(menusAdapter);
 
-        navbar();
+        ordersReference.document(orderId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Map<String, Object> customerMap = documentSnapshot.getData();
+
+                tvName.setText(customerMap.get("name").toString());
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ordersReference.document(orderId).delete();
+                finish();
+            }
+        });
+
+//
+//        navbar();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        menusAdapter.setMenuArrayList(menusDB.getMenus());
+//        menusAdapter.setMenuArrayList(menusDB.getMenus());
+
+        menus.clear();
+
+        menusReference.whereEqualTo("user_id", mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+
+                    for(DocumentSnapshot document : task.getResult().getDocuments()){
+                        Menus menu = document.toObject(Menus.class);
+
+                        menus.add(menu);
+                        menusAdapter.notifyItemInserted(menus.size() - 1);
+                    }
+
+//                    menuAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(MainActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     void navbar() {

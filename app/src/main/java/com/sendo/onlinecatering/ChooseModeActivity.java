@@ -33,6 +33,10 @@ public class ChooseModeActivity extends AppCompatActivity {
         btnToOrdering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent orderIntent = new Intent(ChooseModeActivity.this, RegisterCustomerActivity.class);
+                startActivity(orderIntent);
+
                 /*Intent homeIntent = new Intent(this, MainActivity.class);
                 intent.putExtra("USERIDLOGINTOHOME", user_id);
                 startActivity(homeIntent);*/

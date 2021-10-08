@@ -86,8 +86,6 @@ public class AllMenuPage extends AppCompatActivity {
             }
         });
 
-//        menuArrayList = menusDB.getMenus();
-
         menuAdapter = new AllMenuAdapter(AllMenuPage.this, menuArrayList);
         rlMenuList.setAdapter(menuAdapter);
     }

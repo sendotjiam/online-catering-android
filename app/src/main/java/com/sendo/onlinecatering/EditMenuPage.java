@@ -129,7 +129,16 @@ public class EditMenuPage extends AppCompatActivity {
                 menuMap.put("menu_price", Integer.parseInt(etMenuPrice.getText().toString()));
                 menuMap.put("menu_description", etMenuDesc.getText().toString());
 
-                documentReference.update(menuMap);
+                documentReference.update(menuMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            finish();
+                        } else {
+                            Toast.makeText(EditMenuPage.this, "Error updating menu", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 

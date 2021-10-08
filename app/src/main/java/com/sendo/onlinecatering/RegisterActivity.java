@@ -41,7 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
     RadioGroup radiogroupgender;
     RadioButton radioButtongender;
     CheckBox checkagreement;
-    UsersDB usersDB;
     DatePickerDialog datebirth;
     String date= null;
 
@@ -69,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
         radiogroupgender = findViewById(R.id.radiogroup);
         checkagreement = findViewById(R.id.checkboxagreement);
         TVerror = findViewById(R.id.texterrors);
-        usersDB = new UsersDB(this);
         initDatePicker();
 
         BTNLogin.setOnClickListener(new View.OnClickListener() {

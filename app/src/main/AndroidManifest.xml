@@ -14,11 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineCatering">
-        <activity android:name=".ChooseModeActivity"></activity>
+        <activity android:name=".RegisterCustomerActivity"></activity>
+        <activity android:name=".ChooseModeActivity" />
         <activity android:name=".MenuDetailsPage" />
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".RegisterActivity" /> <!-- <activity android:name=".LoginActivity"> -->
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.MainActivity" />
         <activity android:name="Admin.OrderDetail" />
         <activity android:name="Admin.CustomerOrder" />
         <activity android:name=".InvoicePage" />
@@ -33,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AllMenuPage"></activity>
+        <activity android:name=".AllMenuPage" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

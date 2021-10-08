@@ -71,5 +71,14 @@
             app:menu="@menu/menu_klient">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_above="@id/navbar_klient"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:background="@color/yellow" />
 
 </RelativeLayout>
