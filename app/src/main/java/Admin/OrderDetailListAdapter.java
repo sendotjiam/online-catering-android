@@ -14,13 +14,20 @@ import com.sendo.onlinecatering.R;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OrderDetailListAdapter extends RecyclerView.Adapter<OrderDetailListAdapter.ViewHolder> {
 
     NumberFormat formatter = new DecimalFormat("#,###");
 
     Context context;
-    ArrayList<OrderList> list = new ArrayList<>();
+    ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+
+    public OrderDetailListAdapter(Context context, ArrayList<HashMap<String, Object>> list) {
+        this.context = context;
+        this.list = list;
+    }
 
     @NonNull
     @Override
@@ -32,19 +39,18 @@ public class OrderDetailListAdapter extends RecyclerView.Adapter<OrderDetailList
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        String formatnominal = formatter.format(Integer.parseInt(list.get(position).getOrder_menu_price()));
+        Map data = list.get(position);
 
-        holder.foodname.setText(list.get(position).getOrder_menu_name());
+
+        String formatnominal = formatter.format(Integer.parseInt(data.get("menu_price").toString()));
+
+        holder.foodname.setText(data.get("menu_name").toString());
         holder.foodprice.setText("Rp. " + formatnominal);
     }
 
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    public void setArrayListdata(ArrayList<OrderList> list) {
-        this.list = list;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

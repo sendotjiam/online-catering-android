@@ -17,14 +17,20 @@ import com.sendo.onlinecatering.Order;
 import com.sendo.onlinecatering.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.ViewHolder> {
 
     public static final int REQUEST_CODE_REPLY = 1;
-    int userid;
 
     Context context;
-    ArrayList<OrderList> list = new ArrayList<>();
+//    ArrayList<OrderList> list = new ArrayList<>();
+    ArrayList<HashMap<String, String>> list = new ArrayList<>();
+
+    public OrderListAdapter(Context context, ArrayList<HashMap<String, String>> list) {
+        this.context = context;
+        this.list = list;
+    }
 
     @NonNull
     @Override
@@ -37,17 +43,17 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
-        holder.ordercode.setText(list.get(position).getOrder_code());
-        holder.deliverydate.setText(list.get(position).getOrder_transaction_date());
-        holder.status.setText(list.get(position).getOrder_status());
+        HashMap<String, String> map = list.get(position);
+
+        holder.ordercode.setText(map.get("orderCode"));
+        holder.deliverydate.setText(map.get("date"));
+        holder.status.setText(map.get("type"));
 
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderDetail.class);
-
-                String orderList = list.get(position).getOrder_code();
-                intent.putExtra("orderList", orderList);
+                intent.putExtra("OrderId", map.get("orderCode"));
                 context.startActivity(intent);
             }
         });
@@ -56,11 +62,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    public void setArrayListdata(ArrayList<OrderList> list, int userid) {
-        this.list = list;
-        this.userid = userid;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

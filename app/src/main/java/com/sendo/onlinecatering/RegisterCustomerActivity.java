@@ -34,6 +34,7 @@ public class RegisterCustomerActivity extends AppCompatActivity {
 
     private boolean dineIn;
 
+    private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
     private CollectionReference ordersReference;
 
@@ -42,6 +43,7 @@ public class RegisterCustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_customer);
 
+        mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         ordersReference = mFirestore.collection("Orders");
 
@@ -82,6 +84,7 @@ public class RegisterCustomerActivity extends AppCompatActivity {
                     String transactiondate = new SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault()).format(new Date());
 
                     Map<String, Object> customerMap = new HashMap<>();
+                    customerMap.put("userId", mAuth.getUid());
                     customerMap.put("name", name);
                     customerMap.put("tableNumber", tableNum);
                     customerMap.put("date", transactiondate);
