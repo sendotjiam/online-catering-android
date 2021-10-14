@@ -30,7 +30,30 @@
             android:paddingBottom="15dp"
             android:text="Customer Order"
             android:textColor="@color/yellow"
-            android:textSize="30sp" />
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp">
+
+        <Button
+            android:id="@+id/btn_view_current"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="Current"/>
+
+        <Button
+            android:id="@+id/btn_view_all"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="All"/>
 
     </LinearLayout>
 

@@ -9,7 +9,7 @@
     android:padding="10dp"
     tools:context="Admin.OrderDetail">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -21,10 +21,13 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/ic_back"
-            android:onClick="Icon_Back" />
+            android:onClick="Icon_Back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
@@ -32,9 +35,24 @@
             android:paddingBottom="5dp"
             android:text="Order Detail"
             android:textColor="@color/yellow"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ic_back"
+            app:layout_constraintEnd_toStartOf="@id/btn_complete"/>
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/btn_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="Complete"
+            android:background="#FFF"
+            android:src="@drawable/ic_baseline_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

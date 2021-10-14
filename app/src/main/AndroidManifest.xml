@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineCatering">
-        <activity android:name=".RegisterCustomerActivity"></activity>
+        <activity android:name=".RegisterCustomerActivity" />
         <activity android:name=".ChooseModeActivity" />
         <activity android:name=".MenuDetailsPage" />
         <activity android:name=".activities.CartActivity" />

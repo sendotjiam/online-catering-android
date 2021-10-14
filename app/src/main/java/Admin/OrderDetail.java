@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ import java.util.Map;
 
 public class OrderDetail extends AppCompatActivity {
 
-    ImageButton ic_back;
+    ImageButton ic_back, btnComplete;
     TextView ordercode, deliverydate, status;
     TextView totalorder;
     RecyclerView food_order;
@@ -48,6 +49,7 @@ public class OrderDetail extends AppCompatActivity {
         cartReference = ordersReference.document(orderId).collection("Cart");
 
         ic_back = findViewById(R.id.ic_back);
+        btnComplete = findViewById(R.id.btn_complete);
         ordercode = findViewById(R.id.ordercode);
         deliverydate = findViewById(R.id.deliverydate);
         status = findViewById(R.id.status);
@@ -67,6 +69,18 @@ public class OrderDetail extends AppCompatActivity {
         food_order.setAdapter(orderDetailListAdapter);
         food_order.setLayoutManager(new LinearLayoutManager(this));
 
+        btnComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ordersReference.document(orderId).update("finish", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        finish();
+                    }
+                });
+            }
+        });
+
     }
 
     @Override
@@ -81,7 +95,7 @@ public class OrderDetail extends AppCompatActivity {
 
                 ordercode.setText(documentSnapshot.getId());
                 deliverydate.setText(documentMap.get("date").toString());
-                status.setText((Boolean)documentMap.get("DineIn") ? "Dine In (" + documentMap.get("tableNumber")+ ")" : "Take away");
+                status.setText((Boolean)documentMap.get("dineIn") ? "Dine In (" + documentMap.get("tableNumber")+ ")" : "Take away");
             }
         });
 
@@ -104,9 +118,9 @@ public class OrderDetail extends AppCompatActivity {
     }
 
     public void Icon_Back(View view) {
-        Intent intent = new Intent(OrderDetail.this, CustomerOrder.class);
-        intent.putExtra("userid", userid);
-        startActivity(intent);
+//        Intent intent = new Intent(OrderDetail.this, CustomerOrder.class);
+//        intent.putExtra("userid", userid);
+//        startActivity(intent);
         finish();
     }
 }

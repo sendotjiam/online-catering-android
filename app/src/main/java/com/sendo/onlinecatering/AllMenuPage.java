@@ -38,8 +38,6 @@ public class AllMenuPage extends AppCompatActivity {
     ArrayList<Menus> menuArrayList = new ArrayList<Menus>();
     AllMenuAdapter menuAdapter;
 
-    MenusDB menusDB = new MenusDB(AllMenuPage.this);
-
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
     private CollectionReference menusReference;

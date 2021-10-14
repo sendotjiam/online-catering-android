@@ -13,12 +13,14 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sendo.onlinecatering.activities.CartActivity;
 import com.sendo.onlinecatering.activities.MainActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import Admin.CustomerOrder;
@@ -95,7 +97,11 @@ public class InvoicePage extends AppCompatActivity {
 
     public void backtohome(View view) {
 
-        ordersReference.document(orderId).update("submitted", true);
+        Map<String,Object> updates = new HashMap<>();
+        updates.put("submitted", true);
+        updates.put("finish", false);
+
+        ordersReference.document(orderId).update(updates);
 
         finish();
     }

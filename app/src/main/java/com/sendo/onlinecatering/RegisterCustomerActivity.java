@@ -88,7 +88,7 @@ public class RegisterCustomerActivity extends AppCompatActivity {
                     customerMap.put("name", name);
                     customerMap.put("tableNumber", tableNum);
                     customerMap.put("date", transactiondate);
-                    customerMap.put("DineIn", RadioDineIn.isChecked());
+                    customerMap.put("dineIn", RadioDineIn.isChecked());
 
                     ordersReference.add(customerMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
