@@ -69,7 +69,6 @@ public class MenusAdapter extends RecyclerView.Adapter<MenusAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView menuImg;
         TextView menuName, menuDescription;
-        CartDB cartDB = new CartDB(context);
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             menuImg = itemView.findViewById(R.id.fnbimage);

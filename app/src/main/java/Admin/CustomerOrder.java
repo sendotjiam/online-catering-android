@@ -32,7 +32,6 @@ public class CustomerOrder extends AppCompatActivity {
 
     BottomNavigationView nav_admin;
     RecyclerView order_list;
-    ArrayList<OrderList> list = new ArrayList();
     ArrayList<HashMap<String, String>> list2 = new ArrayList();
     OrderListAdapter orderListAdapter;
 

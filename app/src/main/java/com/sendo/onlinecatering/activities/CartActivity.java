@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -16,17 +15,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.sendo.onlinecatering.Cart;
 import com.sendo.onlinecatering.CartAdapter;
-import com.sendo.onlinecatering.CartDB;
 import com.sendo.onlinecatering.CheckOutPage;
 import com.sendo.onlinecatering.Menus;
-import com.sendo.onlinecatering.ProfilePage;
 import com.sendo.onlinecatering.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -101,12 +96,6 @@ public class CartActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.menu_home) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("OrderId", orderId);
-                    startActivity(intent);
-                    finish();
-                    return true;
-                } else if (item.getItemId() == R.id.menu_profiles) {
-                    Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
-                    intent.putExtra("USERIDCARTTOPROFILE", userId);
                     startActivity(intent);
                     finish();
                     return true;

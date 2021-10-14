@@ -3,12 +3,10 @@ package com.sendo.onlinecatering.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -25,14 +23,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.sendo.onlinecatering.AllMenuPage;
 import com.sendo.onlinecatering.Menus;
 import com.sendo.onlinecatering.MenusAdapter;
-import com.sendo.onlinecatering.MenusDB;
-import com.sendo.onlinecatering.ProfilePage;
 import com.sendo.onlinecatering.R;
 import com.sendo.onlinecatering.Users;
-import com.sendo.onlinecatering.UsersDB;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -135,12 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.menu_cart) {
                     Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                     intent.putExtra("OrderId", orderId);
-                    startActivity(intent);
-                    finish();
-                    return true;
-                } else if (item.getItemId() == R.id.menu_profiles) {
-                    Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
-                    intent.putExtra("USERIDHOMETOPROFILE", userId);
                     startActivity(intent);
                     finish();
                     return true;

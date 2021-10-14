@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView TVError;
     EditText ETEmail, ETPassword;
     Button BTNLogin, BTNRegister;
-    UsersDB usersDB;
     int user_id;
 
     private FirebaseAuth mAuth;
@@ -47,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         BTNLogin = findViewById(R.id.btnlogin);
         BTNRegister = findViewById(R.id.btnregister);
         TVError = findViewById(R.id.txterrormessage);
-        usersDB = new UsersDB(this);
         Users user = new Users();
 
         ETEmail.setText(null);

@@ -6,9 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaSession2Service;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,15 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
-import Admin.OrderDB;
-import Admin.OrderList;
 
 public class CheckOutPage extends AppCompatActivity {
     TextView olshopcash;
@@ -46,10 +35,6 @@ public class CheckOutPage extends AppCompatActivity {
     RecyclerView item_view;
     ArrayList<CheckOutDetail> checkOutDetails = new ArrayList<>();
     CheckOutDetailAdapter checkOutDetailAdapter;
-    UsersDB usersDB;
-    MenusDB menusDB;
-    CartDB cartDB;
-    OrderDB orderDB;
     Users users;
     Menus menus;
     Cart cart;

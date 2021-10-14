@@ -29,7 +29,6 @@ public class OrderDetail extends AppCompatActivity {
     RecyclerView food_order;
     ArrayList<HashMap<String, Object>> foodlist = new ArrayList<>();
     OrderDetailListAdapter orderDetailListAdapter;
-    OrderDB orderDB;
     int total, userid;
 
     private FirebaseFirestore mFirestore;
